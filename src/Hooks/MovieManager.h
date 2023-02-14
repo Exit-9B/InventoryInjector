@@ -27,6 +27,18 @@ namespace Hooks
 			RE::GFxValue _oldFunc;
 		};
 
+		class InventoryListEntry_InitializeFunc : public RE::GFxFunctionHandler
+		{
+		public:
+			void Call(Params& a_params) override;
+		};
+
+		class FormatItemIconFunc : public RE::GFxFunctionHandler
+		{
+		public:
+			void Call(Params& a_params) override;
+		};
+
 		MovieManager() = default;
 
 		static void AddScaleformHooks(
@@ -34,6 +46,8 @@ namespace Hooks
 			RE::GFxMovieView::ScaleModeType a_scaleMode);
 
 		static bool HookProcessListFunc(RE::GFxMovieView* a_view, const char* a_pathToObj);
+
+		static bool HookInventoryListEntry(RE::GFxMovieView* a_view, const char* a_pathToObj);
 
 		static void ProcessEntry(RE::GFxValue* a_thisPtr, RE::GFxValue* a_entryObject);
 
