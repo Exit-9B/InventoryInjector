@@ -7,6 +7,7 @@ namespace Data
 	public:
 		static CustomDataManager* GetSingleton();
 
+		~CustomDataManager() = default;
 		CustomDataManager(const CustomDataManager&) = delete;
 		CustomDataManager(CustomDataManager&&) = delete;
 		CustomDataManager& operator=(const CustomDataManager&) = delete;
