@@ -1,10 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg/master/scripts/vcpkg.schema.json",
-  "name": "invinjector",
+  "name": "inventoryinjector",
   "version": "1",
   "dependencies": [
     "boost-stl-interfaces",
     "rsm-binary-io",
-    "spdlog"
+    "spdlog",
+    "jsoncpp"
   ]
 }

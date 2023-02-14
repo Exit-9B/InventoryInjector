@@ -12,8 +12,6 @@ namespace Hooks
 		static void ProcessEntry(RE::GFxValue* a_thisPtr, RE::GFxValue* a_entryObject);
 
 	private:
-		static void ProcessIconInternal(RE::GFxValue* a_thisPtr, RE::GFxValue* a_entryObject);
-
 		class ProcessListFunc : public RE::GFxFunctionHandler
 		{
 		public:
@@ -24,5 +22,7 @@ namespace Hooks
 		private:
 			RE::GFxValue _oldFunc;
 		};
+
+		static void ProcessIconInternal(RE::GFxValue* a_thisPtr, RE::GFxValue* a_entryObject);
 	};
 }

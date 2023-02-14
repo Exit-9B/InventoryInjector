@@ -4,6 +4,8 @@ namespace Hooks
 {
 	void InventoryListEntry::Install(RE::GFxMovieView* a_view, const char* a_pathToObj)
 	{
+		assert(a_view);
+
 		RE::GFxValue obj;
 		a_view->GetVariable(&obj, a_pathToObj);
 		if (!obj.IsObject()) {
@@ -33,7 +35,13 @@ namespace Hooks
 	{
 		logger::trace("Running InventoryListEntry.initialize hook");
 
-		a_params.thisPtr->Invoke("super.initialize", nullptr, nullptr, 0);
+		assert(a_params.thisPtr);
+
+		RE::GFxValue super;
+		a_params.thisPtr->GetMember("__proto__", &super);
+		if (super.IsObject()) {
+			super.Invoke("initialize");
+		}
 
 		RE::GFxValue itemIcon;
 		a_params.thisPtr->GetMember("itemIcon", &itemIcon);
@@ -63,6 +71,8 @@ namespace Hooks
 	{
 		logger::trace("Running InventoryListEntry.formatItemIcon hook");
 
+		assert(a_params.thisPtr);
+
 		if (a_params.argCount != 3) {
 			logger::debug("Expected 3 arguments, received {}", a_params.argCount);
 			return;
@@ -77,7 +87,8 @@ namespace Hooks
 			return;
 		}
 
-		std::string source = "skyui/icons_item_psychosteve.swf";
+		constexpr std::string_view DEFAULT_SOURCE = "skyui/icons_items_psychosteve.swf";
+		std::string source{ DEFAULT_SOURCE };
 
 		if (a_state.IsObject()) {
 			RE::GFxValue iconSource;
@@ -112,20 +123,25 @@ namespace Hooks
 			return;
 		}
 
+		RE::GFxValue iconSource;
+		a_params.thisPtr->GetMember("_iconSource", &iconSource);
+		bool sourceChanged = !iconSource.IsString() || iconSource.GetString() != source;
+
+		iconSource = source;
+		a_params.thisPtr->SetMember("_iconSource", iconSource);
+
+		if (!sourceChanged) {
+			return;
+		}
+
 		RE::GFxValue iconLoader;
 		a_params.movie->CreateObject(&iconLoader, "MovieClipLoader");
 
 		iconLoader.Invoke("addListener", nullptr, a_params.thisPtr, 1);
 
-		std::array<RE::GFxValue, 2> loadClipArgs{ RE::GFxValue(source), itemIcon };
+		std::array<RE::GFxValue, 2> loadClipArgs{ iconSource, itemIcon };
 		iconLoader.Invoke("loadClip", loadClipArgs);
 
 		itemIcon.SetMember("_visible", false);
-
-		RE::GFxValue equipIcon;
-		a_params.thisPtr->GetMember("equipIcon", &equipIcon);
-		if (equipIcon.IsObject()) {
-			equipIcon.SetMember("_visible", false);
-		}
 	}
 }

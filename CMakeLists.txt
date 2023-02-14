@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.24)
 
 project(
-	InvInjector
+	InventoryInjector
 	VERSION 1.0.0
 	LANGUAGES CXX
 )
@@ -27,6 +27,14 @@ SKSEPlugin_Add(
 		vcpkg.json
 	PRECOMPILE_HEADERS
 		src/PCH/PCH.h
+)
+
+find_package(jsoncpp CONFIG REQUIRED)
+
+target_link_libraries(
+	${PROJECT_NAME}
+	PRIVATE
+		jsoncpp_static
 )
 
 set(CPACK_GENERATOR "7Z")

@@ -6,6 +6,8 @@ namespace Hooks
 {
 	void FavoritesListEntry::Install(RE::GFxMovieView* a_view, const char* a_pathToObj)
 	{
+		assert(a_view);
+
 		RE::GFxValue obj;
 		a_view->GetVariable(&obj, a_pathToObj);
 		if (!obj.IsObject()) {
@@ -37,6 +39,9 @@ namespace Hooks
 	void FavoritesListEntry::SetEntryFunc::Call(Params& a_params)
 	{
 		logger::trace("Running FavoritesListEntry.setEntry hook");
+
+		assert(a_params.movie);
+		assert(a_params.thisPtr);
 
 		if (_oldFunc.IsObject()) {
 			_oldFunc.Invoke(
@@ -110,6 +115,10 @@ namespace Hooks
 
 	void FavoritesListEntry::OnLoadInitFunc::Call(Params& a_params)
 	{
+		logger::trace("Running FavoritesListEntry.onLoadInit hook");
+
+		assert(a_params.thisPtr);
+
 		if (a_params.argCount != 1) {
 			logger::debug("Expected 1 argument, received {}", a_params.argCount);
 			return;

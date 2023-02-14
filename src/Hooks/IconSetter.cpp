@@ -6,6 +6,8 @@ namespace Hooks
 {
 	void IconSetter::Install(RE::GFxMovieView* a_view, const char* a_pathToObj)
 	{
+		assert(a_view);
+
 		RE::GFxValue obj;
 		a_view->GetVariable(&obj, a_pathToObj);
 		if (!obj.IsObject()) {
@@ -74,6 +76,9 @@ namespace Hooks
 
 	void IconSetter::ProcessIconInternal(RE::GFxValue* a_thisPtr, RE::GFxValue* a_entryObject)
 	{
+		assert(a_thisPtr);
+		assert(a_entryObject);
+
 		RE::GFxValue formType;
 		a_entryObject->GetMember("formType", &formType);
 		if (!formType.IsNumber()) {

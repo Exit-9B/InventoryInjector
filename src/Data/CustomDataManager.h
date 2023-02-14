@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Data/Rule.h"
+
 namespace Data
 {
 	class CustomDataManager final
@@ -17,9 +19,13 @@ namespace Data
 
 		void ProcessEntry(
 			RE::GFxValue* a_entryObject,
-			std::function<void(RE::GFxValue*)> a_processIconCallback);
+			std::function<void(RE::GFxValue*)> a_processIconCallback) const;
 
 	private:
 		CustomDataManager() = default;
+
+		void LoadConfig(const std::filesystem::path& a_path);
+
+		std::vector<Rule> _rules;
 	};
 }
