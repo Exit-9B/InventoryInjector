@@ -1,0 +1,60 @@
+{
+  "inventoryObjects": [
+    {
+      "properties": {
+        "formType": "Book",
+        "formId": "Dragonborn.esm|1CAF2"
+      },
+      "customData": {
+        "iconLabel": "book_map"
+      }
+    },
+    {
+      "properties": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Dragonborn.esm|1CAC0",
+            "Dragonborn.esm|1CAC1"
+          ]
+        }
+      },
+      "customData": {
+        "subType": "dragonclaw"
+      }
+    },
+    {
+      "properties": {
+        "formType": "MiscItem",
+        "formId": "Dragonborn.esm|2BAAE"
+      },
+      "customData": {
+        "iconLabel": "book_map"
+      }
+    },
+    {
+      "properties": {
+        "formType": "MiscItem",
+        "formId": "Dragonborn.esm|247F9"
+      },
+      "customData": {
+        "iconLabel": "misc_trollskull"
+      }
+    },
+    {
+      "properties": {
+        "formType": "Weapon",
+        "formId": {
+          "anyOf": [
+            "Dragonborn.esm|179C9",
+            "Dragonborn.esm|206F2",
+            "Dragonborn.esm|398E6"
+          ]
+        }
+      },
+      "customData": {
+        "subType": "pickaxe"
+      }
+    }
+  ]
+}

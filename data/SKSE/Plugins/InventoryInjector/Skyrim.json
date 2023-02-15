@@ -1,0 +1,42 @@
+{
+  "inventoryObjects": [
+    {
+      "properties": {
+        "formType": "Book",
+        "formId": {
+          "anyOf": [
+            "Skyrim.esm|DDEFB",
+            "Skyrim.esm|EF07A",
+            "Skyrim.esm|F33CD",
+            "Skyrim.esm|F33CE",
+            "Skyrim.esm|F33CF",
+            "Skyrim.esm|F33D0",
+            "Skyrim.esm|F33D1",
+            "Skyrim.esm|F33D2",
+            "Skyrim.esm|F33D3",
+            "Skyrim.esm|F33D4",
+            "Skyrim.esm|F33D5",
+            "Skyrim.esm|F33E0"
+          ]
+        }
+      },
+      "customData": {
+        "iconLabel": "book_map"
+      }
+    },
+    {
+      "properties": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Skyrim.esm|60CC2",
+            "Skyrim.esm|BBCD5"
+          ]
+        }
+      },
+      "customData": {
+        "iconLabel": "book_map"
+      }
+    }
+  ]
+}

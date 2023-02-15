@@ -1,0 +1,13 @@
+{
+  "inventoryObjects": [
+    {
+      "properties": {
+        "type": "MiscItem",
+        "formId": "ccBGSSSE034-MntUni.esl|D67"
+      },
+      "customData": {
+        "iconLabel": "book_map"
+      }
+    }
+  ]
+}

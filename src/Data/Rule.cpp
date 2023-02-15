@@ -2,9 +2,19 @@
 
 namespace Data
 {
-	void Rule::AddProperty(std::string a_name, std::shared_ptr<Property> a_property)
+	void Rule::AddProperty(const std::string& a_name, std::shared_ptr<Property> a_property)
 	{
 		_properties[a_name] = a_property;
+	}
+
+	void Rule::AddCustomData(const std::string& a_name, const RE::GFxValue& a_data)
+	{
+		_customData[a_name] = a_data;
+	}
+
+	bool Rule::IsValid() const
+	{
+		return !_properties.empty() && !_customData.empty();
 	}
 
 	void Rule::SetInfo(RE::GFxValue* a_entryObject, bool& a_needsIconUpdate) const

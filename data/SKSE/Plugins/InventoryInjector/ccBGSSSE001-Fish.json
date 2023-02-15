@@ -1,0 +1,28 @@
+{
+  "inventoryObjects": [
+    {
+      "properties": {
+        "type": "Book",
+        "formId": {
+          "anyOf": [
+            "ccBGSSSE001-Fish.esm|70CCA",
+            "ccBGSSSE001-Fish.esm|70CCB",
+            "ccBGSSSE001-Fish.esm|70CCC",
+            "ccBGSSSE001-Fish.esm|70CCD",
+            "ccBGSSSE001-Fish.esm|70CCE",
+            "ccBGSSSE001-Fish.esm|70CCF",
+            "ccBGSSSE001-Fish.esm|70CD0",
+            "ccBGSSSE001-Fish.esm|70CD1",
+            "ccBGSSSE001-Fish.esm|70CD2",
+            "ccBGSSSE001-Fish.esm|70CD3",
+            "ccBGSSSE001-Fish.esm|70CD4",
+            "ccBGSSSE001-Fish.esm|70CD5"
+          ]
+        }
+      },
+      "customData": {
+        "iconLabel": "book_map"
+      }
+    }
+  ]
+}

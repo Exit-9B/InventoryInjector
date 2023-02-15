@@ -37,6 +37,31 @@ target_link_libraries(
 		jsoncpp_static
 )
 
+file(GLOB CONFIGS
+	LIST_DIRECTORIES false
+	CONFIGURE_DEPENDS
+	"${PROJECT_SOURCE_DIR}/data/SKSE/Plugins/${PROJECT_NAME}/*.json"
+)
+
+target_sources(
+	${PROJECT_NAME}
+	PRIVATE
+		${CONFIGS}
+)
+
+source_group(
+	"Data Files/Configs"
+	FILES
+		${CONFIGS}
+)
+
+install(
+	FILES
+		${CONFIGS}
+	DESTINATION
+		"SKSE/Plugins/${PROJECT_NAME}"
+)
+
 set(CPACK_GENERATOR "7Z")
 set(CPACK_PACKAGE_FILE_NAME ${PROJECT_NAME}-${PROJECT_VERSION})
 if(BUILD_SKYRIMVR)

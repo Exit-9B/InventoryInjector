@@ -1,0 +1,13 @@
+{
+  "inventoryObjects": [
+    {
+      "properties": {
+        "type": "MiscItem",
+        "formId": "ccBGSSSE031-AdvCyrus.esm|80D"
+      },
+      "customData": {
+        "iconLabel": "book_map"
+      }
+    }
+  ]
+}

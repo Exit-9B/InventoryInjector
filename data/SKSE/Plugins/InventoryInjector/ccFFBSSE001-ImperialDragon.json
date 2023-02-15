@@ -1,0 +1,13 @@
+{
+  "inventoryObjects": [
+    {
+      "properties": {
+        "type": "MiscItem",
+        "formId": "ccFFBSSE001-ImperialDragon.esl|867"
+      },
+      "customData": {
+        "iconLabel": "book_map"
+      }
+    }
+  ]
+}

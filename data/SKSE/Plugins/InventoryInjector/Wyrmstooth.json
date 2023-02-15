@@ -1,0 +1,13 @@
+{
+  "inventoryObjects": [
+    {
+      "properties": {
+        "type": "MiscItem",
+        "formId": "Wyrmstooth.esp|27978A"
+      },
+      "customData": {
+        "subType": "dragonclaw"
+      }
+    }
+  ]
+}

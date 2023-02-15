@@ -7,7 +7,11 @@ namespace Data
 	class Rule final
 	{
 	public:
-		void AddProperty(std::string, std::shared_ptr<Property>);
+		void AddProperty(const std::string& a_name, std::shared_ptr<Property> a_property);
+
+		void AddCustomData(const std::string& a_name, const RE::GFxValue& a_data);
+
+		[[nodiscard]] bool IsValid() const;
 
 		void SetInfo(RE::GFxValue* a_entryObject, bool& a_needsIconUpdate) const;
 

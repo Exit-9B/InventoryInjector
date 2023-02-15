@@ -1,9 +1,18 @@
 #pragma once
 
+#include "Data/Defines.h"
 #include "Data/Rule.h"
 
 namespace Data
 {
+	class Value
+	{
+	public:
+		virtual void Set(RE::GFxValue& a_value) const = 0;
+
+		virtual RE::GFxValue Retrieve(RE::GFxValue& a_entryObject) const = 0;
+	};
+
 	class CustomDataManager final
 	{
 	public:

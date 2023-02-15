@@ -1,15 +1,11 @@
 #include "CustomDataManager.h"
 
+#include "Data/RuleParser.h"
+
 #include <json/json.h>
 
 namespace Data
 {
-	CustomDataManager* CustomDataManager::GetSingleton()
-	{
-		static CustomDataManager singleton{};
-		return &singleton;
-	}
-
 	RE::BSResourceNiBinaryStream& operator>>(
 		RE::BSResourceNiBinaryStream& a_sin,
 		Json::Value& a_root)
@@ -32,6 +28,12 @@ namespace Data
 		}
 
 		return a_sin;
+	}
+
+	CustomDataManager* CustomDataManager::GetSingleton()
+	{
+		static CustomDataManager singleton{};
+		return &singleton;
 	}
 
 	void CustomDataManager::LoadConfigs()
@@ -71,7 +73,16 @@ namespace Data
 		if (!root.isObject())
 			return;
 
-		// TODO Load data
+		Json::Value inventoryObjects = root["inventoryObjects"];
+		if (inventoryObjects.isArray()) {
+			for (auto& rule : inventoryObjects) {
+				auto parsed = RuleParser::ParseRule(rule);
+
+				if (parsed.IsValid()) {
+					_rules.push_back(std::move(parsed));
+				}
+			}
+		}
 	}
 
 	void CustomDataManager::ProcessEntry(
@@ -81,21 +92,6 @@ namespace Data
 		bool needsIconUpdate = false;
 		for (const auto& rule : _rules) {
 			rule.SetInfo(a_entryObject, needsIconUpdate);
-		}
-
-		// TODO Delete this
-		// hardcoded stuff for testing
-		RE::GFxValue formId;
-		a_entryObject->GetMember("formId", &formId);
-
-		switch (static_cast<RE::FormID>(formId.GetNumber())) {
-		case 0x040179C9:
-		case 0x040206F2:
-		case 0x040398E6:
-			a_entryObject->SetMember("subType", 11);
-			a_entryObject->SetMember("subTypeDisplay", "$Pickaxe");
-			needsIconUpdate = true;
-			break;
 		}
 
 		if (needsIconUpdate) {
