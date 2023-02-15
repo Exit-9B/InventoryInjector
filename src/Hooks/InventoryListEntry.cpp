@@ -78,7 +78,7 @@ namespace Hooks
 			return;
 		}
 
-		[[maybe_unused]] auto& a_entryField = a_params.args[0];
+		auto& a_entryField = a_params.args[0];
 		auto& a_entryObject = a_params.args[1];
 		auto& a_state = a_params.args[2];
 
@@ -130,18 +130,21 @@ namespace Hooks
 		iconSource = source;
 		a_params.thisPtr->SetMember("_iconSource", iconSource);
 
-		if (!sourceChanged) {
-			return;
+		if (sourceChanged) {
+			RE::GFxValue iconLoader;
+			a_params.movie->CreateObject(&iconLoader, "MovieClipLoader");
+
+			iconLoader.Invoke("addListener", nullptr, a_params.thisPtr, 1);
+
+			std::array<RE::GFxValue, 2> loadClipArgs{ iconSource, itemIcon };
+			iconLoader.Invoke("loadClip", loadClipArgs);
+
+			itemIcon.SetMember("_visible", false);
 		}
-
-		RE::GFxValue iconLoader;
-		a_params.movie->CreateObject(&iconLoader, "MovieClipLoader");
-
-		iconLoader.Invoke("addListener", nullptr, a_params.thisPtr, 1);
-
-		std::array<RE::GFxValue, 2> loadClipArgs{ iconSource, itemIcon };
-		iconLoader.Invoke("loadClip", loadClipArgs);
-
-		itemIcon.SetMember("_visible", false);
+		else {
+			a_entryField.Invoke("gotoAndStop", nullptr, &iconLabel, 1);
+			std::array<RE::GFxValue, 2> changeIconColorArgs{ a_entryField, iconColor };
+			a_params.thisPtr->Invoke("changeIconColor", changeIconColorArgs);
+		}
 	}
 }
