@@ -21,6 +21,16 @@ namespace Data
 
 	bool MatchProperty::Match(const RE::GFxValue& a_value) const
 	{
+		if (a_value.IsArray()) {
+			for (std::uint32_t i = 0, size = a_value.GetArraySize(); i < size; i++) {
+				RE::GFxValue elem;
+				a_value.GetElement(i, &elem);
+				if (a_value == _value) {
+					return true;
+				}
+			}
+		}
+
 		return a_value == _value;
 	}
 
