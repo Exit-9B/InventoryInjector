@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Data/Property.h"
-#include "Data/Rule.h"
+#include "Property.h"
+#include "Rule.h"
 
 #include <json/json.h>
 

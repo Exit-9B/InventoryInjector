@@ -1,7 +1,6 @@
 #pragma once
 
-#include "Data/Defines.h"
-#include "Data/Rule.h"
+#include "Config/Rule.h"
 
 namespace Data
 {

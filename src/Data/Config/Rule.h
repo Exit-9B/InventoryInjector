@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Data/Property.h"
+#include "Property.h"
 
 namespace Data
 {

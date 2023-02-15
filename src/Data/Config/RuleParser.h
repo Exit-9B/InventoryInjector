@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Data/CustomDataParser.h"
-#include "Data/PropertyParser.h"
-#include "Data/Rule.h"
+#include "CustomDataParser.h"
+#include "PropertyParser.h"
+#include "Rule.h"
 
 #include <json/json.h>
 

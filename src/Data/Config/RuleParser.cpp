@@ -1,5 +1,7 @@
 #include "RuleParser.h"
 
+#include "Data/Defines/Form.h"
+
 namespace Data
 {
 	Rule RuleParser::ParseRule(const Json::Value& a_rule)

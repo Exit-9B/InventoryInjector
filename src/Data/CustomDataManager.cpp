@@ -1,12 +1,12 @@
 #include "CustomDataManager.h"
 
-#include "Data/RuleParser.h"
+#include "Data/Config/RuleParser.h"
 
 #include <json/json.h>
 
 namespace Data
 {
-	RE::BSResourceNiBinaryStream& operator>>(
+	inline RE::BSResourceNiBinaryStream& operator>>(
 		RE::BSResourceNiBinaryStream& a_sin,
 		Json::Value& a_root)
 	{

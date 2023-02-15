@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Data/Defines.h"
-
 namespace Data
 {
 	class Property
@@ -13,20 +11,9 @@ namespace Data
 	class AnyOfProperty final : public Property
 	{
 	public:
-		bool Match(const RE::GFxValue& a_value) const override
-		{
-			for (const auto& subProperty : _subProperties) {
-				if (subProperty->Match(a_value)) {
-					return true;
-				}
-			}
-			return false;
-		}
+		bool Match(const RE::GFxValue& a_value) const override;
 
-		void AddProperty(std::shared_ptr<Property> a_subProperty)
-		{
-			_subProperties.push_back(a_subProperty);
-		}
+		void AddProperty(std::shared_ptr<Property> a_subProperty);
 
 	private:
 		std::vector<std::shared_ptr<Property>> _subProperties;
@@ -46,7 +33,7 @@ namespace Data
 		{
 		}
 
-		bool Match(const RE::GFxValue& a_value) const override { return a_value == _value; }
+		bool Match(const RE::GFxValue& a_value) const override;
 
 	private:
 		std::string _cachedString;
@@ -58,25 +45,7 @@ namespace Data
 	public:
 		MainPartProperty(std::uint32_t a_slot) : _slot{ a_slot } {}
 
-		bool Match(const RE::GFxValue& a_value) const override
-		{
-			if (!a_value.IsNumber()) {
-				return false;
-			}
-
-			auto value = static_cast<std::uint32_t>(a_value.GetNumber());
-
-			std::uint32_t mainPart = 0;
-			for (std::uint32_t i = 0; i < PartMaskPrecedence.size(); i++) {
-				auto slot = static_cast<std::uint32_t>(PartMaskPrecedence[i]);
-				if (value & slot) {
-					mainPart = slot;
-					break;
-				}
-			}
-
-			return mainPart && _slot == mainPart;
-		}
+		bool Match(const RE::GFxValue& a_value) const override;
 
 	private:
 		std::uint32_t _slot;

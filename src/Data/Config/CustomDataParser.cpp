@@ -1,5 +1,13 @@
 #include "CustomDataParser.h"
 
+#include "Data/Defines/Ammo.h"
+#include "Data/Defines/Armor.h"
+#include "Data/Defines/Book.h"
+#include "Data/Defines/Misc.h"
+#include "Data/Defines/Potion.h"
+#include "Data/Defines/SoulGem.h"
+#include "Data/Defines/Weapon.h"
+
 namespace Data
 {
 	void CustomDataParser::Parse(
@@ -52,6 +60,14 @@ namespace Data
 		std::wstring displayStr;
 
 		switch (_formType) {
+		case RE::FormType::Armor:
+			type = util::to_underlying(ArmorSubTypeMap[a_value]);
+			displayStr = ArmorSubTypeDisplayMap[a_value].c_str();
+			break;
+		case RE::FormType::Book:
+			type = util::to_underlying(BookSubTypeMap[a_value]);
+			displayStr = BookSubTypeDisplayMap[a_value].c_str();
+			break;
 		case RE::FormType::Misc:
 			type = util::to_underlying(MiscSubTypeMap[a_value]);
 			displayStr = MiscSubTypeDisplayMap[a_value].c_str();
@@ -59,6 +75,18 @@ namespace Data
 		case RE::FormType::Weapon:
 			type = util::to_underlying(WeaponSubTypeMap[a_value]);
 			displayStr = WeaponSubTypeDisplayMap[a_value].c_str();
+			break;
+		case RE::FormType::Ammo:
+			type = util::to_underlying(AmmoSubTypeMap[a_value]);
+			displayStr = AmmoSubTypeDisplayMap[a_value].c_str();
+			break;
+		case RE::FormType::AlchemyItem:
+			type = util::to_underlying(PotionSubTypeMap[a_value]);
+			displayStr = PotionSubTypeDisplayMap[a_value].c_str();
+			break;
+		case RE::FormType::SoulGem:
+			type = util::to_underlying(SoulGemSubTypeMap[a_value]);
+			displayStr = SoulGemSubTypeDisplayMap[a_value].c_str();
 			break;
 		}
 

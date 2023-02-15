@@ -1,6 +1,6 @@
 #include "PropertyParser.h"
 
-#include "Data/Defines.h"
+#include "Data/Defines/Form.h"
 
 namespace Data
 {

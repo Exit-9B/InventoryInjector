@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Data/Rule.h"
+#include "Rule.h"
 
 #include <json/json.h>
 
