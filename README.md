@@ -1,3 +1,4 @@
+# Inventory Interface Information Injector
 Injects custom icons and other information into SkyUI's inventory item interfaces.
 
 ## Requirements

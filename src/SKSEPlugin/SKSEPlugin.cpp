@@ -32,6 +32,8 @@ namespace
 	}
 }
 
+#ifndef SKYRIMVR
+
 extern "C" DLLEXPORT constinit auto SKSEPlugin_Version = []()
 {
 	SKSE::PluginVersionData v{};
@@ -46,6 +48,28 @@ extern "C" DLLEXPORT constinit auto SKSEPlugin_Version = []()
 
 	return v;
 }();
+
+#else
+
+extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Query(const SKSE::QueryInterface* a_skse, SKSE::PluginInfo* a_info)
+{
+	a_info->infoVersion = SKSE::PluginInfo::kVersion;
+	a_info->name = Plugin::NAME.data();
+	a_info->version = Plugin::VERSION[0];
+
+	if (a_skse->IsEditor()) {
+		return false;
+	}
+
+	const auto ver = a_skse->RuntimeVersion();
+	if (ver != SKSE::RUNTIME_VR_1_4_15_1) {
+		return false;
+	}
+
+	return true;
+}
+
+#endif
 
 extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* a_skse)
 {
