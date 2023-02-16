@@ -41,7 +41,7 @@ namespace util
 		return false;
 	}
 
-	inline std::wstring Translate(std::wstring a_text)
+	[[nodiscard]] inline std::wstring Translate(std::wstring a_text)
 	{
 		const auto scaleformManager = RE::BSScaleformManager::GetSingleton();
 		const auto loader = scaleformManager ? scaleformManager->loader : nullptr;

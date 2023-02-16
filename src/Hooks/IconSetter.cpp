@@ -1,6 +1,7 @@
 #include "IconSetter.h"
 
 #include "Data/CustomDataManager.h"
+#include "Data/Defines/Book.h"
 
 namespace Hooks
 {
@@ -31,6 +32,29 @@ namespace Hooks
 	{
 		logger::trace("Running IconSetter.processList hook");
 
+		if (a_params.argCount < 1) {
+			logger::debug("Expected 1 argument, received {}", a_params.argCount);
+			return;
+		}
+
+		auto& a_list = a_params.args[0];
+		RE::GFxValue entryList;
+		if (a_list.IsObject()) {
+			a_list.GetMember("_entryList", &entryList);
+		}
+
+		if (entryList.IsArray()) {
+			for (std::uint32_t i = 0, size = entryList.GetArraySize(); i < size; i++) {
+				RE::GFxValue entryObject;
+				entryList.GetElement(i, &entryObject);
+				if (entryObject.IsObject()) {
+					if (entryObject.HasMember("bookType")) {
+						FixNote(entryObject);
+					}
+				}
+			}
+		}
+
 		if (_oldFunc.IsObject()) {
 			_oldFunc.Invoke(
 				"call",
@@ -39,29 +63,13 @@ namespace Hooks
 				static_cast<std::size_t>(a_params.argCount) + 1);
 		}
 
-		if (a_params.argCount != 1) {
-			logger::debug("Expected 1 argument, received {}", a_params.argCount);
-			return;
-		}
-
-		auto& a_list = a_params.args[0];
-		if (!a_list.IsObject()) {
-			logger::debug("a_list was not an object");
-			return;
-		}
-
-		RE::GFxValue entryList;
-		a_list.GetMember("_entryList", &entryList);
-		if (!entryList.IsArray()) {
-			logger::debug("Could not get entry list");
-			return;
-		}
-
-		for (std::uint32_t i = 0, size = entryList.GetArraySize(); i < size; i++) {
-			RE::GFxValue entryObject;
-			entryList.GetElement(i, &entryObject);
-			if (entryObject.IsObject()) {
-				ProcessEntry(a_params.thisPtr, &entryObject);
+		if (entryList.IsArray()) {
+			for (std::uint32_t i = 0, size = entryList.GetArraySize(); i < size; i++) {
+				RE::GFxValue entryObject;
+				entryList.GetElement(i, &entryObject);
+				if (entryObject.IsObject()) {
+					ProcessEntry(a_params.thisPtr, &entryObject);
+				}
 			}
 		}
 	}
@@ -110,6 +118,45 @@ namespace Hooks
 		case RE::FormType::SoulGem:
 			a_thisPtr->Invoke("processSoulGemIcon", nullptr, a_entryObject, 1);
 			break;
+		}
+	}
+
+	void IconSetter::FixNote(RE::GFxValue& a_entryObject)
+	{
+		RE::GFxValue formId;
+		a_entryObject.GetMember("formId", &formId);
+
+		RE::TESObjectBOOK* book = nullptr;
+		if (formId.IsNumber()) {
+			book = RE::TESForm::LookupByID<RE::TESObjectBOOK>(
+				static_cast<RE::FormID>(formId.GetNumber()));
+		}
+
+		if (!book) {
+			return;
+		}
+
+		auto stem = std::filesystem::path(book->model.c_str()).stem().string();
+
+		auto range = std::ranges::search(
+			stem,
+			"Note"sv,
+			[](char ch1, char ch2)
+			{
+				return std::toupper(ch1) == std::toupper(ch2);
+			});
+
+		bool isNote = !range.empty();
+
+		if (isNote) {
+			a_entryObject.SetMember("bookType", 0xFF);
+
+			RE::GFxValue subType;
+			a_entryObject.GetMember("subType", &subType);
+
+			if (subType.IsUndefined()) {
+				a_entryObject.SetMember("subType", util::to_underlying(Data::BookType::Note));
+			}
 		}
 	}
 }

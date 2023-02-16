@@ -24,5 +24,7 @@ namespace Hooks
 		};
 
 		static void ProcessIconInternal(RE::GFxValue* a_thisPtr, RE::GFxValue* a_entryObject);
+
+		static void FixNote(RE::GFxValue& a_entryObject);
 	};
 }
