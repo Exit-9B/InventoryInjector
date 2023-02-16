@@ -6,11 +6,14 @@ namespace Data
 {
 	void PropertyParser::Parse(const Json::Value& a_spec, IPropertyContainer* a_properties) const
 	{
-		if (a_spec.isNumeric()) {
-			ParseNumber(a_spec.asDouble(), a_properties);
-		}
 		if (a_spec.isString()) {
 			ParseString(a_spec.asString(), a_properties);
+		}
+		else if (a_spec.isNumeric()) {
+			ParseNumber(a_spec.asDouble(), a_properties);
+		}
+		else if (a_spec.isBool()) {
+			a_properties->AddProperty(_name, std::make_shared<MatchProperty>(a_spec.asBool()));
 		}
 		else if (a_spec.isObject()) {
 			const Json::Value& anyOf = a_spec["anyOf"];
