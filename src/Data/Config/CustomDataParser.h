@@ -6,19 +6,15 @@
 
 namespace Data
 {
-	using AddCustomData_t = void(const std::string&, const RE::GFxValue&);
-
 	class CustomDataParser
 	{
 	public:
 		CustomDataParser(const std::string& a_name) : _name{ a_name } {}
 
-		void Parse(const Json::Value& a_value, std::function<AddCustomData_t> a_addCustomData)
-			const;
+		void Parse(const Json::Value& a_value, ICustomDataContainer* a_customData) const;
 
-		virtual void ParseString(
-			const Json::String& a_value,
-			std::function<AddCustomData_t> a_addCustomData) const;
+		virtual void ParseString(const Json::String& a_value, ICustomDataContainer* a_customData)
+			const;
 
 	protected:
 		inline static std::set<std::string> _stringCache;
@@ -32,9 +28,8 @@ namespace Data
 	public:
 		using CustomDataParser::CustomDataParser;
 
-		void ParseString(
-			const Json::String& a_value,
-			std::function<AddCustomData_t> a_addCustomData) const override;
+		void ParseString(const Json::String& a_value, ICustomDataContainer* a_customData)
+			const override;
 
 	private:
 		static std::uint32_t ParseColor(std::string_view a_hexCode);
@@ -49,9 +44,8 @@ namespace Data
 		{
 		}
 
-		void ParseString(
-			const Json::String& a_value,
-			std::function<AddCustomData_t> a_addCustomData) const override;
+		void ParseString(const Json::String& a_value, ICustomDataContainer* a_customData)
+			const override;
 
 	private:
 		RE::FormType _formType;
@@ -62,8 +56,7 @@ namespace Data
 	public:
 		using CustomDataParser::CustomDataParser;
 
-		void ParseString(
-			const Json::String& a_value,
-			std::function<AddCustomData_t> a_addCustomData) const override;
+		void ParseString(const Json::String& a_value, ICustomDataContainer* a_customData)
+			const override;
 	};
 }

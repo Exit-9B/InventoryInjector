@@ -4,12 +4,18 @@
 
 namespace Data
 {
-	class Rule final
+	class ICustomDataContainer
 	{
 	public:
-		void AddProperty(const std::string& a_name, std::shared_ptr<Property> a_property);
+		virtual void AddCustomData(const std::string& a_name, const RE::GFxValue& a_data) = 0;
+	};
 
-		void AddCustomData(const std::string& a_name, const RE::GFxValue& a_data);
+	class Rule final : public IPropertyContainer, public ICustomDataContainer
+	{
+	public:
+		void AddProperty(const std::string& a_name, std::shared_ptr<Property> a_property) override;
+
+		void AddCustomData(const std::string& a_name, const RE::GFxValue& a_data) override;
 
 		[[nodiscard]] bool IsValid() const;
 

@@ -14,9 +14,11 @@ namespace Data
 		return false;
 	}
 
-	void AnyOfProperty::AddProperty(std::shared_ptr<Property> a_subProperty)
+	void AnyOfProperty::AddProperty(
+		[[maybe_unused]] const std::string& a_name,
+		std::shared_ptr<Property> a_property)
 	{
-		_subProperties.push_back(a_subProperty);
+		_subProperties.push_back(a_property);
 	}
 
 	bool MatchProperty::Match(const RE::GFxValue& a_value) const

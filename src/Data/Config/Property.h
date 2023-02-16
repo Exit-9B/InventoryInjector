@@ -8,12 +8,22 @@ namespace Data
 		[[nodiscard]] virtual bool Match(const RE::GFxValue& a_value) const = 0;
 	};
 
-	class AnyOfProperty final : public Property
+	class IPropertyContainer
+	{
+	public:
+		virtual void AddProperty(
+			const std::string& a_name,
+			std::shared_ptr<Property> a_property) = 0;
+	};
+
+	class AnyOfProperty final : public Property, public IPropertyContainer
 	{
 	public:
 		bool Match(const RE::GFxValue& a_value) const override;
 
-		void AddProperty(std::shared_ptr<Property> a_subProperty);
+		void AddProperty(
+			const std::string& a_name,
+			std::shared_ptr<Property> a_property) override;
 
 	private:
 		std::vector<std::shared_ptr<Property>> _subProperties;

@@ -7,22 +7,17 @@
 
 namespace Data
 {
-	using AddProperty_t = void(const std::string&, std::shared_ptr<Property>);
-
 	class PropertyParser
 	{
 	public:
 		PropertyParser(const std::string a_name) : _name{ a_name } {}
 
-		void Parse(const Json::Value& a_spec, std::function<AddProperty_t> a_addProperty) const;
+		void Parse(const Json::Value& a_spec, IPropertyContainer* a_properties) const;
 
-		virtual void ParseString(
-			const Json::String& a_value,
-			std::function<AddProperty_t> a_addProperty) const;
+		virtual void ParseString(const Json::String& a_value, IPropertyContainer* a_properties)
+			const;
 
-		virtual void ParseNumber(
-			double a_value,
-			std::function<AddProperty_t> a_addProperty) const;
+		virtual void ParseNumber(double a_value, IPropertyContainer* a_properties) const;
 
 	private:
 		std::string _name;
@@ -33,9 +28,8 @@ namespace Data
 	public:
 		using PropertyParser::PropertyParser;
 
-		void ParseString(
-			const Json::String& a_value,
-			std::function<AddProperty_t> a_addProperty) const override;
+		void ParseString(const Json::String& a_value, IPropertyContainer* a_properties)
+			const override;
 	};
 
 	class FormIDParser final : public PropertyParser
@@ -43,9 +37,8 @@ namespace Data
 	public:
 		using PropertyParser::PropertyParser;
 
-		void ParseString(
-			const Json::String& a_value,
-			std::function<AddProperty_t> a_addProperty) const override;
+		void ParseString(const Json::String& a_value, IPropertyContainer* a_properties)
+			const override;
 
 	private:
 		static RE::FormID ParseFormID(const std::string& a_identifier);
@@ -56,8 +49,6 @@ namespace Data
 	public:
 		using PropertyParser::PropertyParser;
 
-		void ParseNumber(
-			double a_value,
-			std::function<AddProperty_t> a_addProperty) const override;
+		void ParseNumber(double a_value, IPropertyContainer* a_properties) const override;
 	};
 }

@@ -21,13 +21,7 @@ namespace Data
 			const Json::Value& prop = properties[name];
 
 			if (const auto parser = GetPropertyParser(name)) {
-				auto addProperty =
-					[&parsed](const std::string& a_name, std::shared_ptr<Property> a_property)
-				{
-					parsed.AddProperty(a_name, a_property);
-				};
-
-				parser->Parse(prop, addProperty);
+				parser->Parse(prop, &parsed);
 			}
 		}
 
@@ -35,13 +29,7 @@ namespace Data
 			const Json::Value& val = customData[name];
 
 			if (const auto parser = GetCustomDataParser(name, formType)) {
-				auto addCustomData =
-					[&parsed](const std::string& a_name, const RE::GFxValue& a_data)
-				{
-					parsed.AddCustomData(a_name, a_data);
-				};
-
-				parser->Parse(val, addCustomData);
+				parser->Parse(val, &parsed);
 			}
 		}
 
