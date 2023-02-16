@@ -50,6 +50,22 @@ namespace Data
 		RE::GFxValue _value;
 	};
 
+	class RangeProperty final : public Property
+	{
+	public:
+		RangeProperty(std::optional<double> a_min, std::optional<double> a_max)
+			: _min{ a_min },
+			  _max{ a_max }
+		{
+		}
+
+		bool Match(const RE::GFxValue& a_value) const override;
+
+	private:
+		std::optional<double> _min;
+		std::optional<double> _max;
+	};
+
 	class MainPartProperty final : public Property
 	{
 	public:

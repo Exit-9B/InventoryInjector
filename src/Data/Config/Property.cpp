@@ -36,6 +36,25 @@ namespace Data
 		return a_value == _value;
 	}
 
+	bool RangeProperty::Match(const RE::GFxValue& a_value) const
+	{
+		if (!a_value.IsNumber()) {
+			return false;
+		}
+
+		auto value = a_value.GetNumber();
+
+		if (_min.has_value() && value < _min.value()) {
+			return false;
+		}
+
+		if (_max.has_value() && value > _max.value()) {
+			return false;
+		}
+
+		return true;
+	}
+
 	bool MainPartProperty::Match(const RE::GFxValue& a_value) const
 	{
 		if (!a_value.IsNumber()) {

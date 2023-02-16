@@ -22,6 +22,21 @@ namespace Data
 
 				a_properties->AddProperty(_name, prop);
 			}
+
+			std::optional<double> min;
+			std::optional<double> max;
+
+			if (a_spec["min"].isNumeric()) {
+				min = a_spec["min"].asDouble();
+			}
+
+			if (a_spec["max"].isNumeric()) {
+				max = a_spec["max"].asDouble();
+			}
+
+			if (min.has_value() || max.has_value()) {
+				a_properties->AddProperty(_name, std::make_shared<RangeProperty>(min, max));
+			}
 		}
 	}
 
