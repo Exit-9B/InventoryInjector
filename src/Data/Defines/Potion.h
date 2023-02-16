@@ -22,7 +22,7 @@ namespace Data
 		Poison = 15,
 	};
 
-	inline static std::map<std::string, PotionType> PotionSubTypeMap = {
+	inline static util::enum_dict<PotionType> PotionSubTypeMap = {
 		{ "health", PotionType::Health },
 		{ "healrate", PotionType::HealRate },
 		{ "healratemult", PotionType::HealRateMult },
@@ -41,7 +41,7 @@ namespace Data
 		{ "poison", PotionType::Poison },
 	};
 
-	inline static std::map<std::string, std::wstring> PotionSubTypeDisplayMap = {
+	inline static util::enum_dict<std::wstring> PotionSubTypeDisplayMap = {
 		{ "health", L"$Health" },
 		{ "healrate", L"$Health" },
 		{ "healratemult", L"$Health" },

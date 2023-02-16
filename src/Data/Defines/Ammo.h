@@ -8,12 +8,12 @@ namespace Data
 		Bolt = 1,
 	};
 
-	inline static std::map<std::string, AmmoType> AmmoSubTypeMap = {
+	inline static util::enum_dict<AmmoType> AmmoSubTypeMap = {
 		{ "arrow", AmmoType::Arrow },
 		{ "bolt", AmmoType::Bolt },
 	};
 
-	inline static std::map<std::string, std::wstring> AmmoSubTypeDisplayMap = {
+	inline static util::enum_dict<std::wstring> AmmoSubTypeDisplayMap = {
 		{ "arrow", L"$Arrow" },
 		{ "bolt", L"$Bolt" },
 	};

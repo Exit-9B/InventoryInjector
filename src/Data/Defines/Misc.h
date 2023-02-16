@@ -30,7 +30,7 @@ namespace Data
 		Gold = 21,
 	};
 
-	inline static std::map<std::string, MiscType> MiscSubTypeMap = {
+	inline static util::enum_dict<MiscType> MiscSubTypeMap = {
 		{ "gem", MiscType::Gem },
 		{ "dragonclaw", MiscType::DragonClaw },
 		{ "artifact", MiscType::Artifact },
@@ -55,7 +55,7 @@ namespace Data
 		{ "gold", MiscType::Gold },
 	};
 
-	inline static std::map<std::string, std::wstring> MiscSubTypeDisplayMap = {
+	inline static util::enum_dict<std::wstring> MiscSubTypeDisplayMap = {
 		{ "gem", L"$Gem" },
 		{ "dragonclaw", L"$Claw" },
 		{ "artifact", L"$Artifact" },

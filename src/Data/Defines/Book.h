@@ -9,13 +9,13 @@ namespace Data
 		Recipe = 2,
 	};
 
-	inline static std::map<std::string, BookType> BookSubTypeMap = {
+	inline static util::enum_dict<BookType> BookSubTypeMap = {
 		{ "spelltome", BookType::SpellTome },
 		{ "note", BookType::Note },
 		{ "recipe", BookType::Recipe },
 	};
 
-	inline static std::map<std::string, std::wstring> BookSubTypeDisplayMap = {
+	inline static util::enum_dict<std::wstring> BookSubTypeDisplayMap = {
 		{ "spelltome", L"$Spell Tome" },
 		{ "note", L"$Note" },
 		{ "recipe", L"$Recipe" },

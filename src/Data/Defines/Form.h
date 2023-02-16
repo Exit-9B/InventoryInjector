@@ -2,7 +2,7 @@
 
 namespace Data
 {
-	inline static std::map<std::string, RE::FormType> FormTypeMap = {
+	inline static util::enum_dict<RE::FormType> FormTypeMap = {
 		{ "", RE::FormType::None },
 		{ "Ammo", RE::FormType::Ammo },
 		{ "Armor", RE::FormType::Armor },

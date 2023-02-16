@@ -30,7 +30,7 @@ namespace Data
 		Gun = 23,
 	};
 
-	inline static std::map<std::string, WeaponType> WeaponSubTypeMap = {
+	inline static util::enum_dict<WeaponType> WeaponSubTypeMap = {
 		{ "melee", WeaponType::Melee },
 		{ "sword", WeaponType::Sword },
 		{ "dagger", WeaponType::Dagger },
@@ -45,7 +45,7 @@ namespace Data
 		{ "woodaxe", WeaponType::WoodAxe },
 	};
 
-	inline static std::map<std::string, std::wstring> WeaponSubTypeDisplayMap = {
+	inline static util::enum_dict<std::wstring> WeaponSubTypeDisplayMap = {
 		{ "melee", L"$Melee" },
 		{ "sword", L"$Sword" },
 		{ "dagger", L"$Dagger" },

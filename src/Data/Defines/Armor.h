@@ -20,7 +20,7 @@ namespace Data
 		Tail = 13,
 	};
 
-	inline static std::map<std::string, EquipType> ArmorSubTypeMap = {
+	inline static util::enum_dict<EquipType> ArmorSubTypeMap = {
 		{ "head", EquipType::Head },
 		{ "hair", EquipType::Hair },
 		{ "longhair", EquipType::LongHair },
@@ -37,7 +37,7 @@ namespace Data
 		{ "tail", EquipType::Tail },
 	};
 
-	inline static std::map<std::string, std::wstring> ArmorSubTypeDisplayMap = {
+	inline static util::enum_dict<std::wstring> ArmorSubTypeDisplayMap = {
 		{ "head", L"$Head" },
 		{ "hair", L"$Head" },
 		{ "longhair", L"$Head" },

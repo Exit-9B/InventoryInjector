@@ -13,7 +13,7 @@ namespace Data
 		Azura = 6,
 	};
 
-	inline static std::map<std::string, SoulGemType> SoulGemSubTypeMap = {
+	inline static util::enum_dict<SoulGemType> SoulGemSubTypeMap = {
 		{ "none", SoulGemType::None },
 		{ "petty", SoulGemType::Petty },
 		{ "lesser", SoulGemType::Lesser },
@@ -23,7 +23,7 @@ namespace Data
 		{ "azura", SoulGemType::Azura },
 	};
 
-	inline static std::map<std::string, std::wstring> SoulGemSubTypeDisplayMap = {
+	inline static util::enum_dict<std::wstring> SoulGemSubTypeDisplayMap = {
 		{ "none", L"$Empty" },
 		{ "petty", L"$Petty" },
 		{ "lesser", L"$Lesser" },

@@ -4,9 +4,9 @@
 #include <SKSE/SKSE.h>
 
 #ifdef NDEBUG
-#	include <spdlog/sinks/basic_file_sink.h>
+#include <spdlog/sinks/basic_file_sink.h>
 #else
-#	include <spdlog/sinks/msvc_sink.h>
+#include <spdlog/sinks/msvc_sink.h>
 #endif
 
 using namespace std::literals;
@@ -18,6 +18,17 @@ namespace util
 	using SKSE::stl::report_and_fail;
 	using SKSE::stl::to_underlying;
 	using SKSE::stl::utf8_to_utf16;
+
+	struct comp_str_cis
+	{
+		bool operator()(const std::string& a_lhs, const std::string& a_rhs) const
+		{
+			return ::_stricmp(a_lhs.c_str(), a_rhs.c_str()) < 0;
+		}
+	};
+
+	template <typename T>
+	using enum_dict = std::map<std::string, T, comp_str_cis>;
 
 	inline std::wstring Translate(std::wstring a_text)
 	{
