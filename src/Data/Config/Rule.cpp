@@ -19,6 +19,8 @@ namespace Data
 
 	void Rule::SetInfo(RE::GFxValue* a_entryObject, bool& a_needsIconUpdate) const
 	{
+		assert(a_entryObject);
+
 		if (!Match(a_entryObject)) {
 			return;
 		}
@@ -36,6 +38,8 @@ namespace Data
 
 	void Rule::SetIcon(RE::GFxValue* a_entryObject) const
 	{
+		assert(a_entryObject);
+
 		if (!Match(a_entryObject)) {
 			return;
 		}
@@ -51,23 +55,28 @@ namespace Data
 
 	bool Rule::Match(const RE::GFxValue* a_entryObject) const
 	{
-		return std::ranges::all_of(
-			_properties,
-			[a_entryObject](auto& p)
-			{
-				RE::GFxValue value;
-				a_entryObject->GetMember(p.first.c_str(), &value);
-				return p.second->Match(value);
-			});
+		assert(a_entryObject);
+
+		for (const auto& [name, prop] : _properties) {
+			RE::GFxValue value;
+			a_entryObject->GetMember(name.c_str(), &value);
+
+			if (!prop->Match(value)) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	bool Rule::HasInfo() const
 	{
-		return std::ranges::any_of(
-			_customData,
-			[](auto& p)
-			{
-				return p.first.rfind("icon", 0) != 0;
-			});
+		for (const auto& [name, data] : _customData) {
+			if (name.rfind("icon", 0) != 0) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 }
