@@ -17,4 +17,12 @@ namespace Data
 		{ "arrow", L"$Arrow" },
 		{ "bolt", L"$Bolt" },
 	};
+
+	using AmmoFlag = RE::AMMO_DATA::Flag;
+
+	inline static util::enum_dict<AmmoFlag> AmmoFlagsMap = {
+		{ "ignoresNormalWeaponResistance", AmmoFlag::kIgnoresNormalWeaponResistance },
+		{ "nonPlayable", AmmoFlag::kNonPlayable },
+		{ "nonBolt", AmmoFlag::kNonBolt },
+	};
 }

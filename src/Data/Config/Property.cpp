@@ -55,6 +55,16 @@ namespace Data
 		return true;
 	}
 
+	bool BitfieldProperty::Match(const RE::GFxValue& a_value) const
+	{
+		if (!a_value.IsNumber()) {
+			return false;
+		}
+
+		auto value = static_cast<std::uint32_t>(a_value.GetNumber());
+		return value & _flags;
+	}
+
 	bool MainPartProperty::Match(const RE::GFxValue& a_value) const
 	{
 		if (!a_value.IsNumber()) {

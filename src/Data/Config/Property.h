@@ -66,6 +66,17 @@ namespace Data
 		std::optional<double> _max;
 	};
 
+	class BitfieldProperty final : public Property
+	{
+	public:
+		BitfieldProperty(std::uint32_t a_flags) : _flags{ a_flags } {}
+
+		bool Match(const RE::GFxValue& a_value) const override;
+
+	private:
+		std::uint32_t _flags;
+	};
+
 	class MainPartProperty final : public Property
 	{
 	public:

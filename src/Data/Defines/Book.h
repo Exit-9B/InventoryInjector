@@ -20,4 +20,12 @@ namespace Data
 		{ "note", L"$Note" },
 		{ "recipe", L"$Recipe" },
 	};
+
+	using BookFlag = RE::OBJ_BOOK::Flag;
+
+	inline static util::enum_dict<BookFlag> BookFlagsMap = {
+		{ "spell", BookFlag::kTeachesSpell },
+		{ "skill", BookFlag::kAdvancesActorValue },
+		{ "read", BookFlag::kHasBeenRead },
+	};
 }

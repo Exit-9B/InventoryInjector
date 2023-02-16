@@ -59,4 +59,13 @@ namespace Data
 		{ "food", L"$Food" },
 		{ "poison", L"$Poison" },
 	};
+
+	using PotionFlag = RE::AlchemyItem::AlchemyFlag;
+
+	inline static util::enum_dict<PotionFlag> PotionFlagsMap = {
+		{ "manualCalc", PotionFlag::kCostOverride },
+		{ "food", PotionFlag::kFoodItem },
+		{ "medicine", PotionFlag::kMedicine },
+		{ "poison", PotionFlag::kPoison },
+	};
 }

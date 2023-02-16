@@ -15,6 +15,11 @@ namespace Data
 		else if (a_spec.isBool()) {
 			a_properties->AddProperty(_name, std::make_shared<MatchProperty>(a_spec.asBool()));
 		}
+		else if (a_spec.isArray()) {
+			for (auto& a_subSpec : a_spec) {
+				Parse(a_subSpec, a_properties);
+			}
+		}
 		else if (a_spec.isObject()) {
 			const Json::Value& anyOf = a_spec["anyOf"];
 			if (anyOf.isArray()) {
@@ -103,6 +108,12 @@ namespace Data
 		formID += rawFormID;
 
 		return formID;
+	}
+
+	void PartsParser::ParseNumber(double a_value, IPropertyContainer* a_properties) const
+	{
+		std::uint32_t value = 1 << (static_cast<std::uint32_t>(a_value) - 30);
+		a_properties->AddProperty("partMask", std::make_shared<BitfieldProperty>(value));
 	}
 
 	void MainPartParser::ParseNumber(double a_value, IPropertyContainer* a_properties) const
