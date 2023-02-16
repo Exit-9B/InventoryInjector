@@ -61,32 +61,32 @@ namespace Data
 
 		switch (_formType) {
 		case RE::FormType::Armor:
-			type = util::to_underlying(ArmorSubTypeMap[a_value]);
-			displayStr = ArmorSubTypeDisplayMap[a_value].c_str();
+			util::try_get(ArmorSubTypeMap, a_value, type) &&
+				util::try_get(ArmorSubTypeDisplayMap, a_value, displayStr);
 			break;
 		case RE::FormType::Book:
-			type = util::to_underlying(BookSubTypeMap[a_value]);
-			displayStr = BookSubTypeDisplayMap[a_value].c_str();
+			util::try_get(BookSubTypeMap, a_value, type) &&
+				util::try_get(BookSubTypeDisplayMap, a_value, displayStr);
 			break;
 		case RE::FormType::Misc:
-			type = util::to_underlying(MiscSubTypeMap[a_value]);
-			displayStr = MiscSubTypeDisplayMap[a_value].c_str();
+			util::try_get(MiscSubTypeMap, a_value, type) &&
+				util::try_get(MiscSubTypeDisplayMap, a_value, displayStr);
 			break;
 		case RE::FormType::Weapon:
-			type = util::to_underlying(WeaponSubTypeMap[a_value]);
-			displayStr = WeaponSubTypeDisplayMap[a_value].c_str();
+			util::try_get(WeaponSubTypeMap, a_value, type) &&
+				util::try_get(WeaponSubTypeDisplayMap, a_value, displayStr);
 			break;
 		case RE::FormType::Ammo:
-			type = util::to_underlying(AmmoSubTypeMap[a_value]);
-			displayStr = AmmoSubTypeDisplayMap[a_value].c_str();
+			util::try_get(AmmoSubTypeMap, a_value, type) &&
+				util::try_get(AmmoSubTypeDisplayMap, a_value, displayStr);
 			break;
 		case RE::FormType::AlchemyItem:
-			type = util::to_underlying(PotionSubTypeMap[a_value]);
-			displayStr = PotionSubTypeDisplayMap[a_value].c_str();
+			util::try_get(PotionSubTypeMap, a_value, type) &&
+				util::try_get(PotionSubTypeDisplayMap, a_value, displayStr);
 			break;
 		case RE::FormType::SoulGem:
-			type = util::to_underlying(SoulGemSubTypeMap[a_value]);
-			displayStr = SoulGemSubTypeDisplayMap[a_value].c_str();
+			util::try_get(SoulGemSubTypeMap, a_value, type) &&
+				util::try_get(SoulGemSubTypeDisplayMap, a_value, displayStr);
 			break;
 		}
 

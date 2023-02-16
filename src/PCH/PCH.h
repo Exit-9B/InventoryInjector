@@ -30,6 +30,17 @@ namespace util
 	template <typename T>
 	using enum_dict = std::map<std::string, T, comp_str_cis>;
 
+	template <typename Map, typename Result>
+	bool try_get(Map const& a_map, typename Map::key_type const& a_key, typename Result& a_result)
+	{
+		if (const auto it = a_map.find(a_key); it != a_map.end()) {
+			a_result = static_cast<Result>(it->second);
+			return true;
+		}
+
+		return false;
+	}
+
 	inline std::wstring Translate(std::wstring a_text)
 	{
 		const auto scaleformManager = RE::BSScaleformManager::GetSingleton();
