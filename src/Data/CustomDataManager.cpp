@@ -73,9 +73,9 @@ namespace Data
 		if (!root.isObject())
 			return;
 
-		Json::Value inventoryObjects = root["inventoryObjects"];
-		if (inventoryObjects.isArray()) {
-			for (auto& rule : inventoryObjects) {
+		Json::Value rules = root["rules"];
+		if (rules.isArray()) {
+			for (auto& rule : rules) {
 				auto parsed = RuleParser::ParseRule(rule);
 
 				if (parsed.IsValid()) {
