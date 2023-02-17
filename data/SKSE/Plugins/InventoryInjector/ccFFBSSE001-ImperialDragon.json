@@ -1,11 +1,11 @@
 {
   "rules": [
     {
-      "properties": {
+      "match": {
         "type": "MiscItem",
         "formId": "ccFFBSSE001-ImperialDragon.esl|867"
       },
-      "customData": {
+      "assign": {
         "iconLabel": "book_map"
       }
     }

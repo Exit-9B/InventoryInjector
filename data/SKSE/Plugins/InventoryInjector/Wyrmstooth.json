@@ -1,11 +1,11 @@
 {
   "rules": [
     {
-      "properties": {
+      "match": {
         "type": "MiscItem",
         "formId": "Wyrmstooth.esp|27978A"
       },
-      "customData": {
+      "assign": {
         "subType": "dragonclaw"
       }
     }

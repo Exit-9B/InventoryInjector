@@ -1,11 +1,11 @@
 {
   "rules": [
     {
-      "properties": {
+      "match": {
         "type": "MiscItem",
         "formId": "ccBGSSSE031-AdvCyrus.esm|80D"
       },
-      "customData": {
+      "assign": {
         "iconLabel": "book_map"
       }
     }

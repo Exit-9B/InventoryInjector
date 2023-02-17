@@ -14,26 +14,26 @@ namespace Data
 	{
 		Rule parsed{};
 
-		const Json::Value& properties = a_rule["properties"];
-		const Json::Value& customData = a_rule["customData"];
+		const Json::Value& match = a_rule["match"];
+		const Json::Value& assign = a_rule["assign"];
 
-		if (!properties.isObject() || !customData.isObject()) {
+		if (!match.isObject() || !assign.isObject()) {
 			return parsed;
 		}
 
 		RE::FormType formType = RE::FormType::None;
-		util::try_get(FormTypeMap, properties["formType"].asString(), formType);
+		util::try_get(FormTypeMap, match["formType"].asString(), formType);
 
-		for (auto& name : properties.getMemberNames()) {
-			const Json::Value& prop = properties[name];
+		for (auto& name : match.getMemberNames()) {
+			const Json::Value& prop = match[name];
 
 			if (const auto parser = GetPropertyParser(name, formType)) {
 				parser->Parse(prop, &parsed);
 			}
 		}
 
-		for (auto& name : customData.getMemberNames()) {
-			const Json::Value& val = customData[name];
+		for (auto& name : assign.getMemberNames()) {
+			const Json::Value& val = assign[name];
 
 			if (const auto parser = GetCustomDataParser(name, formType)) {
 				parser->Parse(val, &parsed);

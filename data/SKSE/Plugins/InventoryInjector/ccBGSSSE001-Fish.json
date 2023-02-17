@@ -1,7 +1,7 @@
 {
   "rules": [
     {
-      "properties": {
+      "match": {
         "type": "Book",
         "formId": {
           "anyOf": [
@@ -20,7 +20,7 @@
           ]
         }
       },
-      "customData": {
+      "assign": {
         "iconLabel": "book_map"
       }
     }

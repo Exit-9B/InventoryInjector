@@ -1,7 +1,7 @@
 {
   "rules": [
     {
-      "properties": {
+      "match": {
         "formType": "Book",
         "formId": {
           "anyOf": [
@@ -20,12 +20,12 @@
           ]
         }
       },
-      "customData": {
+      "assign": {
         "iconLabel": "book_map"
       }
     },
     {
-      "properties": {
+      "match": {
         "formType": "MiscItem",
         "formId": {
           "anyOf": [
@@ -34,7 +34,7 @@
           ]
         }
       },
-      "customData": {
+      "assign": {
         "iconLabel": "book_map"
       }
     }

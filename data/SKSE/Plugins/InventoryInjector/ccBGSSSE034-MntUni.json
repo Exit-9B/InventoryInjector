@@ -1,11 +1,11 @@
 {
   "rules": [
     {
-      "properties": {
+      "match": {
         "type": "MiscItem",
         "formId": "ccBGSSSE034-MntUni.esl|D67"
       },
-      "customData": {
+      "assign": {
         "iconLabel": "book_map"
       }
     }

@@ -1,16 +1,16 @@
 {
   "rules": [
     {
-      "properties": {
+      "match": {
         "formType": "Book",
         "formId": "Dragonborn.esm|1CAF2"
       },
-      "customData": {
+      "assign": {
         "iconLabel": "book_map"
       }
     },
     {
-      "properties": {
+      "match": {
         "formType": "MiscItem",
         "formId": {
           "anyOf": [
@@ -19,30 +19,30 @@
           ]
         }
       },
-      "customData": {
+      "assign": {
         "subType": "dragonclaw"
       }
     },
     {
-      "properties": {
+      "match": {
         "formType": "MiscItem",
         "formId": "Dragonborn.esm|2BAAE"
       },
-      "customData": {
+      "assign": {
         "iconLabel": "book_map"
       }
     },
     {
-      "properties": {
+      "match": {
         "formType": "MiscItem",
         "formId": "Dragonborn.esm|247F9"
       },
-      "customData": {
+      "assign": {
         "iconLabel": "misc_trollskull"
       }
     },
     {
-      "properties": {
+      "match": {
         "formType": "Weapon",
         "formId": {
           "anyOf": [
@@ -52,7 +52,7 @@
           ]
         }
       },
-      "customData": {
+      "assign": {
         "subType": "pickaxe"
       }
     }
