@@ -7,7 +7,7 @@ namespace Data
 		_properties[a_name] = a_property;
 	}
 
-	void Rule::AddCustomData(const std::string& a_name, const RE::GFxValue& a_data)
+	void Rule::AddCustomData(const std::string& a_name, const CustomData& a_data)
 	{
 		_customData[a_name] = a_data;
 	}

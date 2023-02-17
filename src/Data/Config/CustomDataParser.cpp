@@ -28,9 +28,7 @@ namespace Data
 		const Json::String& a_value,
 		ICustomDataContainer* a_customData) const
 	{
-		RE::GFxValue str;
-		str.SetString(*_stringCache.insert(a_value).first);
-		a_customData->AddCustomData(_name, str);
+		a_customData->AddCustomData(_name, a_value);
 	}
 
 	void IconColorParser::ParseString(
@@ -93,30 +91,12 @@ namespace Data
 			a_customData->AddCustomData("subType", type);
 
 			if (!displayStr.empty()) {
-				displayStr = util::Translate(displayStr);
-
-				RE::GFxValue str;
-				str.SetStringW(*_wstringCache.insert(displayStr).first);
-				a_customData->AddCustomData("subTypeDisplay", str);
+				a_customData->AddCustomData("subTypeDisplay", displayStr);
 			}
 
 			return;
 		}
 
 		CustomDataParser::ParseString(a_value, a_customData);
-	}
-
-	void SubTypeDisplayParser::ParseString(
-		const Json::String& a_value,
-		ICustomDataContainer* a_customData) const
-	{
-		std::wstring displayStr = util::utf8_to_utf16(a_value).value_or(L"");
-		displayStr = util::Translate(displayStr);
-
-		if (!displayStr.empty()) {
-			RE::GFxValue str;
-			str.SetStringW(*_wstringCache.insert(displayStr).first);
-			a_customData->AddCustomData("subTypeDisplay", str);
-		}
 	}
 }

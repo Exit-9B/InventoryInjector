@@ -17,9 +17,6 @@ namespace Data
 			const;
 
 	protected:
-		inline static std::set<std::string> _stringCache;
-		inline static std::set<std::wstring> _wstringCache;
-
 		std::string _name;
 	};
 
@@ -49,14 +46,5 @@ namespace Data
 
 	private:
 		RE::FormType _formType;
-	};
-
-	class SubTypeDisplayParser final : public CustomDataParser
-	{
-	public:
-		using CustomDataParser::CustomDataParser;
-
-		void ParseString(const Json::String& a_value, ICustomDataContainer* a_customData)
-			const override;
 	};
 }

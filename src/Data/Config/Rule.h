@@ -1,21 +1,16 @@
 #pragma once
 
+#include "CustomData.h"
 #include "Property.h"
 
 namespace Data
 {
-	class ICustomDataContainer
-	{
-	public:
-		virtual void AddCustomData(const std::string& a_name, const RE::GFxValue& a_data) = 0;
-	};
-
 	class Rule final : public IPropertyContainer, public ICustomDataContainer
 	{
 	public:
 		void AddProperty(const std::string& a_name, std::shared_ptr<Property> a_property) override;
 
-		void AddCustomData(const std::string& a_name, const RE::GFxValue& a_data) override;
+		void AddCustomData(const std::string& a_name, const CustomData& a_data) override;
 
 		[[nodiscard]] bool IsValid() const;
 
@@ -29,6 +24,6 @@ namespace Data
 		bool HasInfo() const;
 
 		std::map<std::string, std::shared_ptr<Property>> _properties;
-		std::map<std::string, RE::GFxValue> _customData;
+		std::map<std::string, CustomData> _customData;
 	};
 }

@@ -79,9 +79,6 @@ namespace Data
 		else if (a_name == "subType") {
 			return std::make_shared<SubTypeParser>(a_name, a_formType);
 		}
-		else if (a_name == "subTypeDisplay") {
-			return std::make_shared<SubTypeDisplayParser>(a_name);
-		}
 		else {
 			return std::make_shared<CustomDataParser>(a_name);
 		}
