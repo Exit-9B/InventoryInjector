@@ -1,9 +1,12 @@
 #include "RuleParser.h"
 
 #include "Data/Defines/Ammo.h"
+#include "Data/Defines/Armor.h"
 #include "Data/Defines/Book.h"
 #include "Data/Defines/Form.h"
+#include "Data/Defines/Magic.h"
 #include "Data/Defines/Potion.h"
+#include "Data/Defines/SoulGem.h"
 
 namespace Data
 {
@@ -54,6 +57,34 @@ namespace Data
 		}
 		else if (a_name == "parts") {
 			return std::make_shared<PartsParser>(a_name);
+		}
+		else if (a_name == "weightClass") {
+			return std::make_shared<EnumParser<WeightClass>>(a_name, ArmorWeightClassMap);
+		}
+		else if (a_name == "gemSize" || a_name == "soulSize") {
+			return std::make_shared<EnumParser<SoulGemType>>(a_name, SoulGemSubTypeMap);
+		}
+		else if (a_name == "status") {
+			return std::make_shared<EnumParser<SoulGemStatus>>(a_name, SoulGemStatusMap);
+		}
+		// SkyUI replaces magicType with resistType and actorValue with primaryValue
+		else if (a_name == "primaryValue" || a_name == "resistType" || a_name == "school") {
+			return std::make_shared<EnumParser<RE::ActorValue>>(a_name, ActorValueMap);
+		}
+		else if (a_name == "spellType") {
+			return std::make_shared<EnumParser<SpellType>>(a_name, SpellTypeMap);
+		}
+		else if (a_name == "archetype") {
+			return std::make_shared<EnumParser<EffectArchetype>>(a_name, EffectArchetypeMap);
+		}
+		else if (a_name == "deliveryType") {
+			return std::make_shared<EnumParser<Delivery>>(a_name, DeliveryTypeMap);
+		}
+		else if (a_name == "castType") {
+			return std::make_shared<EnumParser<CastingType>>(a_name, CastingTypeMap);
+		}
+		else if (a_name == "effectFlags") {
+			return std::make_shared<BitfieldParser<EffectFlag>>(a_name, EffectFlagsMap);
 		}
 		else if (a_name == "flags") {
 			switch (a_formType) {

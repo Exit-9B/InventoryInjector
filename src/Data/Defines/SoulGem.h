@@ -32,4 +32,17 @@ namespace Data
 		{ "grand", L"$Grand" },
 		{ "azura", L"$Azura" },
 	};
+
+	enum class SoulGemStatus
+	{
+		Empty = 0,
+		Partial = 1,
+		Full = 2,
+	};
+
+	inline static util::enum_dict<SoulGemStatus> SoulGemStatusMap = {
+		{ "empty", SoulGemStatus::Empty },
+		{ "partial", SoulGemStatus::Partial },
+		{ "full", SoulGemStatus::Full },
+	};
 }

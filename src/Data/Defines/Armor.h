@@ -88,4 +88,21 @@ namespace Data
 		static_cast<RE::BIPED_MODEL::BipedObjectSlot>(1 << 30),
 		RE::BIPED_MODEL::BipedObjectSlot::kFX01,
 	};
+
+	enum class WeightClass
+	{
+		Light = 0,
+		Heavy = 1,
+		None = 2,
+		Clothing = 3,
+		Jewelry = 4,
+	};
+
+	inline static util::enum_dict<WeightClass> ArmorWeightClassMap = {
+		{ "light", WeightClass::Light },
+		{ "heavy", WeightClass::Heavy },
+		{ "none", WeightClass::None },
+		{ "clothing", WeightClass::Clothing },
+		{ "jewelry", WeightClass::Jewelry },
+	};
 }
