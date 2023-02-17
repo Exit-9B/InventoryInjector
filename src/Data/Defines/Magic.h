@@ -2,9 +2,13 @@
 
 namespace Data
 {
+	template <typename Enum>
+	extern const util::enum_dict<Enum> EnumLookup;
+
 	using RE::MagicSystem::SpellType;
 
-	inline static const util::enum_dict<SpellType> SpellTypeMap = {
+	template <>
+	inline const util::enum_dict<SpellType> EnumLookup<SpellType> = {
 		{ "Spell", SpellType::kSpell },
 		{ "Disease", SpellType::kDisease },
 		{ "Power", SpellType::kPower },
@@ -23,7 +27,8 @@ namespace Data
 
 	using RE::MagicSystem::Delivery;
 
-	inline static const util::enum_dict<Delivery> DeliveryTypeMap = {
+	template <>
+	inline const util::enum_dict<Delivery> EnumLookup<Delivery> = {
 		{ "Self", Delivery::kSelf },
 		{ "Touch", Delivery::kTouch },
 		{ "Aimed", Delivery::kAimed },
@@ -33,7 +38,8 @@ namespace Data
 
 	using RE::MagicSystem::CastingType;
 
-	inline static const util::enum_dict<CastingType> CastingTypeMap = {
+	template <>
+	inline const util::enum_dict<CastingType> EnumLookup<CastingType> = {
 		{ "ConstantEffect", CastingType::kConstantEffect },
 		{ "FireAndForget", CastingType::kFireAndForget },
 		{ "Concentration", CastingType::kConcentration },
@@ -42,7 +48,8 @@ namespace Data
 
 	using EffectArchetype = RE::EffectArchetypes::ArchetypeID;
 
-	inline static const util::enum_dict<EffectArchetype> EffectArchetypeMap = {
+	template <>
+	inline const util::enum_dict<EffectArchetype> EnumLookup<EffectArchetype> = {
 		{ "ValueModifier", EffectArchetype::kValueModifier },
 		{ "Script", EffectArchetype::kScript },
 		{ "Dispel", EffectArchetype::kDispel },
@@ -94,7 +101,8 @@ namespace Data
 
 	using EffectFlag = RE::EffectSetting::EffectSettingData::Flag;
 
-	inline static const util::enum_dict<EffectFlag> EffectFlagsMap = {
+	template <>
+	inline const util::enum_dict<EffectFlag> EnumLookup<EffectFlag> = {
 		{ "Hostile", EffectFlag::kHostile },
 		{ "Recover", EffectFlag::kRecover },
 		{ "Detrimental", EffectFlag::kDetrimental },
@@ -114,7 +122,8 @@ namespace Data
 		{ "NoDeathDispel", EffectFlag::kNoDeathDispel },
 	};
 
-	inline static const util::enum_dict<RE::ActorValue> ActorValueMap = {
+	template <>
+	inline const util::enum_dict<RE::ActorValue> EnumLookup<RE::ActorValue> = {
 		{ "Aggression", RE::ActorValue::kAggression },
 		{ "Confidence", RE::ActorValue::kConfidence },
 		{ "Energy", RE::ActorValue::kEnergy },

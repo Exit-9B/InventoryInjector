@@ -2,13 +2,17 @@
 
 namespace Data
 {
+	template <typename Enum>
+	extern const util::enum_dict<Enum> EnumLookup;
+
 	enum class AmmoType
 	{
 		Arrow = 0,
 		Bolt = 1,
 	};
 
-	inline static const util::enum_dict<AmmoType> AmmoSubTypeMap = {
+	template <>
+	inline const util::enum_dict<AmmoType> EnumLookup<AmmoType> = {
 		{ "Arrow", AmmoType::Arrow },
 		{ "Bolt", AmmoType::Bolt },
 	};
@@ -20,7 +24,8 @@ namespace Data
 
 	using AmmoFlag = RE::AMMO_DATA::Flag;
 
-	inline static const util::enum_dict<AmmoFlag> AmmoFlagsMap = {
+	template <>
+	inline const util::enum_dict<AmmoFlag> EnumLookup<AmmoFlag> = {
 		{ "IgnoresNormalWeaponResistance", AmmoFlag::kIgnoresNormalWeaponResistance },
 		{ "NonPlayable", AmmoFlag::kNonPlayable },
 		{ "NonBolt", AmmoFlag::kNonBolt },

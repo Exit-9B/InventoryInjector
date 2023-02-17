@@ -2,6 +2,9 @@
 
 namespace Data
 {
+	template <typename Enum>
+	extern const util::enum_dict<Enum> EnumLookup;
+
 	enum class PotionType
 	{
 		Health = 0,
@@ -22,7 +25,8 @@ namespace Data
 		Poison = 15,
 	};
 
-	inline static const util::enum_dict<PotionType> PotionSubTypeMap = {
+	template <>
+	inline const util::enum_dict<PotionType> EnumLookup<PotionType> = {
 		{ "Health", PotionType::Health },
 		{ "HealRate", PotionType::HealRate },
 		{ "HealRateMult", PotionType::HealRateMult },
@@ -62,7 +66,8 @@ namespace Data
 
 	using PotionFlag = RE::AlchemyItem::AlchemyFlag;
 
-	inline static util::enum_dict<PotionFlag> PotionFlagsMap = {
+	template <>
+	inline const util::enum_dict<PotionFlag> EnumLookup<PotionFlag> = {
 		{ "ManualCalc", PotionFlag::kCostOverride },
 		{ "Food", PotionFlag::kFoodItem },
 		{ "Medicine", PotionFlag::kMedicine },

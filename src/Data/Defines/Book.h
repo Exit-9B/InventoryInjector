@@ -2,6 +2,9 @@
 
 namespace Data
 {
+	template <typename Enum>
+	extern const util::enum_dict<Enum> EnumLookup;
+
 	enum class BookType
 	{
 		SpellTome = 0,
@@ -9,7 +12,8 @@ namespace Data
 		Recipe = 2,
 	};
 
-	inline static const util::enum_dict<BookType> BookSubTypeMap = {
+	template <>
+	inline const util::enum_dict<BookType> EnumLookup<BookType> = {
 		{ "SpellTome", BookType::SpellTome },
 		{ "Note", BookType::Note },
 		{ "Recipe", BookType::Recipe },
@@ -23,7 +27,8 @@ namespace Data
 
 	using BookFlag = RE::OBJ_BOOK::Flag;
 
-	inline static const util::enum_dict<BookFlag> BookFlagsMap = {
+	template <>
+	inline const util::enum_dict<BookFlag> EnumLookup<BookFlag> = {
 		{ "Spell", BookFlag::kTeachesSpell },
 		{ "Skill", BookFlag::kAdvancesActorValue },
 		{ "Read", BookFlag::kHasBeenRead },

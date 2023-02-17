@@ -2,6 +2,9 @@
 
 namespace Data
 {
+	template <typename Enum>
+	extern const util::enum_dict<Enum> EnumLookup;
+
 	enum class SoulGemType
 	{
 		None = 0,
@@ -13,7 +16,8 @@ namespace Data
 		Azura = 6,
 	};
 
-	inline static const util::enum_dict<SoulGemType> SoulGemSubTypeMap = {
+	template <>
+	inline const util::enum_dict<SoulGemType> EnumLookup<SoulGemType> = {
 		{ "None", SoulGemType::None },
 		{ "Petty", SoulGemType::Petty },
 		{ "Lesser", SoulGemType::Lesser },
@@ -40,7 +44,8 @@ namespace Data
 		Full = 2,
 	};
 
-	inline static const util::enum_dict<SoulGemStatus> SoulGemStatusMap = {
+	template <>
+	inline const util::enum_dict<SoulGemStatus> EnumLookup<SoulGemStatus> = {
 		{ "Empty", SoulGemStatus::Empty },
 		{ "Partial", SoulGemStatus::Partial },
 		{ "Full", SoulGemStatus::Full },

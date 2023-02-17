@@ -2,6 +2,9 @@
 
 namespace Data
 {
+	template <typename Enum>
+	extern const util::enum_dict<Enum> EnumLookup;
+
 	enum class WeaponType
 	{
 		Melee = 0,
@@ -30,7 +33,8 @@ namespace Data
 		Gun = 23,
 	};
 
-	inline static const util::enum_dict<WeaponType> WeaponSubTypeMap = {
+	template <>
+	inline const util::enum_dict<WeaponType> EnumLookup<WeaponType> = {
 		{ "Melee", WeaponType::Melee },
 		{ "Sword", WeaponType::Sword },
 		{ "Dagger", WeaponType::Dagger },

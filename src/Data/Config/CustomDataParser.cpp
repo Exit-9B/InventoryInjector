@@ -58,31 +58,31 @@ namespace Data
 
 		switch (_formType) {
 		case RE::FormType::Armor:
-			util::try_get(ArmorSubTypeMap, a_value, type) &&
+			util::try_get(EnumLookup<EquipType>, a_value, type) &&
 				util::try_get(ArmorSubTypeDisplayMap, a_value, displayStr);
 			break;
 		case RE::FormType::Book:
-			util::try_get(BookSubTypeMap, a_value, type) &&
+			util::try_get(EnumLookup<BookType>, a_value, type) &&
 				util::try_get(BookSubTypeDisplayMap, a_value, displayStr);
 			break;
 		case RE::FormType::Misc:
-			util::try_get(MiscSubTypeMap, a_value, type) &&
+			util::try_get(EnumLookup<MiscType>, a_value, type) &&
 				util::try_get(MiscSubTypeDisplayMap, a_value, displayStr);
 			break;
 		case RE::FormType::Weapon:
-			util::try_get(WeaponSubTypeMap, a_value, type) &&
+			util::try_get(EnumLookup<WeaponType>, a_value, type) &&
 				util::try_get(WeaponSubTypeDisplayMap, a_value, displayStr);
 			break;
 		case RE::FormType::Ammo:
-			util::try_get(AmmoSubTypeMap, a_value, type) &&
+			util::try_get(EnumLookup<AmmoType>, a_value, type) &&
 				util::try_get(AmmoSubTypeDisplayMap, a_value, displayStr);
 			break;
 		case RE::FormType::AlchemyItem:
-			util::try_get(PotionSubTypeMap, a_value, type) &&
+			util::try_get(EnumLookup<PotionType>, a_value, type) &&
 				util::try_get(PotionSubTypeDisplayMap, a_value, displayStr);
 			break;
 		case RE::FormType::SoulGem:
-			util::try_get(SoulGemSubTypeMap, a_value, type) &&
+			util::try_get(EnumLookup<SoulGemType>, a_value, type) &&
 				util::try_get(SoulGemSubTypeDisplayMap, a_value, displayStr);
 			break;
 		}

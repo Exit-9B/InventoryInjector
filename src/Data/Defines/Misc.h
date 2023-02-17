@@ -2,6 +2,9 @@
 
 namespace Data
 {
+	template <typename Enum>
+	extern const util::enum_dict<Enum> EnumLookup;
+
 	enum class MiscType
 	{
 		Gem = 0,
@@ -30,7 +33,8 @@ namespace Data
 		Gold = 21,
 	};
 
-	inline static const util::enum_dict<MiscType> MiscSubTypeMap = {
+	template <>
+	inline const util::enum_dict<MiscType> EnumLookup<MiscType> = {
 		{ "Gem", MiscType::Gem },
 		{ "DragonClaw", MiscType::DragonClaw },
 		{ "Artifact", MiscType::Artifact },

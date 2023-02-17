@@ -7,6 +7,9 @@
 
 namespace Data
 {
+	template <typename Enum>
+	extern const util::enum_dict<Enum> EnumLookup;
+
 	class PropertyParser
 	{
 	public:
@@ -66,11 +69,7 @@ namespace Data
 	public:
 		using Map = util::enum_dict<T>;
 
-		EnumParser(const std::string& a_name, Map const& a_map)
-			: PropertyParser(a_name),
-			  _map{ a_map }
-		{
-		}
+		using PropertyParser::PropertyParser;
 
 		void ParseString(const Json::String& a_value, IPropertyContainer* a_properties)
 			const override
@@ -85,7 +84,7 @@ namespace Data
 		}
 
 	private:
-		Map _map;
+		Map _map{ EnumLookup<T> };
 	};
 
 	template <typename T>
@@ -94,11 +93,7 @@ namespace Data
 	public:
 		using Map = util::enum_dict<T>;
 
-		BitfieldParser(const std::string& a_name, Map const& a_map)
-			: PropertyParser(a_name),
-			  _map{ a_map }
-		{
-		}
+		using PropertyParser::PropertyParser;
 
 		void ParseString(const Json::String& a_value, IPropertyContainer* a_properties)
 			const override
@@ -113,6 +108,6 @@ namespace Data
 		}
 
 	private:
-		Map _map;
+		Map _map{ EnumLookup<T> };
 	};
 }

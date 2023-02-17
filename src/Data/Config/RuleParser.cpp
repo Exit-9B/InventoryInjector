@@ -43,59 +43,59 @@ namespace Data
 		return parsed;
 	}
 
+	using PropertyParserFactory_t =
+		std::shared_ptr<PropertyParser>(const std::string&, RE::FormType);
+
+	template <typename T>
+	std::shared_ptr<PropertyParser> MakePropertyParser(const std::string& a_name, RE::FormType)
+	{
+		return std::make_shared<T>(a_name);
+	}
+
+	inline const std::map<std::string, PropertyParserFactory_t*> PropertyParserMap = {
+		{ "formType", MakePropertyParser<FormTypeParser> },
+		{ "formId", MakePropertyParser<FormIDParser> },
+		{ "mainPart", MakePropertyParser<MainPartParser> },
+		{ "parts", MakePropertyParser<PartsParser> },
+		{ "weightClass", MakePropertyParser<EnumParser<WeightClass>> },
+		{ "gemSize", MakePropertyParser<EnumParser<SoulGemType>> },
+		{ "status", MakePropertyParser<EnumParser<SoulGemStatus>> },
+		// SkyUI replaces actorValue with primaryValue
+		{ "primaryValue", MakePropertyParser<EnumParser<RE::ActorValue>> },
+		// SkyUI replaces magicType with resistType
+		{ "resistType", MakePropertyParser<EnumParser<RE::ActorValue>> },
+		{ "school", MakePropertyParser<EnumParser<RE::ActorValue>> },
+		{ "spellType", MakePropertyParser<EnumParser<SpellType>> },
+		{ "archetype", MakePropertyParser<EnumParser<EffectArchetype>> },
+		{ "deliveryType", MakePropertyParser<EnumParser<Delivery>> },
+		{ "castType", MakePropertyParser<EnumParser<CastingType>> },
+		{ "effectFlags", MakePropertyParser<BitfieldParser<EffectFlag>> },
+		// clang-format off
+		{ "flags",
+			+[](const std::string& a_name,
+				RE::FormType a_formType) -> std::shared_ptr<PropertyParser>
+			{
+				switch (a_formType) {
+				case RE::FormType::Book:
+					return std::make_shared<BitfieldParser<BookFlag>>(a_name);
+				case RE::FormType::Ammo:
+					return std::make_shared<BitfieldParser<AmmoFlag>>(a_name);
+				case RE::FormType::AlchemyItem:
+					return std::make_shared<BitfieldParser<PotionFlag>>(a_name);
+				default:
+					return std::make_shared<PropertyParser>(a_name);
+				}
+			}
+		},
+		// clang-format on
+	};
+
 	std::shared_ptr<PropertyParser> RuleParser::GetPropertyParser(
 		const std::string& a_name,
 		RE::FormType a_formType)
 	{
-		if (a_name == "formType") {
-			return std::make_shared<FormTypeParser>(a_name);
-		}
-		else if (a_name == "formId") {
-			return std::make_shared<FormIDParser>(a_name);
-		}
-		else if (a_name == "mainPart") {
-			return std::make_shared<MainPartParser>(a_name);
-		}
-		else if (a_name == "parts") {
-			return std::make_shared<PartsParser>(a_name);
-		}
-		else if (a_name == "weightClass") {
-			return std::make_shared<EnumParser<WeightClass>>(a_name, ArmorWeightClassMap);
-		}
-		else if (a_name == "gemSize" || a_name == "soulSize") {
-			return std::make_shared<EnumParser<SoulGemType>>(a_name, SoulGemSubTypeMap);
-		}
-		else if (a_name == "status") {
-			return std::make_shared<EnumParser<SoulGemStatus>>(a_name, SoulGemStatusMap);
-		}
-		// SkyUI replaces magicType with resistType and actorValue with primaryValue
-		else if (a_name == "primaryValue" || a_name == "resistType" || a_name == "school") {
-			return std::make_shared<EnumParser<RE::ActorValue>>(a_name, ActorValueMap);
-		}
-		else if (a_name == "spellType") {
-			return std::make_shared<EnumParser<SpellType>>(a_name, SpellTypeMap);
-		}
-		else if (a_name == "archetype") {
-			return std::make_shared<EnumParser<EffectArchetype>>(a_name, EffectArchetypeMap);
-		}
-		else if (a_name == "deliveryType") {
-			return std::make_shared<EnumParser<Delivery>>(a_name, DeliveryTypeMap);
-		}
-		else if (a_name == "castType") {
-			return std::make_shared<EnumParser<CastingType>>(a_name, CastingTypeMap);
-		}
-		else if (a_name == "effectFlags") {
-			return std::make_shared<BitfieldParser<EffectFlag>>(a_name, EffectFlagsMap);
-		}
-		else if (a_name == "flags") {
-			switch (a_formType) {
-			case RE::FormType::Book:
-				return std::make_shared<BitfieldParser<BookFlag>>(a_name, BookFlagsMap);
-			case RE::FormType::Ammo:
-				return std::make_shared<BitfieldParser<AmmoFlag>>(a_name, AmmoFlagsMap);
-			case RE::FormType::AlchemyItem:
-				return std::make_shared<BitfieldParser<PotionFlag>>(a_name, PotionFlagsMap);
-			}
+		if (auto it = PropertyParserMap.find(a_name); it != PropertyParserMap.end()) {
+			return it->second(a_name, a_formType);
 		}
 
 		return std::make_shared<PropertyParser>(a_name);

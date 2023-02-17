@@ -2,6 +2,9 @@
 
 namespace Data
 {
+	template <typename Enum>
+	extern const util::enum_dict<Enum> EnumLookup;
+
 	enum class EquipType
 	{
 		Head = 0,
@@ -20,7 +23,8 @@ namespace Data
 		Tail = 13,
 	};
 
-	inline static const util::enum_dict<EquipType> ArmorSubTypeMap = {
+	template <>
+	inline const util::enum_dict<EquipType> EnumLookup<EquipType> = {
 		{ "Head", EquipType::Head },
 		{ "Hair", EquipType::Hair },
 		{ "LongHair", EquipType::LongHair },
@@ -98,7 +102,8 @@ namespace Data
 		Jewelry = 4,
 	};
 
-	inline static const util::enum_dict<WeightClass> ArmorWeightClassMap = {
+	template <>
+	inline const util::enum_dict<WeightClass> EnumLookup<WeightClass> = {
 		{ "Light", WeightClass::Light },
 		{ "Heavy", WeightClass::Heavy },
 		{ "None", WeightClass::None },
