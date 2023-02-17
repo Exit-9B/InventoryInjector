@@ -21,7 +21,8 @@ namespace Data
 			return parsed;
 		}
 
-		[[maybe_unused]] RE::FormType formType = FormTypeMap[properties["formType"].asString()];
+		RE::FormType formType = RE::FormType::None;
+		util::try_get(FormTypeMap, properties["formType"].asString(), formType);
 
 		for (auto& name : properties.getMemberNames()) {
 			const Json::Value& prop = properties[name];

@@ -9,23 +9,23 @@ namespace Data
 		Recipe = 2,
 	};
 
-	inline static util::enum_dict<BookType> BookSubTypeMap = {
-		{ "spelltome", BookType::SpellTome },
-		{ "note", BookType::Note },
-		{ "recipe", BookType::Recipe },
+	inline static const util::enum_dict<BookType> BookSubTypeMap = {
+		{ "SpellTome", BookType::SpellTome },
+		{ "Note", BookType::Note },
+		{ "Recipe", BookType::Recipe },
 	};
 
-	inline static util::enum_dict<std::wstring> BookSubTypeDisplayMap = {
-		{ "spelltome", L"$Spell Tome" },
-		{ "note", L"$Note" },
-		{ "recipe", L"$Recipe" },
+	inline static const util::enum_dict<std::wstring> BookSubTypeDisplayMap = {
+		{ "SpellTome", L"$Spell Tome" },
+		{ "Note", L"$Note" },
+		{ "Recipe", L"$Recipe" },
 	};
 
 	using BookFlag = RE::OBJ_BOOK::Flag;
 
-	inline static util::enum_dict<BookFlag> BookFlagsMap = {
-		{ "spell", BookFlag::kTeachesSpell },
-		{ "skill", BookFlag::kAdvancesActorValue },
-		{ "read", BookFlag::kHasBeenRead },
+	inline static const util::enum_dict<BookFlag> BookFlagsMap = {
+		{ "Spell", BookFlag::kTeachesSpell },
+		{ "Skill", BookFlag::kAdvancesActorValue },
+		{ "Read", BookFlag::kHasBeenRead },
 	};
 }

@@ -13,24 +13,24 @@ namespace Data
 		Azura = 6,
 	};
 
-	inline static util::enum_dict<SoulGemType> SoulGemSubTypeMap = {
-		{ "none", SoulGemType::None },
-		{ "petty", SoulGemType::Petty },
-		{ "lesser", SoulGemType::Lesser },
-		{ "common", SoulGemType::Common },
-		{ "greater", SoulGemType::Greater },
-		{ "grand", SoulGemType::Grand },
-		{ "azura", SoulGemType::Azura },
+	inline static const util::enum_dict<SoulGemType> SoulGemSubTypeMap = {
+		{ "None", SoulGemType::None },
+		{ "Petty", SoulGemType::Petty },
+		{ "Lesser", SoulGemType::Lesser },
+		{ "Common", SoulGemType::Common },
+		{ "Greater", SoulGemType::Greater },
+		{ "Grand", SoulGemType::Grand },
+		{ "Azura", SoulGemType::Azura },
 	};
 
-	inline static util::enum_dict<std::wstring> SoulGemSubTypeDisplayMap = {
-		{ "none", L"$Empty" },
-		{ "petty", L"$Petty" },
-		{ "lesser", L"$Lesser" },
-		{ "common", L"$Common" },
-		{ "greater", L"$Greater" },
-		{ "grand", L"$Grand" },
-		{ "azura", L"$Azura" },
+	inline static const util::enum_dict<std::wstring> SoulGemSubTypeDisplayMap = {
+		{ "None", L"$Empty" },
+		{ "Petty", L"$Petty" },
+		{ "Lesser", L"$Lesser" },
+		{ "Common", L"$Common" },
+		{ "Greater", L"$Greater" },
+		{ "Grand", L"$Grand" },
+		{ "Azura", L"$Azura" },
 	};
 
 	enum class SoulGemStatus
@@ -40,9 +40,9 @@ namespace Data
 		Full = 2,
 	};
 
-	inline static util::enum_dict<SoulGemStatus> SoulGemStatusMap = {
-		{ "empty", SoulGemStatus::Empty },
-		{ "partial", SoulGemStatus::Partial },
-		{ "full", SoulGemStatus::Full },
+	inline static const util::enum_dict<SoulGemStatus> SoulGemStatusMap = {
+		{ "Empty", SoulGemStatus::Empty },
+		{ "Partial", SoulGemStatus::Partial },
+		{ "Full", SoulGemStatus::Full },
 	};
 }

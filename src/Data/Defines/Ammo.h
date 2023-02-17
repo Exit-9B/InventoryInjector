@@ -8,21 +8,21 @@ namespace Data
 		Bolt = 1,
 	};
 
-	inline static util::enum_dict<AmmoType> AmmoSubTypeMap = {
-		{ "arrow", AmmoType::Arrow },
-		{ "bolt", AmmoType::Bolt },
+	inline static const util::enum_dict<AmmoType> AmmoSubTypeMap = {
+		{ "Arrow", AmmoType::Arrow },
+		{ "Bolt", AmmoType::Bolt },
 	};
 
-	inline static util::enum_dict<std::wstring> AmmoSubTypeDisplayMap = {
-		{ "arrow", L"$Arrow" },
-		{ "bolt", L"$Bolt" },
+	inline static const util::enum_dict<std::wstring> AmmoSubTypeDisplayMap = {
+		{ "Arrow", L"$Arrow" },
+		{ "Bolt", L"$Bolt" },
 	};
 
 	using AmmoFlag = RE::AMMO_DATA::Flag;
 
-	inline static util::enum_dict<AmmoFlag> AmmoFlagsMap = {
-		{ "ignoresNormalWeaponResistance", AmmoFlag::kIgnoresNormalWeaponResistance },
-		{ "nonPlayable", AmmoFlag::kNonPlayable },
-		{ "nonBolt", AmmoFlag::kNonBolt },
+	inline static const util::enum_dict<AmmoFlag> AmmoFlagsMap = {
+		{ "IgnoresNormalWeaponResistance", AmmoFlag::kIgnoresNormalWeaponResistance },
+		{ "NonPlayable", AmmoFlag::kNonPlayable },
+		{ "NonBolt", AmmoFlag::kNonBolt },
 	};
 }

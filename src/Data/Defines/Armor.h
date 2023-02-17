@@ -20,38 +20,38 @@ namespace Data
 		Tail = 13,
 	};
 
-	inline static util::enum_dict<EquipType> ArmorSubTypeMap = {
-		{ "head", EquipType::Head },
-		{ "hair", EquipType::Hair },
-		{ "longhair", EquipType::LongHair },
-		{ "body", EquipType::Body },
-		{ "forearms", EquipType::Forearms },
-		{ "hands", EquipType::Hands },
-		{ "shield", EquipType::Shield },
-		{ "calves", EquipType::Calves },
-		{ "feet", EquipType::Feet },
-		{ "circlet", EquipType::Circlet },
-		{ "amulet", EquipType::Amulet },
-		{ "ears", EquipType::Ears },
-		{ "ring", EquipType::Ring },
-		{ "tail", EquipType::Tail },
+	inline static const util::enum_dict<EquipType> ArmorSubTypeMap = {
+		{ "Head", EquipType::Head },
+		{ "Hair", EquipType::Hair },
+		{ "LongHair", EquipType::LongHair },
+		{ "Body", EquipType::Body },
+		{ "Forearms", EquipType::Forearms },
+		{ "Hands", EquipType::Hands },
+		{ "Shield", EquipType::Shield },
+		{ "Calves", EquipType::Calves },
+		{ "Feet", EquipType::Feet },
+		{ "Circlet", EquipType::Circlet },
+		{ "Amulet", EquipType::Amulet },
+		{ "Ears", EquipType::Ears },
+		{ "Ring", EquipType::Ring },
+		{ "Tail", EquipType::Tail },
 	};
 
-	inline static util::enum_dict<std::wstring> ArmorSubTypeDisplayMap = {
-		{ "head", L"$Head" },
-		{ "hair", L"$Head" },
-		{ "longhair", L"$Head" },
-		{ "body", L"$Body" },
-		{ "forearms", L"$Forearms" },
-		{ "hands", L"$Hands" },
-		{ "shield", L"$Shield" },
-		{ "calves", L"$Calves" },
-		{ "feet", L"$Feet" },
-		{ "circlet", L"$Circlet" },
-		{ "amulet", L"$Amulet" },
-		{ "ears", L"$Ears" },
-		{ "ring", L"$Ring" },
-		{ "tail", L"$Tail" },
+	inline static const util::enum_dict<std::wstring> ArmorSubTypeDisplayMap = {
+		{ "Head", L"$Head" },
+		{ "Hair", L"$Head" },
+		{ "LongHair", L"$Head" },
+		{ "Body", L"$Body" },
+		{ "Forearms", L"$Forearms" },
+		{ "Hands", L"$Hands" },
+		{ "Shield", L"$Shield" },
+		{ "Calves", L"$Calves" },
+		{ "Feet", L"$Feet" },
+		{ "Circlet", L"$Circlet" },
+		{ "Amulet", L"$Amulet" },
+		{ "Ears", L"$Ears" },
+		{ "Ring", L"$Ring" },
+		{ "Tail", L"$Tail" },
 	};
 
 	inline static std::vector<RE::BIPED_MODEL::BipedObjectSlot> PartMaskPrecedence = {
@@ -98,11 +98,11 @@ namespace Data
 		Jewelry = 4,
 	};
 
-	inline static util::enum_dict<WeightClass> ArmorWeightClassMap = {
-		{ "light", WeightClass::Light },
-		{ "heavy", WeightClass::Heavy },
-		{ "none", WeightClass::None },
-		{ "clothing", WeightClass::Clothing },
-		{ "jewelry", WeightClass::Jewelry },
+	inline static const util::enum_dict<WeightClass> ArmorWeightClassMap = {
+		{ "Light", WeightClass::Light },
+		{ "Heavy", WeightClass::Heavy },
+		{ "None", WeightClass::None },
+		{ "Clothing", WeightClass::Clothing },
+		{ "Jewelry", WeightClass::Jewelry },
 	};
 }
