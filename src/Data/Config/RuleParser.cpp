@@ -70,8 +70,8 @@ namespace Data
 		{ "teachesSpell", MakePropertyParser<FormIDParser> },
 		// SkyUI replaces actorValue with primaryValue
 		{ "primaryValue", MakePropertyParser<EnumParser<RE::ActorValue>> },
-		// SkyUI replaces magicType with resistType
-		{ "resistType", MakePropertyParser<EnumParser<RE::ActorValue>> },
+		// SkyUI replaces magicType with resistance
+		{ "resistance", MakePropertyParser<EnumParser<RE::ActorValue>> },
 		{ "school", MakePropertyParser<EnumParser<RE::ActorValue>> },
 		{ "spellType", MakePropertyParser<EnumParser<SpellType>> },
 		{ "archetype", MakePropertyParser<EnumParser<EffectArchetype>> },

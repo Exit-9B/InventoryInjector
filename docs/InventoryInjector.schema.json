@@ -140,7 +140,7 @@
                     "delayTime": { "$ref": "#/$defs/match-number" },
                     "castType": { "$ref": "#/$defs/match-castType" },
                     "primaryValue": { "$ref": "#/$defs/match-actorValue" },
-                    "resistType": { "$ref": "#/$defs/match-resistType" }
+                    "resistance": { "$ref": "#/$defs/match-resistance" }
                   }
                 }
               },
@@ -551,7 +551,7 @@
       ]
     },
 
-    "resistType": {
+    "resistance": {
       "description": "Resist Type",
       "enum": [
         "DamageResist",
@@ -564,15 +564,15 @@
       ]
     },
 
-    "match-resistType": {
+    "match-resistance": {
       "anyOf": [
-        { "$ref": "#/$defs/resistType" },
+        { "$ref": "#/$defs/resistance" },
         {
           "type": "object",
           "properties": {
             "anyOf": {
               "type": "array",
-              "items": { "$ref": "#/$defs/resistType" }
+              "items": { "$ref": "#/$defs/resistance" }
             }
           }
         }
