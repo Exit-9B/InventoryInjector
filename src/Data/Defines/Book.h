@@ -35,8 +35,8 @@ namespace Data
 
 	template <>
 	inline const util::enum_dict<BookFlag> EnumLookup<BookFlag> = {
-		{ "Spell", BookFlag::kTeachesSpell },
-		{ "Skill", BookFlag::kAdvancesActorValue },
+		{ "TeachesSpell", BookFlag::kTeachesSpell },
+		{ "TeachesSkill", BookFlag::kAdvancesActorValue },
 		{ "Read", BookFlag::kHasBeenRead },
 	};
 }

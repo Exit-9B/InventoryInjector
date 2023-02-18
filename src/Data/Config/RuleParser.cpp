@@ -1,5 +1,6 @@
 #include "RuleParser.h"
 
+#include "Data/Defines/Actor.h"
 #include "Data/Defines/Ammo.h"
 #include "Data/Defines/Armor.h"
 #include "Data/Defines/Book.h"

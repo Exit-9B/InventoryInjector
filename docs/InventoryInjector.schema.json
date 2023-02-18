@@ -1,0 +1,959 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Inventory Interface Information Injector",
+  "description": "Defines data to inject into SkyUI item menus",
+  "type": "object",
+  "properties": {
+    "rules": {
+      "description": "Main array describing data injection rules",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "match": {
+            "description": "Determines which objects are manipulated by the rule",
+            "type": "object",
+            "properties": {
+              "formType": {
+                "description": "Form Type",
+                "enum": [
+                  "Enchantment",
+                  "Spell",
+                  "Scroll",
+                  "Armor",
+                  "Book",
+                  "Ingredient",
+                  "Light",
+                  "MiscItem",
+                  "Weapon",
+                  "Ammo",
+                  "Key",
+                  "Potion",
+                  "SoulGem"
+                ]
+              },
+              "formId": { "$ref": "#/$defs/match-formId" },
+              "keywords": { "$ref": "#/$defs/match-string-array" },
+              "value": { "$ref": "#/$defs/match-number" },
+              "weight": { "$ref": "#/$defs/match-number" },
+              "isEquipped": { "type": "boolean" },
+              "isStolen": { "type": "boolean" }
+            },
+            "allOf": [
+              {
+                "if": { "properties": { "formType": { "const": "Armor" } } },
+                "then": {
+                  "properties": {
+                    "parts": { "$ref": "#/$defs/match-number-array" },
+                    "mainPart": { "$ref": "#/$defs/match-number" },
+                    "weightClass": { "$ref": "#/$defs/match-weightClass" },
+                    "armor": { "$ref": "#/$defs/match-number" },
+                    "isEnchanted": { "type": "boolean" }
+                  }
+                }
+              },
+              {
+                "if": { "properties": { "formType": { "const": "Ammo" } } },
+                "then": {
+                  "properties": {
+                    "flags": { "$ref": "#/$defs/match-ammo-flags" },
+                    "damage": { "$ref": "#/$defs/match-number" },
+                    "isEnchanted": { "type": "boolean" }
+                  }
+                }
+              },
+              {
+                "if": { "properties": { "formType": { "const": "Weapon" } } },
+                "then": {
+                  "properties": {
+                    "weaponType": { "$ref": "#/$defs/match-weaponType" },
+                    "speed": { "$ref": "#/$defs/match-number" },
+                    "reach": { "$ref": "#/$defs/match-number" },
+                    "stagger": { "$ref": "#/$defs/match-number" },
+                    "critDamage": { "$ref": "#/$defs/match-number" },
+                    "minRange": { "$ref": "#/$defs/match-number" },
+                    "maxRange": { "$ref": "#/$defs/match-number" },
+                    "baseDamage": { "$ref": "#/$defs/match-number" },
+                    "equipSlot": { "$ref": "#/$defs/match-formId" },
+                    "damage": { "$ref": "#/$defs/match-number" },
+                    "isEnchanted": { "type": "boolean" },
+                    "isPoisoned": { "type": "boolean" }
+                  }
+                }
+              },
+              {
+                "if": { "properties": { "formType": { "const": "SoulGem" } } },
+                "then": {
+                  "properties": {
+                    "gemSize": { "$ref": "#/$defs/match-soul-level" },
+                    "soulSize": { "$ref": "#/$defs/match-soul-level" },
+                    "status": { "$ref": "#/$defs/match-soulgem-status" }
+                  }
+                }
+              },
+              {
+                "if": { "properties": { "formType": { "const": "Potion" } } },
+                "then": {
+                  "properties": {
+                    "flags": { "$ref": "#/$defs/match-potion-flags" }
+                  }
+                }
+              },
+              {
+                "if": { "properties": { "formType": { "const": "Book" } } },
+                "then": {
+                  "properties": {
+                    "flags": { "$ref": "#/$defs/match-book-flags" },
+                    "bookType": { "enum": [ "Book", "Note" ]},
+                    "teachesSkill": { "$ref": "#/$defs/match-skill" },
+                    "teachesSpell": { "$ref": "#/$defs/match-formId" }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "formType": {
+                      "enum": [
+                        "Spell",
+                        "Scroll",
+                        "Ingredient",
+                        "Potion",
+                        "Enchantment"
+                      ]
+                    }
+                  }
+                },
+                "then": {
+                  "properties": {
+                    "spellName": { "$ref": "#/$defs/match-string" },
+                    "magnitude": { "$ref": "#/$defs/match-number" },
+                    "duration": { "$ref": "#/$defs/match-number" },
+                    "area": { "$ref": "#/$defs/match-number" },
+                    "effectName": { "$ref": "#/$defs/match-string" },
+                    "effectFlags": { "$ref": "#/$defs/match-effectFlags" },
+                    "school": { "$ref": "#/$defs/match-school" },
+                    "skillLevel": { "$ref": "#/$defs/match-number" },
+                    "archetype": { "$ref": "#/$defs/match-archetype" },
+                    "deliveryType": { "$ref": "#/$defs/match-deliveryType" },
+                    "castTime": { "$ref": "#/$defs/match-number" },
+                    "delayTime": { "$ref": "#/$defs/match-number" },
+                    "castType": { "$ref": "#/$defs/match-castType" },
+                    "primaryValue": { "$ref": "#/$defs/match-actorValue" },
+                    "resistType": { "$ref": "#/$defs/match-resistType" }
+                  }
+                }
+              },
+              {
+                "if": { "properties": { "formType": { "enum": [ "Spell", "Scroll" ] } } },
+                "then": {
+                  "properties": {
+                    "spellType": { "$ref": "#/$defs/match-spellType" },
+                    "trueCost": { "$ref": "#/$defs/match-number" },
+                    "equipSlot": { "$ref": "#/$defs/match-formId" }
+                  }
+                }
+              },
+              {
+                "if": { "properties": { "formType": { "const": "Enchantment" } } },
+                "then": {
+                  "properties": {
+                    "effectName": { "$ref": "#/$defs/match-string" }
+                  }
+                }
+              },
+              {
+                "if": { "properties": { "formType": { "const": "Shout" } } },
+                "then": {
+                  "properties": {
+                    "fullName": { "$ref": "#/$defs/match-string" }
+                  }
+                }
+              }
+            ],
+            "minProperties": 1
+          },
+          "assign": {
+            "description": "Specifies the data to assign to matching objects",
+            "type": "object",
+            "properties": {
+              "subType": { "$ref": "#/$defs/assign-data" },
+              "subTypeDisplay": { "$ref": "#/$defs/assign-data" },
+              "materialDisplay": { "$ref": "#/$defs/assign-data" },
+              "weightClassDisplay": { "$ref": "#/$defs/assign-data" },
+              "soulSizeDisplay": { "$ref": "#/$defs/assign-data" },
+              "infoSchoolName": { "$ref": "#/$defs/assign-data" },
+              "text": { "$ref": "#/$defs/assign-data" },
+              "infoArmor": { "$ref": "#/$defs/assign-data" },
+              "infoDamage": { "$ref": "#/$defs/assign-data" },
+              "infoWeight": { "$ref": "#/$defs/assign-data" },
+              "infoValue": { "$ref": "#/$defs/assign-data" },
+              "infoValueWeight": { "$ref": "#/$defs/assign-data" },
+              "infoCastLevel": { "$ref": "#/$defs/assign-data" },
+              "magnitude": { "$ref": "#/$defs/assign-data" },
+              "duration": { "$ref": "#/$defs/assign-data" },
+              "spellCostDisplay": { "$ref": "#/$defs/assign-data" },
+              "word0": { "$ref": "#/$defs/assign-data" },
+              "word1": { "$ref": "#/$defs/assign-data" },
+              "word2": { "$ref": "#/$defs/assign-data" },
+              "timeRemainingDisplay": { "$ref": "#/$defs/assign-data" },
+              "cardName": { "$ref": "#/$defs/assign-data" },
+              "effectName": { "$ref": "#/$defs/assign-data" }
+            },
+            "minProperties": 1
+          }
+        },
+        "required": [ "match", "assign" ]
+      }
+    },
+    "required": [ "rules" ]
+  },
+  "$defs": {
+
+    "number-range": {
+      "anyOf": [
+        { "type": "number" },
+        {
+          "type": "object",
+          "properties": {
+            "min": { "type": "number" },
+            "max": { "type": "number" }
+          }
+        }
+      ]
+    },
+
+    "match-number": {
+      "description": "Number",
+      "anyOf": [
+        { "$ref": "#/$defs/number-range" },
+        {
+          "type": "object",
+          "properties": {
+            "anyOf": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/number-range" }
+            }
+          },
+          "required": [ "anyOf" ]
+        }
+      ]
+    },
+
+    "match-number-array": {
+      "description": "Array of Number",
+      "anyOf": [
+        { "$ref": "#/$defs/match-number" },
+        {
+          "type": "array",
+          "items": { "type": "number" }
+        }
+      ]
+    },
+
+    "match-string": {
+      "description": "String",
+      "anyOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "properties": {
+            "anyOf": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          },
+          "required": [ "anyOf" ]
+        }
+      ]
+    },
+
+    "match-string-array": {
+      "description": "Array of String",
+      "anyOf": [
+        { "$ref": "#/$defs/match-string" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/$defs/match-string" }
+        }
+      ]
+    },
+
+    "formId": {
+      "description": "Look up a Form by a plugin file and Form ID (e.g. \"Skyrim.esm|12E47\")",
+      "type": "string",
+      "pattern": "^[^\\\\\\/:*?\"<>|]+\\.es[lmp]\\|(0[Xx])?[\\dA-Fa-f]{3,8}$"
+    },
+
+    "match-formId": {
+      "description": "FormID",
+      "anyOf": [
+        { "$ref": "#/$defs/formId" },
+        {
+          "type": "object",
+          "properties": {
+            "anyOf": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/formId" }
+            }
+          }
+        }
+      ]
+    },
+
+    "actorValue": {
+      "enum": [
+        "Aggression",
+        "Confidence",
+        "Energy",
+        "Morality",
+        "Mood",
+        "Assistance",
+        "OneHanded",
+        "TwoHanded",
+        "Marksman",
+        "Block",
+        "Smithing",
+        "HeavyArmor",
+        "LightArmor",
+        "Pickpocket",
+        "Lockpicking",
+        "Sneak",
+        "Alchemy",
+        "Speechcraft",
+        "Alteration",
+        "Conjuration",
+        "Destruction",
+        "Illusion",
+        "Restoration",
+        "Enchanting",
+        "Health",
+        "Magicka",
+        "Stamina",
+        "HealRate",
+        "MagickaRate",
+        "StaminaRate",
+        "SpeedMult",
+        "InventoryWeight",
+        "CarryWeight",
+        "CritChance",
+        "MeleeDamage",
+        "UnarmedDamage",
+        "Mass",
+        "VoicePoints",
+        "VoiceRate",
+        "DamageResist",
+        "PoisonResist",
+        "FireResist",
+        "ElectricResist",
+        "FrostResist",
+        "MagicResist",
+        "DiseaseResist",
+        "PerceptionCondition",
+        "EnduranceCondition",
+        "LeftAttackCondition",
+        "RightAttackCondition",
+        "LeftMobilityCondition",
+        "RightMobilityCondition",
+        "BrainCondition",
+        "Paralysis",
+        "Invisibility",
+        "NightEye",
+        "DetectLifeRange",
+        "WaterBreathing",
+        "WaterWalking",
+        "IgnoreCrippledLimbs",
+        "Fame",
+        "Infamy",
+        "JumpingBonus",
+        "WardPower",
+        "RightItemCharge",
+        "ArmorPerks",
+        "ShieldPerks",
+        "WardDeflection",
+        "Variable01",
+        "Variable02",
+        "Variable03",
+        "Variable04",
+        "Variable05",
+        "Variable06",
+        "Variable07",
+        "Variable08",
+        "Variable09",
+        "Variable10",
+        "BowSpeedBonus",
+        "FavorActive",
+        "FavorsPerDay",
+        "FavorsPerDayTimer",
+        "LeftItemCharge",
+        "AbsorbChance",
+        "Blindness",
+        "WeaponSpeedMult",
+        "ShoutRecoveryMult",
+        "BowStaggerBonus",
+        "Telekinesis",
+        "FavorPointsBonus",
+        "LastBribedIntimidated",
+        "LastFlattered",
+        "MovementNoiseMult",
+        "BypassVendorStolenCheck",
+        "BypassVendorKeywordCheck",
+        "WaitingForPlayer",
+        "OneHandedMod",
+        "TwoHandedMod",
+        "MarksmanMod",
+        "BlockMod",
+        "SmithingMod",
+        "HeavyArmorMod",
+        "LightArmorMod",
+        "PickpocketMod",
+        "LockpickingMod",
+        "SneakMod",
+        "AlchemyMod",
+        "SpeechcraftMod",
+        "AlterationMod",
+        "ConjurationMod",
+        "DestructionMod",
+        "IllusionMod",
+        "RestorationMod",
+        "EnchantingMod",
+        "OneHandedSkillAdvance",
+        "TwoHandedSkillAdvance",
+        "MarksmanSkillAdvance",
+        "BlockSkillAdvance",
+        "SmithingSkillAdvance",
+        "HeavyArmorSkillAdvance",
+        "LightArmorSkillAdvance",
+        "PickpocketSkillAdvance",
+        "LockpickingSkillAdvance",
+        "SneakSkillAdvance",
+        "AlchemySkillAdvance",
+        "SpeechcraftSkillAdvance",
+        "AlterationSkillAdvance",
+        "ConjurationSkillAdvance",
+        "DestructionSkillAdvance",
+        "IllusionSkillAdvance",
+        "RestorationSkillAdvance",
+        "EnchantingSkillAdvance",
+        "LeftWeaponSpeedMult",
+        "DragonSouls",
+        "CombatHealthRegenMult",
+        "OneHandedPowerMod",
+        "TwoHandedPowerMod",
+        "MarksmanPowerMod",
+        "BlockPowerMod",
+        "SmithingPowerMod",
+        "HeavyArmorPowerMod",
+        "LightArmorPowerMod",
+        "PickpocketPowerMod",
+        "LockpickingPowerMod",
+        "SneakPowerMod",
+        "AlchemyPowerMod",
+        "SpeechcraftPowerMod",
+        "AlterationPowerMod",
+        "ConjurationPowerMod",
+        "DestructionPowerMod",
+        "IllusionPowerMod",
+        "RestorationPowerMod",
+        "EnchantingPowerMod",
+        "DragonRend",
+        "AttackDamageMult",
+        "HealRateMult",
+        "MagickaRateMult",
+        "StaminaRateMult",
+        "WerewolfPerks",
+        "VampirePerks",
+        "GrabActorOffset",
+        "Grabbed",
+        "DEPRECATED05",
+        "ReflectDamage"
+      ]
+    },
+
+    "match-actorValue": {
+      "description": "Actor Value",
+      "anyOf": [
+        { "$ref": "#/$defs/actorValue" },
+        {
+          "type": "object",
+          "properties": {
+            "anyOf": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/actorValue" }
+            }
+          }
+        }
+      ]
+    },
+
+    "skill": {
+      "enum": [
+        "OneHanded",
+        "TwoHanded",
+        "Marksman",
+        "Block",
+        "Smithing",
+        "HeavyArmor",
+        "LightArmor",
+        "Pickpocket",
+        "Lockpicking",
+        "Sneak",
+        "Alchemy",
+        "Speechcraft",
+        "Alteration",
+        "Conjuration",
+        "Destruction",
+        "Illusion",
+        "Restoration",
+        "Enchanting"
+      ]
+    },
+
+    "match-skill": {
+      "description": "Skill",
+      "anyOf": [
+        { "$ref": "#/$defs/skill" },
+        {
+          "type": "object",
+          "properties": {
+            "anyOf": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/skill" }
+            }
+          }
+        }
+      ]
+    },
+
+    "school": {
+      "enum": [
+        "Alteration",
+        "Conjuration",
+        "Destruction",
+        "Illusion",
+        "Restoration"
+      ]
+    },
+
+    "match-school": {
+      "description": "Magic School",
+      "anyOf": [
+        { "$ref": "#/$defs/school" },
+        {
+          "type": "object",
+          "properties": {
+            "anyOf": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/school" }
+            }
+          }
+        }
+      ]
+    },
+
+    "resistType": {
+      "description": "Resist Type",
+      "enum": [
+        "DamageResist",
+        "PoisonResist",
+        "FireResist",
+        "ElectricResist",
+        "FrostResist",
+        "MagicResist",
+        "DiseaseResist"
+      ]
+    },
+
+    "match-resistType": {
+      "anyOf": [
+        { "$ref": "#/$defs/resistType" },
+        {
+          "type": "object",
+          "properties": {
+            "anyOf": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/resistType" }
+            }
+          }
+        }
+      ]
+    },
+
+    "weightClass": {
+      "enum": [ "Light", "Heavy", "None", "Clothing", "Jewelry" ]
+    },
+
+    "match-weightClass": {
+      "description": "Armor Weight Class",
+      "anyOf": [
+        { "$ref": "#/$defs/weightClass" },
+        {
+          "type": "object",
+          "properties": {
+            "anyOf": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/weightClass" }
+            }
+          }
+        }
+      ]
+    },
+
+    "ammo-flags": {
+      "enum": [ "IgnoresNormalWeaponResistance", "NonPlayable", "NonBolt" ]
+    },
+
+    "match-ammo-flags": {
+      "description": "Ammo Flags",
+      "anyOf": [
+        { "$ref": "#/$defs/ammo-flags" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ammo-flags" }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "anyOf": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/ammo-flags" }
+            }
+          }
+        }
+      ]
+    },
+
+    "weaponType": {
+      "enum": [
+        "HandToHandMelee",
+        "OneHandSword",
+        "OneHandDagger",
+        "OneHandAxe",
+        "OneHandMace",
+        "TwoHandSword",
+        "TwoHandAxe",
+        "Bow",
+        "Staff",
+        "Crossbow"
+      ]
+    },
+
+    "match-weaponType": {
+      "description": "Weapon Animation Type",
+      "anyOf": [
+        { "$ref": "#/$defs/weaponType" },
+        {
+          "type": "object",
+          "properties": {
+            "anyOf": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/weaponType" }
+            }
+          }
+        }
+      ]
+    },
+
+    "soul-level": {
+      "anyOf": [
+        { "enum": [ "None", "Petty", "Lesser", "Common", "Greater", "Grand" ] },
+        { "$ref": "#/$defs/number-range" }
+      ]
+    },
+
+    "match-soul-level": {
+      "description": "Soul Level",
+      "anyOf": [
+        { "$ref": "#/$defs/soul-level" },
+        {
+          "type": "object",
+          "properties": {
+            "anyOf": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/soul-level" }
+            }
+          }
+        }
+      ]
+    },
+
+    "soulgem-status": {
+      "enum": [ "Empty", "Partial", "Full" ]
+    },
+
+    "match-soulgem-status": {
+      "description": "Soul Gem Status",
+      "anyOf": [
+        { "$ref": "#/$defs/soulgem-status" },
+        {
+          "type": "object",
+          "properties": {
+            "anyOf": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/soulgem-status" }
+            }
+          }
+        }
+      ]
+    },
+
+    "potion-flags": {
+      "enum": [
+        "ManualCalc",
+        "Food",
+        "Medicine",
+        "Poison"
+      ]
+    },
+
+    "match-potion-flags": {
+      "description": "Potion Flags",
+      "anyOf": [
+        { "$ref": "#/$defs/potion-flags" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/$defs/potion-flags" }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "anyOf": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/potion-flags" }
+            }
+          }
+        }
+      ]
+    },
+
+    "book-flags": {
+      "enum": [
+        "TeachesSpell",
+        "TeachesSkill",
+        "Read"
+      ]
+    },
+
+    "match-book-flags": {
+      "description": "Book Flags",
+      "anyOf": [
+        { "$ref": "#/$defs/book-flags" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/$defs/book-flags" }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "anyOf": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/book-flags" }
+            }
+          }
+        }
+      ]
+    },
+
+    "effectFlags": {
+      "enum": [
+        "Hostile",
+        "Recover",
+        "Detrimental",
+        "SnapToNavMesh",
+        "NoHitEvent",
+        "DispelWithKeywords",
+        "NoDuration",
+        "NoArea",
+        "FXPersist",
+        "GoryVisuals",
+        "HideInUI",
+        "NoRecast",
+        "PowerAffectsMagnitude",
+        "PowerAffectsDuration",
+        "Painless",
+        "NoHitEffect",
+        "NoDeathDispel"
+      ]
+    },
+
+    "match-effectFlags": {
+      "description": "Magic Effect Flags",
+      "anyOf": [
+        { "$ref": "#/$defs/effectFlags" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/$defs/effectFlags" }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "anyOf": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/effectFlags" }
+            }
+          }
+        }
+      ]
+    },
+
+    "archetype": {
+      "enum": [
+        "ValueModifier",
+        "Script",
+        "Dispel",
+        "CureDisease",
+        "Absorb",
+        "DualValueModifier",
+        "Calm",
+        "Demoralize",
+        "Frenzy",
+        "Disarm",
+        "CommandSummoned",
+        "Invisibility",
+        "Light",
+        "Darkness",
+        "NightEye",
+        "Lock",
+        "Open",
+        "BoundWeapon",
+        "SummonCreature",
+        "DetectLife",
+        "Telekinesis",
+        "Paralysis",
+        "Reanimate",
+        "SoulTrap",
+        "TurnUndead",
+        "Guide",
+        "WerewolfFeed",
+        "CureParalysis",
+        "CureAddiction",
+        "CurePoison",
+        "Concussion",
+        "ValueAndParts",
+        "AccumulateMagnitude",
+        "Stagger",
+        "PeakValueModifier",
+        "Cloak",
+        "Werewolf",
+        "SlowTime",
+        "Rally",
+        "EnhanceWeapon",
+        "SpawnHazard",
+        "Etherealize",
+        "Banish",
+        "SpawnScriptedRef",
+        "Disguise",
+        "GrabActor",
+        "VampireLord"
+      ]
+    },
+
+    "match-archetype": {
+      "description": "Spell Archetype",
+      "anyOf": [
+        { "$ref": "#/$defs/weaponType" },
+        {
+          "type": "object",
+          "properties": {
+            "anyOf": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/weaponType" }
+            }
+          }
+        }
+      ]
+    },
+
+    "deliveryType": {
+      "enum": [
+        "Self",
+        "Touch",
+        "Aimed",
+        "TargetActor",
+        "TargetLocation"
+      ]
+    },
+
+    "match-deliveryType": {
+      "description": "Spell Delivery Type",
+      "anyOf": [
+        { "$ref": "#/$defs/deliveryType" },
+        {
+          "type": "object",
+          "properties": {
+            "anyOf": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/deliveryType" }
+            }
+          }
+        }
+      ]
+    },
+
+    "castType": {
+      "enum": [
+        "ConstantEffect",
+        "FireAndForget",
+        "Concentration",
+        "Scroll"
+      ]
+    },
+
+    "match-castType": {
+      "description": "Spell Casting Type",
+      "anyOf": [
+        { "$ref": "#/$defs/castType" },
+        {
+          "type": "object",
+          "properties": {
+            "anyOf": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/castType" }
+            }
+          }
+        }
+      ]
+    },
+
+    "spellType": {
+      "enum": [
+        "Spell",
+        "Disease",
+        "Power",
+        "LesserPower",
+        "Ability",
+        "Poison",
+        "Enchantment",
+        "Potion",
+        "WortCraft",
+        "LeveledSpell",
+        "Addiction",
+        "VoicePower",
+        "StaffEnchantment",
+        "Scroll"
+      ]
+    },
+
+    "match-spellType": {
+      "description": "Spell Type",
+      "anyOf": [
+        { "$ref": "#/$defs/spellType" },
+        {
+          "type": "object",
+          "properties": {
+            "anyOf": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/spellType" }
+            }
+          }
+        }
+      ]
+    },
+
+    "assign-data": {
+      "anyOf": [
+        { "type": [ "string", "number", "boolean" ] }
+      ]
+    }
+  }
+}
