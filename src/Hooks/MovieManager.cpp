@@ -44,6 +44,7 @@ namespace Hooks
 		IconSetter::Install(a_view, "_global.FavoritesIconSetter.prototype");
 
 		InventoryListEntry::Install(a_view, "_global.InventoryListEntry.prototype");
+		InventoryListEntry::Install(a_view, "_global.CraftingListEntry.prototype");
 		FavoritesListEntry::Install(a_view, "_global.FavoritesListEntry.prototype");
 	}
 
