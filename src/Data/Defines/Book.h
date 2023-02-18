@@ -25,6 +25,12 @@ namespace Data
 		{ "Recipe", L"$Recipe" },
 	};
 
+	template <>
+	inline const util::enum_dict<RE::OBJ_BOOK::Type> EnumLookup<RE::OBJ_BOOK::Type> = {
+		{ "Book", RE::OBJ_BOOK::Type::kBookTome },
+		{ "Note", RE::OBJ_BOOK::Type::kNoteScroll },
+	};
+
 	using BookFlag = RE::OBJ_BOOK::Flag;
 
 	template <>

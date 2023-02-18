@@ -7,6 +7,7 @@
 #include "Data/Defines/Magic.h"
 #include "Data/Defines/Potion.h"
 #include "Data/Defines/SoulGem.h"
+#include "Data/Defines/Weapon.h"
 
 namespace Data
 {
@@ -58,8 +59,13 @@ namespace Data
 		{ "mainPart", MakePropertyParser<MainPartParser> },
 		{ "parts", MakePropertyParser<PartsParser> },
 		{ "weightClass", MakePropertyParser<EnumParser<WeightClass>> },
+		{ "weaponType", MakePropertyParser<EnumParser<RE::WEAPON_TYPE>> },
+		{ "equipSlot", MakePropertyParser<FormIDParser> },
 		{ "gemSize", MakePropertyParser<EnumParser<SoulGemType>> },
 		{ "status", MakePropertyParser<EnumParser<SoulGemStatus>> },
+		{ "bookType", MakePropertyParser<EnumParser<RE::OBJ_BOOK::Type>> },
+		{ "teachesSkill", MakePropertyParser<EnumParser<RE::ActorValue>> },
+		{ "teachesSpell", MakePropertyParser<FormIDParser> },
 		// SkyUI replaces actorValue with primaryValue
 		{ "primaryValue", MakePropertyParser<EnumParser<RE::ActorValue>> },
 		// SkyUI replaces magicType with resistType

@@ -42,11 +42,26 @@ namespace Data
 		{ "Mace", WeaponType::Mace },
 		{ "Greatsword", WeaponType::Greatsword },
 		{ "Battleaxe", WeaponType::Battleaxe },
+		{ "Warhammer", WeaponType::Warhammer },
 		{ "Bow", WeaponType::Bow },
 		{ "Crossbow", WeaponType::Crossbow },
 		{ "Staff", WeaponType::Staff },
 		{ "Pickaxe", WeaponType::Pickaxe },
 		{ "WoodAxe", WeaponType::WoodAxe },
+	};
+
+	template <>
+	inline const util::enum_dict<RE::WEAPON_TYPE> EnumLookup<RE::WEAPON_TYPE> = {
+		{ "HandToHandMelee", RE::WEAPON_TYPE::kHandToHandMelee },
+		{ "OneHandSword", RE::WEAPON_TYPE::kOneHandSword },
+		{ "OneHandDagger", RE::WEAPON_TYPE::kOneHandDagger },
+		{ "OneHandAxe", RE::WEAPON_TYPE::kOneHandAxe },
+		{ "OneHandMace", RE::WEAPON_TYPE::kOneHandMace },
+		{ "TwoHandSword", RE::WEAPON_TYPE::kTwoHandSword },
+		{ "TwoHandAxe", RE::WEAPON_TYPE::kTwoHandAxe },
+		{ "Bow", RE::WEAPON_TYPE::kBow },
+		{ "Staff", RE::WEAPON_TYPE::kStaff },
+		{ "Crossbow", RE::WEAPON_TYPE::kCrossbow },
 	};
 
 	inline static const util::enum_dict<std::wstring> WeaponSubTypeDisplayMap = {
