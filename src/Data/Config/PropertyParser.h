@@ -47,6 +47,15 @@ namespace Data
 		static RE::FormID ParseFormID(const std::string& a_identifier);
 	};
 
+	class KeywordsParser final : public PropertyParser
+	{
+	public:
+		using PropertyParser::PropertyParser;
+
+		void ParseString(const Json::String& a_value, IPropertyContainer* a_properties)
+			const override;
+	};
+
 	class PartsParser final : public PropertyParser
 	{
 	public:

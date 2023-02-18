@@ -21,9 +21,7 @@ namespace Data
 	public:
 		bool Match(const RE::GFxValue& a_value) const override;
 
-		void AddProperty(
-			const std::string& a_name,
-			std::shared_ptr<Property> a_property) override;
+		void AddProperty(const std::string& a_name, std::shared_ptr<Property> a_property) override;
 
 	private:
 		std::vector<std::shared_ptr<Property>> _subProperties;
@@ -75,6 +73,17 @@ namespace Data
 
 	private:
 		std::uint32_t _flags;
+	};
+
+	class KeywordsProperty final : public Property
+	{
+	public:
+		KeywordsProperty(std::string_view a_string) : _keyword{ a_string } {}
+
+		bool Match(const RE::GFxValue& a_value) const override;
+
+	private:
+		std::string _keyword;
 	};
 
 	class MainPartProperty final : public Property

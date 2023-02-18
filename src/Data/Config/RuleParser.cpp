@@ -57,6 +57,7 @@ namespace Data
 	inline const std::map<std::string, PropertyParserFactory_t*> PropertyParserMap = {
 		{ "formType", MakePropertyParser<FormTypeParser> },
 		{ "formId", MakePropertyParser<FormIDParser> },
+		{ "keywords", MakePropertyParser<KeywordsParser> },
 		{ "mainPart", MakePropertyParser<MainPartParser> },
 		{ "parts", MakePropertyParser<PartsParser> },
 		{ "weightClass", MakePropertyParser<EnumParser<WeightClass>> },

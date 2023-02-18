@@ -65,7 +65,7 @@ namespace Data
 		if (auto it = FormTypeMap.find(a_value); it != FormTypeMap.end()) {
 			auto value = it->second;
 			a_properties->AddProperty(
-				"formType",
+				_name,
 				std::make_shared<MatchProperty>(util::to_underlying(value)));
 			return;
 		}
@@ -79,12 +79,18 @@ namespace Data
 		auto formID = ParseFormID(a_value);
 		if (formID) {
 			a_properties->AddProperty(
-				"formId",
+				_name,
 				std::make_shared<MatchProperty>(static_cast<std::uint32_t>(formID)));
 			return;
 		}
 
 		PropertyParser::ParseString(a_value, a_properties);
+	}
+
+	void KeywordsParser::ParseString(const Json::String& a_value, IPropertyContainer* a_properties)
+		const
+	{
+		a_properties->AddProperty(_name, std::make_shared<KeywordsProperty>(a_value));
 	}
 
 	RE::FormID FormIDParser::ParseFormID(const std::string& a_identifier)

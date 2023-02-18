@@ -65,6 +65,14 @@ namespace Data
 		return value & _flags;
 	}
 
+	bool KeywordsProperty::Match(const RE::GFxValue& a_value) const
+	{
+		RE::GFxValue hasKeyword;
+		a_value.GetMember(_keyword.c_str(), &hasKeyword);
+
+		return hasKeyword.IsBool() && hasKeyword.GetBool();
+	}
+
 	bool MainPartProperty::Match(const RE::GFxValue& a_value) const
 	{
 		if (!a_value.IsNumber()) {
