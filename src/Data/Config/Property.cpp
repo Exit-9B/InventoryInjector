@@ -67,6 +67,10 @@ namespace Data
 
 	bool KeywordsProperty::Match(const RE::GFxValue& a_value) const
 	{
+		if (!a_value.IsObject()) {
+			return false;
+		}
+
 		RE::GFxValue hasKeyword;
 		a_value.GetMember(_keyword.c_str(), &hasKeyword);
 
