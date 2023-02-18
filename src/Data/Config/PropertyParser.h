@@ -67,47 +67,37 @@ namespace Data
 	class EnumParser final : public PropertyParser
 	{
 	public:
-		using Map = util::enum_dict<T>;
-
 		using PropertyParser::PropertyParser;
 
 		void ParseString(const Json::String& a_value, IPropertyContainer* a_properties)
 			const override
 		{
 			std::underlying_type_t<T> underlying{};
-			if (util::try_get(_map, a_value, underlying)) {
+			if (util::try_get(EnumLookup<T>, a_value, underlying)) {
 				a_properties->AddProperty(_name, std::make_shared<MatchProperty>(underlying));
 				return;
 			}
 
 			PropertyParser::ParseString(a_value, a_properties);
 		}
-
-	private:
-		Map _map{ EnumLookup<T> };
 	};
 
 	template <typename T>
 	class BitfieldParser final : public PropertyParser
 	{
 	public:
-		using Map = util::enum_dict<T>;
-
 		using PropertyParser::PropertyParser;
 
 		void ParseString(const Json::String& a_value, IPropertyContainer* a_properties)
 			const override
 		{
 			std::uint32_t flag = 0;
-			if (util::try_get(_map, a_value, flag)) {
+			if (util::try_get(EnumLookup<T>, a_value, flag)) {
 				a_properties->AddProperty(_name, std::make_shared<BitfieldProperty>(flag));
 				return;
 			}
 
 			PropertyParser::ParseString(a_value, a_properties);
 		}
-
-	private:
-		Map _map{ EnumLookup<T> };
 	};
 }
