@@ -28,6 +28,10 @@ namespace Data
 		util::try_get(FormTypeMap, match["formType"].asString(), formType);
 
 		for (auto& name : match.getMemberNames()) {
+			if (name.empty() || name[0] == '$') {
+				continue;
+			}
+
 			const Json::Value& prop = match[name];
 
 			if (const auto parser = GetPropertyParser(name, formType)) {
@@ -36,6 +40,10 @@ namespace Data
 		}
 
 		for (auto& name : assign.getMemberNames()) {
+			if (name.empty() || name[0] == '$') {
+				continue;
+			}
+
 			const Json::Value& val = assign[name];
 
 			if (const auto parser = GetCustomDataParser(name, formType)) {
