@@ -87,8 +87,7 @@ namespace Hooks
 			return;
 		}
 
-		constexpr std::string_view DEFAULT_SOURCE = "skyui/icons_items_psychosteve.swf";
-		std::string source{ DEFAULT_SOURCE };
+		std::string source{ "skyui/icons_item_psychosteve.swf" };
 
 		if (a_state.IsObject()) {
 			RE::GFxValue iconSource;
@@ -107,7 +106,7 @@ namespace Hooks
 
 		RE::GFxValue iconLabel;
 		a_entryObject.GetMember("iconLabel", &iconLabel);
-		if (iconLabel.IsNull()) {
+		if (iconLabel.IsUndefined()) {
 			iconLabel = "default_misc";
 		}
 		a_params.thisPtr->SetMember("_iconLabel", iconLabel);

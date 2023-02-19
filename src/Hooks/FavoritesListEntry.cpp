@@ -57,7 +57,7 @@ namespace Hooks
 		}
 
 		auto& a_entryObject = a_params.args[0];
-		auto& a_state = a_params.args[1];
+		[[maybe_unused]] auto& a_state = a_params.args[1];
 
 		RE::GFxValue iconSetter;
 		a_params.movie->GetVariable(&iconSetter, "_global.FavoritesIconSetter");
@@ -68,9 +68,10 @@ namespace Hooks
 
 		IconSetter::ProcessEntry(&iconSetter, &a_entryObject);
 
-		std::string source;
+		// The favorites menu has icons embedded but we will override those
+		std::string source{ "skyui/icons_item_psychosteve.swf" };
 
-		if (a_state.IsObject()) {
+		{
 			RE::GFxValue iconSource;
 			a_entryObject.GetMember("iconSource", &iconSource);
 
@@ -79,38 +80,42 @@ namespace Hooks
 			}
 		}
 
-		if (source.empty()) {
-			logger::trace("No custom source provided");
-			return;
+		RE::GFxValue iconSource;
+		a_params.thisPtr->GetMember("_iconSource", &iconSource);
+		bool sourceChanged = !iconSource.IsString() || iconSource.GetString() != source;
+
+		iconSource = source;
+		a_params.thisPtr->SetMember("_iconSource", iconSource);
+
+		if (sourceChanged) {
+			RE::GFxValue iconLabel;
+			a_entryObject.GetMember("iconLabel", &iconLabel);
+			if (iconLabel.IsUndefined()) {
+				iconLabel = "default_misc";
+			}
+			a_params.thisPtr->SetMember("_iconLabel", iconLabel);
+
+			RE::GFxValue iconColor;
+			a_entryObject.GetMember("iconColor", &iconColor);
+			a_params.thisPtr->SetMember("_iconColor", iconColor);
+
+			RE::GFxValue itemIcon;
+			a_params.thisPtr->GetMember("itemIcon", &itemIcon);
+			if (!itemIcon.IsObject()) {
+				logger::debug("Failed to get item icon movie clip");
+				return;
+			}
+
+			RE::GFxValue iconLoader;
+			a_params.movie->CreateObject(&iconLoader, "MovieClipLoader");
+
+			iconLoader.Invoke("addListener", nullptr, a_params.thisPtr, 1);
+
+			std::array<RE::GFxValue, 2> loadClipArgs{ iconSource, itemIcon };
+			iconLoader.Invoke("loadClip", loadClipArgs);
+
+			itemIcon.SetMember("_visible", false);
 		}
-
-		RE::GFxValue iconLabel;
-		a_entryObject.GetMember("iconLabel", &iconLabel);
-		if (iconLabel.IsNull()) {
-			iconLabel = "default_misc";
-		}
-		a_params.thisPtr->SetMember("_iconLabel", iconLabel);
-
-		RE::GFxValue iconColor;
-		a_entryObject.GetMember("iconColor", &iconColor);
-		a_params.thisPtr->SetMember("_iconColor", iconColor);
-
-		RE::GFxValue itemIcon;
-		a_params.thisPtr->GetMember("itemIcon", &itemIcon);
-		if (!itemIcon.IsObject()) {
-			logger::debug("Failed to get item icon movie clip");
-			return;
-		}
-
-		RE::GFxValue iconLoader;
-		a_params.movie->CreateObject(&iconLoader, "MovieClipLoader");
-
-		iconLoader.Invoke("addListener", nullptr, a_params.thisPtr, 1);
-
-		std::array<RE::GFxValue, 2> loadClipArgs{ RE::GFxValue(source), itemIcon };
-		iconLoader.Invoke("loadClip", loadClipArgs);
-
-		itemIcon.SetMember("_visible", false);
 	}
 
 	void FavoritesListEntry::OnLoadInitFunc::Call(Params& a_params)
