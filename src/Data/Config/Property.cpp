@@ -71,10 +71,7 @@ namespace Data
 			return false;
 		}
 
-		RE::GFxValue hasKeyword;
-		a_value.GetMember(_keyword.c_str(), &hasKeyword);
-
-		return hasKeyword.IsBool() && hasKeyword.GetBool();
+		return a_value.HasMember(_keyword.c_str());
 	}
 
 	bool MainPartProperty::Match(const RE::GFxValue& a_value) const

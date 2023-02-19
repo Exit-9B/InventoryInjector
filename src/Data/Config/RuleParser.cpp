@@ -45,7 +45,7 @@ namespace Data
 		return parsed;
 	}
 
-	using PropertyParserFactory_t =
+	using MakePropertyParser_t =
 		std::shared_ptr<PropertyParser>(const std::string&, RE::FormType);
 
 	template <typename T>
@@ -54,7 +54,7 @@ namespace Data
 		return std::make_shared<T>(a_name);
 	}
 
-	inline const std::map<std::string, PropertyParserFactory_t*> PropertyParserMap = {
+	const std::map<std::string, MakePropertyParser_t*> PropertyParserMap = {
 		{ "formType", MakePropertyParser<FormTypeParser> },
 		{ "formId", MakePropertyParser<FormIDParser> },
 		{ "keywords", MakePropertyParser<KeywordsParser> },

@@ -6,7 +6,7 @@
 
 namespace Data
 {
-	inline RE::BSResourceNiBinaryStream& operator>>(
+	RE::BSResourceNiBinaryStream& operator>>(
 		RE::BSResourceNiBinaryStream& a_sin,
 		Json::Value& a_root)
 	{
