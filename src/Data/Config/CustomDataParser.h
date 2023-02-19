@@ -47,4 +47,13 @@ namespace Data
 	private:
 		RE::FormType _formType;
 	};
+
+	class WeightClassParser final : public CustomDataParser
+	{
+	public:
+		using CustomDataParser::CustomDataParser;
+
+		void ParseString(const Json::String& a_value, ICustomDataContainer* a_customData)
+			const override;
+	};
 }

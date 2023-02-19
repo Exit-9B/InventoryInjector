@@ -99,4 +99,27 @@ namespace Data
 
 		CustomDataParser::ParseString(a_value, a_customData);
 	}
+
+	void WeightClassParser::ParseString(
+		const Json::String& a_value,
+		ICustomDataContainer* a_customData) const
+	{
+		std::int32_t type = -1;
+		std::wstring displayStr;
+
+		util::try_get(EnumLookup<EquipType>, a_value, type) &&
+			util::try_get(ArmorSubTypeDisplayMap, a_value, displayStr);
+
+		if (type != -1) {
+			a_customData->AddCustomData("weightClass", type);
+
+			if (!displayStr.empty()) {
+				a_customData->AddCustomData("weightClassDisplay", displayStr);
+			}
+
+			return;
+		}
+
+		CustomDataParser::ParseString(a_value, a_customData);
+	}
 }

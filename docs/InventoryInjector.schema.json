@@ -580,7 +580,7 @@
     },
 
     "weightClass": {
-      "enum": [ "Light", "Heavy", "None", "Clothing", "Jewelry" ]
+      "enum": [ "Light", "Heavy", "Other", "Clothing", "Jewelry" ]
     },
 
     "match-weightClass": {

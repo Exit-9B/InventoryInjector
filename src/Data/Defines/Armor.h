@@ -106,8 +106,16 @@ namespace Data
 	inline const util::enum_dict<WeightClass> EnumLookup<WeightClass> = {
 		{ "Light", WeightClass::Light },
 		{ "Heavy", WeightClass::Heavy },
-		{ "None", WeightClass::None },
+		{ "Other", WeightClass::None },
 		{ "Clothing", WeightClass::Clothing },
 		{ "Jewelry", WeightClass::Jewelry },
+	};
+
+	inline static const util::enum_dict<std::wstring> ArmorWeightClassDisplayMap = {
+		{ "Light", L"$Light" },
+		{ "Heavy", L"$Heavy" },
+		{ "Other", L"$Other" },
+		{ "Clothing", L"$Clothing" },
+		{ "Jewelry", L"$Jewelry" },
 	};
 }

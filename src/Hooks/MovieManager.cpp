@@ -47,5 +47,4 @@ namespace Hooks
 		InventoryListEntry::Install(a_view, "_global.CraftingListEntry.prototype");
 		FavoritesListEntry::Install(a_view, "_global.FavoritesListEntry.prototype");
 	}
-
 }

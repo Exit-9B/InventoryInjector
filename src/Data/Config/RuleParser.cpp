@@ -119,6 +119,9 @@ namespace Data
 		else if (a_name == "subType") {
 			return std::make_shared<SubTypeParser>(a_name, a_formType);
 		}
+		else if (a_name == "weightClass") {
+			return std::make_shared<WeightClassParser>(a_name);
+		}
 		else {
 			return std::make_shared<CustomDataParser>(a_name);
 		}
