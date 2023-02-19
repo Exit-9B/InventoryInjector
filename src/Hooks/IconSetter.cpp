@@ -156,6 +156,7 @@ namespace Hooks
 
 			if (subType.IsUndefined()) {
 				a_entryObject.SetMember("subType", util::to_underlying(Data::BookType::Note));
+				a_entryObject.SetMember("subTypeDisplay", L"$Note");
 			}
 		}
 	}
