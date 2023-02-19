@@ -27,9 +27,6 @@ namespace Data
 
 		void ParseString(const Json::String& a_value, ICustomDataContainer* a_customData)
 			const override;
-
-	private:
-		static std::uint32_t ParseColor(std::string_view a_hexCode);
 	};
 
 	class SubTypeParser final : public CustomDataParser

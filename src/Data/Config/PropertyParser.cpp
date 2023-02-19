@@ -1,5 +1,7 @@
 #include "PropertyParser.h"
 
+#include "ParseUtil.h"
+
 #include "Data/Defines/Form.h"
 
 namespace Data
@@ -63,10 +65,9 @@ namespace Data
 		const
 	{
 		if (auto it = FormTypeMap.find(a_value); it != FormTypeMap.end()) {
-			auto value = it->second;
-			a_properties->AddProperty(
-				_name,
-				std::make_shared<MatchProperty>(util::to_underlying(value)));
+			const auto value = util::to_underlying(it->second);
+			const auto prop = std::make_shared<MatchProperty>(value);
+			a_properties->AddProperty(_name, prop);
 			return;
 		}
 
@@ -76,15 +77,22 @@ namespace Data
 	void FormIDParser::ParseString(const Json::String& a_value, IPropertyContainer* a_properties)
 		const
 	{
-		auto formID = ParseFormID(a_value);
+		const auto formID = ParseUtil::ParseFormID(a_value);
 		if (formID) {
-			a_properties->AddProperty(
-				_name,
-				std::make_shared<MatchProperty>(static_cast<std::uint32_t>(formID)));
+			const auto value = static_cast<std::uint32_t>(formID);
+			const auto prop = std::make_shared<MatchProperty>(value);
+			a_properties->AddProperty(_name, prop);
 			return;
 		}
 
 		PropertyParser::ParseString(a_value, a_properties);
+	}
+
+	void ColorParser::ParseString(const Json::String& a_value, IPropertyContainer* a_properties)
+		const
+	{
+		const auto prop = std::make_shared<MatchProperty>(ParseUtil::ParseColor(a_value));
+		a_properties->AddProperty(_name, prop);
 	}
 
 	void KeywordsParser::ParseString(const Json::String& a_value, IPropertyContainer* a_properties)
@@ -93,44 +101,21 @@ namespace Data
 		a_properties->AddProperty(_name, std::make_shared<KeywordsProperty>(a_value));
 	}
 
-	RE::FormID FormIDParser::ParseFormID(const std::string& a_identifier)
-	{
-		std::istringstream ss{ a_identifier };
-		std::string plugin, id;
-
-		std::getline(ss, plugin, '|');
-		std::getline(ss, id);
-		RE::FormID rawFormID;
-		std::istringstream(id) >> std::hex >> rawFormID;
-
-		const auto dataHandler = RE::TESDataHandler::GetSingleton();
-		const auto file = dataHandler->LookupModByName(plugin);
-		if (!file || file->compileIndex == 0xFF) {
-			return 0x00000000;
-		}
-
-		RE::FormID formID = file->compileIndex << 24;
-		formID += file->smallFileCompileIndex << 12;
-		formID += rawFormID;
-
-		return formID;
-	}
-
 	void PartsParser::ParseNumber(double a_value, IPropertyContainer* a_properties) const
 	{
-		std::uint32_t value = 1 << (static_cast<std::uint32_t>(a_value) - 30);
+		const std::uint32_t value = 1 << (static_cast<std::uint32_t>(a_value) - 30);
 		a_properties->AddProperty("partMask", std::make_shared<BitfieldProperty>(value));
 	}
 
 	void MainPartParser::ParseNumber(double a_value, IPropertyContainer* a_properties) const
 	{
-		auto part = static_cast<std::uint32_t>(a_value);
+		const auto part = static_cast<std::uint32_t>(a_value);
 		if (part < 30 || part > 61) {
 			logger::warn("Part number {} is out of range", part);
 			return;
 		}
 
-		auto value = 1 << (part - 30);
+		const auto value = 1 << (part - 30);
 		a_properties->AddProperty("partMask", std::make_shared<MainPartProperty>(value));
 	}
 }

@@ -45,8 +45,7 @@ namespace Data
 		return parsed;
 	}
 
-	using MakePropertyParser_t =
-		std::shared_ptr<PropertyParser>(const std::string&, RE::FormType);
+	using MakePropertyParser_t = std::shared_ptr<PropertyParser>(const std::string&, RE::FormType);
 
 	template <typename T>
 	std::shared_ptr<PropertyParser> MakePropertyParser(const std::string& a_name, RE::FormType)
@@ -96,6 +95,7 @@ namespace Data
 			}
 		},
 		// clang-format on
+		{ "iconColor", MakePropertyParser<ColorParser> },
 	};
 
 	std::shared_ptr<PropertyParser> RuleParser::GetPropertyParser(

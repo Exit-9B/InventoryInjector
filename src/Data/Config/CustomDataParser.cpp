@@ -1,5 +1,7 @@
 #include "CustomDataParser.h"
 
+#include "ParseUtil.h"
+
 #include "Data/Defines/Ammo.h"
 #include "Data/Defines/Armor.h"
 #include "Data/Defines/Book.h"
@@ -35,18 +37,7 @@ namespace Data
 		const Json::String& a_value,
 		ICustomDataContainer* a_customData) const
 	{
-		a_customData->AddCustomData("iconColor", ParseColor(a_value));
-	}
-
-	std::uint32_t IconColorParser::ParseColor(std::string_view a_hexCode)
-	{
-		if (a_hexCode.empty()) {
-			return 0x000000;
-		}
-
-		std::size_t prefix = a_hexCode[0] == '#' ? 1 : 0;
-		a_hexCode.remove_prefix(prefix);
-		return static_cast<std::uint32_t>(std::stoll(std::string(a_hexCode), nullptr, 16));
+		a_customData->AddCustomData("iconColor", ParseUtil::ParseColor(a_value));
 	}
 
 	void SubTypeParser::ParseString(
