@@ -6,6 +6,7 @@
 #include "Data/Defines/Book.h"
 #include "Data/Defines/Form.h"
 #include "Data/Defines/Magic.h"
+#include "Data/Defines/Misc.h"
 #include "Data/Defines/Potion.h"
 #include "Data/Defines/SoulGem.h"
 #include "Data/Defines/Weapon.h"
@@ -77,6 +78,7 @@ namespace Data
 		{ "deliveryType", MakePropertyParser<EnumParser<Delivery>> },
 		{ "castType", MakePropertyParser<EnumParser<CastingType>> },
 		{ "effectFlags", MakePropertyParser<BitfieldParser<EffectFlag>> },
+		{ "iconColor", MakePropertyParser<ColorParser> },
 		// clang-format off
 		{ "flags",
 			+[](const std::string& a_name,
@@ -94,8 +96,31 @@ namespace Data
 				}
 			}
 		},
+		{ "subType",
+			+[](const std::string& a_name,
+				RE::FormType a_formType) -> std::shared_ptr<PropertyParser>
+			{
+				switch (a_formType) {
+				case RE::FormType::Armor:
+					return std::make_shared<EnumParser<EquipType>>(a_name);
+				case RE::FormType::Book:
+					return std::make_shared<EnumParser<BookType>>(a_name);
+				case RE::FormType::Misc:
+					return std::make_shared<EnumParser<MiscType>>(a_name);
+				case RE::FormType::Weapon:
+					return std::make_shared<EnumParser<WeaponType>>(a_name);
+				case RE::FormType::Ammo:
+					return std::make_shared<EnumParser<AmmoType>>(a_name);
+				case RE::FormType::AlchemyItem:
+					return std::make_shared<EnumParser<PotionType>>(a_name);
+				case RE::FormType::SoulGem:
+					return std::make_shared<EnumParser<SoulGemType>>(a_name);
+				default:
+					return std::make_shared<PropertyParser>(a_name);
+				}
+			}
+		},
 		// clang-format on
-		{ "iconColor", MakePropertyParser<ColorParser> },
 	};
 
 	std::shared_ptr<PropertyParser> RuleParser::GetPropertyParser(
