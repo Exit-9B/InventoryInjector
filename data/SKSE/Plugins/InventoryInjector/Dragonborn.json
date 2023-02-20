@@ -3,15 +3,6 @@
   "rules": [
     {
       "match": {
-        "formType": "Book",
-        "formId": "Dragonborn.esm|1CAF2"
-      },
-      "assign": {
-        "iconLabel": "book_map"
-      }
-    },
-    {
-      "match": {
         "formType": "MiscItem",
         "formId": {
           "anyOf": [
@@ -22,15 +13,6 @@
       },
       "assign": {
         "subType": "dragonclaw"
-      }
-    },
-    {
-      "match": {
-        "formType": "MiscItem",
-        "formId": "Dragonborn.esm|2BAAE"
-      },
-      "assign": {
-        "iconLabel": "book_map"
       }
     },
     {
