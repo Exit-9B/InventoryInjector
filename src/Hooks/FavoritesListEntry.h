@@ -26,5 +26,10 @@ namespace Hooks
 		public:
 			void Call(Params& a_params) override;
 		};
+
+		static void ChangeIconColor(
+			RE::GFxMovie* a_movie,
+			const RE::GFxValue& a_icon,
+			const RE::GFxValue& a_rgb);
 	};
 }

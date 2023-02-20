@@ -108,6 +108,10 @@ namespace Hooks
 
 			RE::GFxValue iconLoader;
 			a_params.movie->CreateObject(&iconLoader, "MovieClipLoader");
+			if (!iconLoader.IsObject()) {
+				logger::debug("Failed to create MovieClipLoader object");
+				return;
+			}
 
 			iconLoader.Invoke("addListener", nullptr, a_params.thisPtr, 1);
 
@@ -141,5 +145,59 @@ namespace Hooks
 		a_icon.Invoke("gotoAndStop", nullptr, &iconLabel, 1);
 		a_icon.SetMember("_x", 0);
 		a_icon.SetMember("_y", 0);
+
+		RE::GFxValue iconColor;
+		a_params.thisPtr->GetMember("_iconColor", &iconColor);
+		ChangeIconColor(a_params.movie, a_icon, iconColor);
+	}
+
+	void FavoritesListEntry::ChangeIconColor(
+		RE::GFxMovie* a_movie,
+		const RE::GFxValue& a_icon,
+		const RE::GFxValue& a_rgb)
+	{
+		if (!a_icon.IsDisplayObject()) {
+			logger::debug("ChangeIconColor received bad arguments");
+			return;
+		}
+
+		struct ObjectVisitor : RE::GFxValue::ObjectVisitor
+		{
+			ObjectVisitor(RE::GFxMovie* a_movie, const RE::GFxValue& a_rgb)
+				: movie_{ a_movie },
+				  rgb_{ a_rgb }
+			{
+			}
+
+			void Visit([[maybe_unused]] const char* a_name, const RE::GFxValue& a_val) override
+			{
+				if (!a_val.IsDisplayObject()) {
+					return;
+				}
+
+				RE::GFxValue ct;
+				movie_->CreateObject(&ct, "flash.geom.ColorTransform");
+				if (!ct.IsObject()) {
+					logger::debug("Failed to create ColorTransform object");
+					return;
+				}
+
+				RE::GFxValue tf;
+				movie_->CreateObject(&tf, "flash.geom.Transform", &a_val, 1);
+				if (!ct.IsObject()) {
+					logger::debug("Failed to create Transform object");
+					return;
+				}
+
+				ct.SetMember("rgb", rgb_.IsNumber() ? rgb_.GetNumber() : 0xFFFFFF);
+				tf.SetMember("colorTransform", ct);
+			}
+
+			RE::GFxMovie* movie_;
+			const RE::GFxValue& rgb_;
+		};
+
+		ObjectVisitor visitor{ a_movie, a_rgb };
+		a_icon.VisitMembers(&visitor);
 	}
 }

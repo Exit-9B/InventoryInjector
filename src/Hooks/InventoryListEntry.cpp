@@ -132,6 +132,10 @@ namespace Hooks
 		if (sourceChanged) {
 			RE::GFxValue iconLoader;
 			a_params.movie->CreateObject(&iconLoader, "MovieClipLoader");
+			if (!iconLoader.IsObject()) {
+				logger::debug("Failed to create MovieClipLoader object");
+				return;
+			}
 
 			iconLoader.Invoke("addListener", nullptr, a_params.thisPtr, 1);
 
