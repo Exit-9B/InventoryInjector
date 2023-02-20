@@ -84,6 +84,20 @@ namespace Hooks
 			}
 		}
 
+		RE::GFxValue magicType;
+		a_entryObject.GetMember("magicType", &magicType);
+		if (!magicType.IsUndefined()) {
+			a_entryObject.SetMember("resistance", magicType);
+			a_entryObject.DeleteMember("magicType");
+		}
+
+		RE::GFxValue actorValue;
+		a_entryObject.GetMember("actorValue", &actorValue);
+		if (!actorValue.IsUndefined()) {
+			a_entryObject.SetMember("primaryValue", actorValue);
+			a_entryObject.DeleteMember("actorValue");
+		}
+
 		RE::GFxValue iconSetter;
 		a_params.movie->GetVariable(&iconSetter, "_global.FavoritesIconSetter");
 		if (iconSetter.IsObject()) {
