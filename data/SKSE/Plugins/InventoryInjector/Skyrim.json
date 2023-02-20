@@ -1,0 +1,276 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Exit-9B/InventoryInjector/main/docs/InventoryInjector.schema.json",
+  "rules": [
+    {
+      "match": {
+        "formType": "MiscItem",
+        "keywords": "VendorItemFireword"
+      },
+      "assign": {
+        "subType": "Firewood"
+      }
+    },
+    {
+      "match": {
+        "formType": "Spell",
+        "resistance": "FireResist"
+      },
+      "assign": {
+        "iconLabel": "magic_fire",
+        "iconColor": "#C73636"
+      }
+    },
+    {
+      "match": {
+        "formType": "Spell",
+        "resistance": "ElectricResist"
+      },
+      "assign": {
+        "iconLabel": "magic_shock",
+        "iconColor": "#EAAB00"
+      }
+    },
+    {
+      "match": {
+        "formType": "Spell",
+        "resistance": "FrostResist"
+      },
+      "assign": {
+        "iconLabel": "magic_frost",
+        "iconColor": "#1FFBFF"
+      }
+    },
+    {
+      "match": {
+        "formType": "Scroll",
+        "resistance": "FireResist"
+      },
+      "assign": {
+        "iconColor": "#C73636"
+      }
+    },
+    {
+      "match": {
+        "formType": "Scroll",
+        "resistance": "ElectricResist"
+      },
+      "assign": {
+        "iconColor": "#FFFF00"
+      }
+    },
+    {
+      "match": {
+        "formType": "Scroll",
+        "resistance": "FrostResist"
+      },
+      "assign": {
+        "iconColor": "#1FFBFF"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "weightClass": "Other"
+      },
+      "assign": {
+        "iconColor": "#EDDA87"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "weightClass": "Light"
+      },
+      "assign": {
+        "iconColor": "#756000"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "iconColor": "#6B7585"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon"
+      },
+      "assign": {
+        "iconColor": "#A4A5BF"
+      }
+    },
+    {
+      "match": {
+        "formType": "Ammo"
+      },
+      "assign": {
+        "iconColor": "#A89E8C"
+      }
+    },
+    {
+      "match": {
+        "formType": "Potion",
+        "subType": { "anyOf": [ "Health", "HealRate", "HealRateMult" ] }
+      },
+      "assign": {
+        "iconColor": "#DB2E73"
+      }
+    },
+    {
+      "match": {
+        "formType": "Potion",
+        "subType": { "anyOf": [ "Magicka", "MagickaRate", "MagickaRateMult" ] }
+      },
+      "assign": {
+        "iconColor": "#2E9FDB"
+      }
+    },
+    {
+      "match": {
+        "formType": "Potion",
+        "subType": { "anyOf": [ "Stamina", "StaminaRate", "StaminaRateMult" ] }
+      },
+      "assign": {
+        "iconColor": "#51DB2E"
+      }
+    },
+    {
+      "match": {
+        "formType": "Potion",
+        "subType": "FireResist"
+      },
+      "assign": {
+        "iconColor": "#C73636"
+      }
+    },
+    {
+      "match": {
+        "formType": "Potion",
+        "subType": "ElectricResist"
+      },
+      "assign": {
+        "iconColor": "#EAAB00"
+      }
+    },
+    {
+      "match": {
+        "formType": "Potion",
+        "subType": "FrostResist"
+      },
+      "assign": {
+        "iconColor": "#1FFBFF"
+      }
+    },
+    {
+      "match": {
+        "formType": "SoulGem",
+        "subType": "Petty"
+      },
+      "assign": {
+        "iconColor": "#D7D4FF"
+      }
+    },
+    {
+      "match": {
+        "formType": "SoulGem",
+        "subType": "Lesser"
+      },
+      "assign": {
+        "iconColor": "#C0BAFF"
+      }
+    },
+    {
+      "match": {
+        "formType": "SoulGem",
+        "subType": "Common"
+      },
+      "assign": {
+        "iconColor": "#ABA3FF"
+      }
+    },
+    {
+      "match": {
+        "formType": "SoulGem",
+        "subType": "Greater"
+      },
+      "assign": {
+        "iconColor": "#948BFC"
+      }
+    },
+    {
+      "match": {
+        "formType": "SoulGem",
+        "subType": { "anyOf": [ "Grand", "Azura" ] }
+      },
+      "assign": {
+        "iconColor": "#7569FF"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "subType": "Gem"
+      },
+      "assign": {
+        "iconColor": "#FFB0D1"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "subType": "Hide"
+      },
+      "assign": {
+        "iconColor": "#DBB36E"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "subType": "Ingot"
+      },
+      "assign": {
+        "iconColor": "#828282"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "subType": "Firewood"
+      },
+      "assign": {
+        "iconColor": "#A89E8C"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "subType": "Gold"
+      },
+      "assign": {
+        "iconColor": "#CCCC33"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "subType": "LeatherStrips"
+      },
+      "assign": {
+        "iconColor": "#BA8D23"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "subType": "ChildrensClothes"
+      },
+      "assign": {
+        "iconColor": "#EDDA87"
+      }
+    }
+  ]
+}
