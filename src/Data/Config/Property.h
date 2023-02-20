@@ -30,6 +30,7 @@ namespace Data
 	class MatchProperty final : public Property
 	{
 	public:
+		MatchProperty(std::nullopt_t) {}
 		MatchProperty(bool a_boolean) : _value{ a_boolean } {}
 		MatchProperty(double a_number) : _value{ a_number } {}
 		MatchProperty(std::int32_t a_number) : _value{ a_number } {}

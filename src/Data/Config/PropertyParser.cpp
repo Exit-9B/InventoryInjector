@@ -48,6 +48,9 @@ namespace Data
 				a_properties->AddProperty(_name, std::make_shared<RangeProperty>(min, max));
 			}
 		}
+		else if (a_spec.isNull()) {
+			a_properties->AddProperty(_name, std::make_shared<MatchProperty>(std::nullopt));
+		}
 	}
 
 	void PropertyParser::ParseString(const Json::String& a_value, IPropertyContainer* a_properties)

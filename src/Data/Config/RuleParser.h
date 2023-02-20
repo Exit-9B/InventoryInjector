@@ -13,7 +13,7 @@ namespace Data
 	public:
 		RuleParser() = delete;
 
-		static Rule ParseRule(const Json::Value& a_rule);
+		[[nodiscard]] static Rule ParseRule(const Json::Value& a_rule);
 
 	private:
 		static std::shared_ptr<PropertyParser> GetPropertyParser(
