@@ -43,6 +43,53 @@ namespace Hooks
 		assert(a_params.movie);
 		assert(a_params.thisPtr);
 
+		if (a_params.argCount < 2) {
+			logger::debug("Expected 2 arguments, received {}", a_params.argCount);
+			return;
+		}
+
+		auto& a_entryObject = a_params.args[0];
+		[[maybe_unused]] auto& a_state = a_params.args[1];
+
+		RE::GFxValue itemIcon;
+		a_params.thisPtr->GetMember("itemIcon", &itemIcon);
+		if (!itemIcon.IsObject()) {
+			logger::debug("Failed to get item icon movie clip");
+			return;
+		}
+
+		// Favorites menu icons are offset by (64, 64) compared to icon swf
+		// Icon sprite also has a transform, which might vary depending on mods
+		if (!a_params.thisPtr->HasMember("_matrix")) {
+			RE::GFxValue transform;
+			itemIcon.GetMember("transform", &transform);
+
+			if (transform.IsObject()) {
+				RE::GFxValue matrix;
+				transform.GetMember("matrix", &matrix);
+
+				if (matrix.IsObject()) {
+					RE::GFxValue sx, sy;
+					matrix.GetMember("a", &sx);
+					matrix.GetMember("d", &sy);
+
+					if (sx.IsNumber() && sy.IsNumber()) {
+						std::array<RE::GFxValue, 2>
+							args{ -64.0 * sx.GetNumber(), -64.0 * sy.GetNumber() };
+						matrix.Invoke("translate", args);
+
+						a_params.thisPtr->SetMember("_matrix", matrix);
+					}
+				}
+			}
+		}
+
+		RE::GFxValue iconSetter;
+		a_params.movie->GetVariable(&iconSetter, "_global.FavoritesIconSetter");
+		if (iconSetter.IsObject()) {
+			IconSetter::ProcessEntry(&iconSetter, &a_entryObject);
+		}
+
 		if (_oldFunc.IsObject()) {
 			_oldFunc.Invoke(
 				"call",
@@ -51,25 +98,8 @@ namespace Hooks
 				static_cast<std::size_t>(a_params.argCount) + 1);
 		}
 
-		if (a_params.argCount != 2) {
-			logger::debug("Expected 2 arguments, received {}", a_params.argCount);
-			return;
-		}
-
-		auto& a_entryObject = a_params.args[0];
-		[[maybe_unused]] auto& a_state = a_params.args[1];
-
-		RE::GFxValue iconSetter;
-		a_params.movie->GetVariable(&iconSetter, "_global.FavoritesIconSetter");
-		if (!iconSetter.IsObject()) {
-			logger::debug("Failed to get FavoritesIconSetter");
-			return;
-		}
-
-		IconSetter::ProcessEntry(&iconSetter, &a_entryObject);
-
-		// The favorites menu has icons embedded but we will override those
-		std::string source{ "skyui/icons_item_psychosteve.swf" };
+		// We are overriding the embedded icons in the movie
+		const char* source = "skyui/icons_item_psychosteve.swf";
 
 		{
 			RE::GFxValue iconSource;
@@ -80,32 +110,26 @@ namespace Hooks
 			}
 		}
 
+		RE::GFxValue iconLabel;
+		a_entryObject.GetMember("iconLabel", &iconLabel);
+		if (iconLabel.IsUndefined()) {
+			iconLabel = "default_misc";
+		}
+		a_params.thisPtr->SetMember("_iconLabel", iconLabel);
+
+		RE::GFxValue iconColor;
+		a_entryObject.GetMember("iconColor", &iconColor);
+		a_params.thisPtr->SetMember("_iconColor", iconColor);
+
 		RE::GFxValue iconSource;
 		a_params.thisPtr->GetMember("_iconSource", &iconSource);
-		bool sourceChanged = !iconSource.IsString() || iconSource.GetString() != source;
+		bool sourceChanged = !iconSource.IsString() ||
+			::strcmp(iconSource.GetString(), source) != 0;
 
 		iconSource = source;
 		a_params.thisPtr->SetMember("_iconSource", iconSource);
 
 		if (sourceChanged) {
-			RE::GFxValue iconLabel;
-			a_entryObject.GetMember("iconLabel", &iconLabel);
-			if (iconLabel.IsUndefined()) {
-				iconLabel = "default_misc";
-			}
-			a_params.thisPtr->SetMember("_iconLabel", iconLabel);
-
-			RE::GFxValue iconColor;
-			a_entryObject.GetMember("iconColor", &iconColor);
-			a_params.thisPtr->SetMember("_iconColor", iconColor);
-
-			RE::GFxValue itemIcon;
-			a_params.thisPtr->GetMember("itemIcon", &itemIcon);
-			if (!itemIcon.IsObject()) {
-				logger::debug("Failed to get item icon movie clip");
-				return;
-			}
-
 			RE::GFxValue iconLoader;
 			a_params.movie->CreateObject(&iconLoader, "MovieClipLoader");
 			if (!iconLoader.IsObject()) {
@@ -119,6 +143,9 @@ namespace Hooks
 			iconLoader.Invoke("loadClip", loadClipArgs);
 
 			itemIcon.SetMember("_visible", false);
+		}
+		else {
+			ChangeIconColor(itemIcon, iconColor);
 		}
 	}
 
@@ -137,67 +164,63 @@ namespace Hooks
 
 		RE::GFxValue iconLabel;
 		a_params.thisPtr->GetMember("_iconLabel", &iconLabel);
-		if (!iconLabel.IsString()) {
+		if (iconLabel.IsUndefined()) {
 			logger::debug("Failed to get icon label for custom source");
 			iconLabel = "default_misc";
 		}
 
 		a_icon.Invoke("gotoAndStop", nullptr, &iconLabel, 1);
-		a_icon.SetMember("_x", 0);
-		a_icon.SetMember("_y", 0);
+		RE::GFxValue matrix;
+		a_params.thisPtr->GetMember("_matrix", &matrix);
+		if (matrix.IsObject()) {
+			RE::GFxValue tf;
+			a_icon.GetMember("transform", &tf);
+			if (!tf.IsObject()) {
+				a_params.movie->CreateObject(&tf, "flash.geom.Transform", &a_icon, 1);
+			}
+			if (tf.IsObject()) {
+				tf.SetMember("matrix", matrix);
+			}
+		}
 
 		RE::GFxValue iconColor;
 		a_params.thisPtr->GetMember("_iconColor", &iconColor);
-		ChangeIconColor(a_params.movie, a_icon, iconColor);
+		ChangeIconColor(a_icon, iconColor);
 	}
 
-	void FavoritesListEntry::ChangeIconColor(
-		RE::GFxMovie* a_movie,
-		const RE::GFxValue& a_icon,
-		const RE::GFxValue& a_rgb)
+	void FavoritesListEntry::ChangeIconColor(const RE::GFxValue& a_icon, const RE::GFxValue& a_rgb)
 	{
 		if (!a_icon.IsDisplayObject()) {
 			logger::debug("ChangeIconColor received bad arguments");
 			return;
 		}
 
-		struct ObjectVisitor : RE::GFxValue::ObjectVisitor
-		{
-			ObjectVisitor(RE::GFxMovie* a_movie, const RE::GFxValue& a_rgb)
-				: movie_{ a_movie },
-				  rgb_{ a_rgb }
-			{
-			}
-
-			void Visit([[maybe_unused]] const char* a_name, const RE::GFxValue& a_val) override
+		a_icon.VisitMembers(
+			[&a_rgb]([[maybe_unused]] const char* a_name, const RE::GFxValue& a_val)
 			{
 				if (!a_val.IsDisplayObject()) {
 					return;
 				}
 
-				RE::GFxValue ct;
-				movie_->CreateObject(&ct, "flash.geom.ColorTransform");
-				if (!ct.IsObject()) {
-					logger::debug("Failed to create ColorTransform object");
-					return;
-				}
+				std::uint32_t rgb = a_rgb.IsNumber()
+					? static_cast<std::uint32_t>(a_rgb.GetNumber())
+					: 0xFFFFFF;
 
-				RE::GFxValue tf;
-				movie_->CreateObject(&tf, "flash.geom.Transform", &a_val, 1);
-				if (!ct.IsObject()) {
-					logger::debug("Failed to create Transform object");
-					return;
-				}
+				auto cx = GetColorTransform(rgb);
+				const_cast<RE::GFxValue&>(a_val).SetCxform(cx);
+			});
+	}
 
-				ct.SetMember("rgb", rgb_.IsNumber() ? rgb_.GetNumber() : 0xFFFFFF);
-				tf.SetMember("colorTransform", ct);
-			}
+	RE::GRenderer::Cxform FavoritesListEntry::GetColorTransform(std::uint32_t a_rgb)
+	{
+		RE::GRenderer::Cxform cx;
+		cx.matrix[0][0] = 0.0f;
+		cx.matrix[1][0] = 0.0f;
+		cx.matrix[2][0] = 0.0f;
+		cx.matrix[0][1] = static_cast<float>((a_rgb >> 16) & 0xFF);
+		cx.matrix[1][1] = static_cast<float>((a_rgb >> 8) & 0xFF);
+		cx.matrix[2][1] = static_cast<float>((a_rgb >> 0) & 0xFF);
 
-			RE::GFxMovie* movie_;
-			const RE::GFxValue& rgb_;
-		};
-
-		ObjectVisitor visitor{ a_movie, a_rgb };
-		a_icon.VisitMembers(&visitor);
+		return cx;
 	}
 }

@@ -87,7 +87,7 @@ namespace Hooks
 			return;
 		}
 
-		std::string source{ "skyui/icons_item_psychosteve.swf" };
+		const char* source = "skyui/icons_item_psychosteve.swf";
 
 		if (a_state.IsObject()) {
 			RE::GFxValue iconSource;
@@ -124,7 +124,8 @@ namespace Hooks
 
 		RE::GFxValue iconSource;
 		a_params.thisPtr->GetMember("_iconSource", &iconSource);
-		bool sourceChanged = !iconSource.IsString() || iconSource.GetString() != source;
+		bool sourceChanged = !iconSource.IsString() ||
+			::strcmp(iconSource.GetString(), source) != 0;
 
 		iconSource = source;
 		a_params.thisPtr->SetMember("_iconSource", iconSource);
