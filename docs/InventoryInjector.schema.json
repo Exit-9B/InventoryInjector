@@ -177,6 +177,9 @@
             "description": "Specifies the data to assign to matching objects",
             "type": "object",
             "properties": {
+              "iconSource": { "$ref": "#/$defs/assign-data" },
+              "iconLabel": { "$ref": "#/$defs/assign-data" },
+              "iconColor": { "$ref": "#/$defs/assign-data" },
               "subType": { "$ref": "#/$defs/assign-data" },
               "subTypeDisplay": { "$ref": "#/$defs/assign-data" },
               "materialDisplay": { "$ref": "#/$defs/assign-data" },
