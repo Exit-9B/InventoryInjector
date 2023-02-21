@@ -43,7 +43,7 @@ namespace Data
 			return;
 
 		for (auto& file : dataHandler->files) {
-			if (!file)
+			if (!file || file->recordFlags.none(RE::TESFile::RecordFlag::kChecked))
 				continue;
 
 			auto fileName = std::filesystem::path(file->fileName);
