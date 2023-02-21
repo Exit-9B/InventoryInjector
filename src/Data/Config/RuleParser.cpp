@@ -76,8 +76,7 @@ namespace Data
 		{ "bookType", MakePropertyParser<EnumParser<RE::OBJ_BOOK::Type>> },
 		{ "teachesSkill", MakePropertyParser<EnumParser<RE::ActorValue>> },
 		{ "teachesSpell", MakePropertyParser<FormIDParser> },
-		// SkyUI replaces actorValue with primaryValue
-		{ "primaryValue", MakePropertyParser<EnumParser<RE::ActorValue>> },
+		{ "actorValue", MakePropertyParser<EnumParser<RE::ActorValue>> },
 		// SkyUI replaces magicType with resistance
 		{ "resistance", MakePropertyParser<EnumParser<RE::ActorValue>> },
 		{ "school", MakePropertyParser<EnumParser<RE::ActorValue>> },

@@ -48,6 +48,14 @@ namespace Hooks
 			return;
 		}
 
+		if (_oldFunc.IsObject()) {
+			_oldFunc.Invoke(
+				"call",
+				a_params.retVal,
+				a_params.argsWithThisRef,
+				static_cast<std::size_t>(a_params.argCount) + 1);
+		}
+
 		auto& a_entryObject = a_params.args[0];
 		[[maybe_unused]] auto& a_state = a_params.args[1];
 
@@ -60,7 +68,7 @@ namespace Hooks
 
 		// Favorites menu icons are offset by (64, 64) compared to icon swf
 		// Icon sprite also has a transform, which might vary depending on mods
-		if (!a_params.thisPtr->HasMember("_matrix")) {
+		if (!a_params.thisPtr->HasMember("_iconPosFixed")) {
 			RE::GFxValue transform;
 			itemIcon.GetMember("transform", &transform);
 
@@ -78,38 +86,11 @@ namespace Hooks
 							args{ -64.0 * sx.GetNumber(), -64.0 * sy.GetNumber() };
 						matrix.Invoke("translate", args);
 
-						a_params.thisPtr->SetMember("_matrix", matrix);
+						transform.SetMember("matrix", matrix);
+						a_params.thisPtr->SetMember("_iconPosFixed", true);
 					}
 				}
 			}
-		}
-
-		RE::GFxValue magicType;
-		a_entryObject.GetMember("magicType", &magicType);
-		if (!magicType.IsUndefined()) {
-			a_entryObject.SetMember("resistance", magicType);
-			a_entryObject.DeleteMember("magicType");
-		}
-
-		RE::GFxValue actorValue;
-		a_entryObject.GetMember("actorValue", &actorValue);
-		if (!actorValue.IsUndefined()) {
-			a_entryObject.SetMember("primaryValue", actorValue);
-			a_entryObject.DeleteMember("actorValue");
-		}
-
-		RE::GFxValue iconSetter;
-		a_params.movie->GetVariable(&iconSetter, "_global.FavoritesIconSetter");
-		if (iconSetter.IsObject()) {
-			IconSetter::ProcessEntry(&iconSetter, &a_entryObject);
-		}
-
-		if (_oldFunc.IsObject()) {
-			_oldFunc.Invoke(
-				"call",
-				a_params.retVal,
-				a_params.argsWithThisRef,
-				static_cast<std::size_t>(a_params.argCount) + 1);
 		}
 
 		// We are overriding the embedded icons in the movie
@@ -184,18 +165,6 @@ namespace Hooks
 		}
 
 		a_icon.Invoke("gotoAndStop", nullptr, &iconLabel, 1);
-		RE::GFxValue matrix;
-		a_params.thisPtr->GetMember("_matrix", &matrix);
-		if (matrix.IsObject()) {
-			RE::GFxValue tf;
-			a_icon.GetMember("transform", &tf);
-			if (!tf.IsObject()) {
-				a_params.movie->CreateObject(&tf, "flash.geom.Transform", &a_icon, 1);
-			}
-			if (tf.IsObject()) {
-				tf.SetMember("matrix", matrix);
-			}
-		}
 
 		RE::GFxValue iconColor;
 		a_params.thisPtr->GetMember("_iconColor", &iconColor);

@@ -48,6 +48,14 @@ namespace Hooks
 				RE::GFxValue entryObject;
 				entryList.GetElement(i, &entryObject);
 				if (entryObject.IsObject()) {
+					// Favorites menu doesn't do this
+					RE::GFxValue magicType;
+					entryObject.GetMember("magicType", &magicType);
+					if (!magicType.IsUndefined()) {
+						entryObject.SetMember("resistance", magicType);
+						entryObject.DeleteMember("magicType");
+					}
+
 					if (entryObject.HasMember("bookType")) {
 						FixNote(entryObject);
 					}
