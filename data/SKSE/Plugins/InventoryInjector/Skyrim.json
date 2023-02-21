@@ -113,6 +113,15 @@
     {
       "match": {
         "formType": "Potion",
+        "subType": "Poison"
+      },
+      "assign": {
+        "iconColor": "#AD00B3"
+      }
+    },
+    {
+      "match": {
+        "formType": "Potion",
         "subType": { "anyOf": [ "Health", "HealRate", "HealRateMult" ] }
       },
       "assign": {
@@ -252,6 +261,15 @@
       },
       "assign": {
         "iconColor": "#CCCC33"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "subType": "Leather"
+      },
+      "assign": {
+        "iconColor": "#BA8D23"
       }
     },
     {
