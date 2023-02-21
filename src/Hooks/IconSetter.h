@@ -25,6 +25,10 @@ namespace Hooks
 
 		static void ProcessIconInternal(RE::GFxValue* a_thisPtr, RE::GFxValue* a_entryObject);
 
+		static void ModifyObject(RE::GFxMovie* a_movie, RE::GFxValue& a_entryObject);
+
+		static void ExtendMagicItemData(RE::GFxMovie* a_movie, RE::GFxValue& a_entryObject);
+
 		static void FixNote(RE::GFxValue& a_entryObject);
 	};
 }

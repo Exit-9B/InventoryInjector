@@ -140,7 +140,8 @@
                     "delayTime": { "$ref": "#/$defs/match-number" },
                     "castType": { "$ref": "#/$defs/match-castType" },
                     "actorValue": { "$ref": "#/$defs/match-actorValue" },
-                    "resistance": { "$ref": "#/$defs/match-resistance" }
+                    "resistance": { "$ref": "#/$defs/match-resistance" },
+                    "effectKeywords": { "$ref": "#/$defs/match-string-array" }
                   }
                 }
               },

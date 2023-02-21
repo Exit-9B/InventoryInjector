@@ -85,6 +85,7 @@ namespace Data
 		{ "deliveryType", MakePropertyParser<EnumParser<Delivery>> },
 		{ "castType", MakePropertyParser<EnumParser<CastingType>> },
 		{ "effectFlags", MakePropertyParser<BitfieldParser<EffectFlag>> },
+		{ "effectKeywords", MakePropertyParser<KeywordsParser> },
 		{ "iconColor", MakePropertyParser<ColorParser> },
 		// clang-format off
 		{ "flags",

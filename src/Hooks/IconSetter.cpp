@@ -47,19 +47,7 @@ namespace Hooks
 			for (std::uint32_t i = 0, size = entryList.GetArraySize(); i < size; i++) {
 				RE::GFxValue entryObject;
 				entryList.GetElement(i, &entryObject);
-				if (entryObject.IsObject()) {
-					// Favorites menu doesn't do this
-					RE::GFxValue magicType;
-					entryObject.GetMember("magicType", &magicType);
-					if (!magicType.IsUndefined()) {
-						entryObject.SetMember("resistance", magicType);
-						entryObject.DeleteMember("magicType");
-					}
-
-					if (entryObject.HasMember("bookType")) {
-						FixNote(entryObject);
-					}
-				}
+				ModifyObject(a_params.movie, entryObject);
 			}
 		}
 
@@ -127,6 +115,78 @@ namespace Hooks
 			a_thisPtr->Invoke("processSoulGemIcon", nullptr, a_entryObject, 1);
 			break;
 		}
+	}
+
+	void IconSetter::ModifyObject(RE::GFxMovie* a_movie, RE::GFxValue& a_entryObject)
+	{
+		if (!a_entryObject.IsObject()) {
+			return;
+		}
+
+		RE::GFxValue formType;
+		a_entryObject.GetMember("formType", &formType);
+		if (!formType.IsNumber()) {
+			return;
+		}
+
+		switch (static_cast<RE::FormType>(formType.GetNumber())) {
+		case RE::FormType::Spell:
+		case RE::FormType::Scroll:
+		case RE::FormType::Ingredient:
+		case RE::FormType::AlchemyItem:
+		case RE::FormType::MagicEffect:
+		{
+			// SkyUI normally does this, except for the Favorites menu
+			RE::GFxValue magicType;
+			a_entryObject.GetMember("magicType", &magicType);
+			if (!magicType.IsUndefined()) {
+				a_entryObject.SetMember("resistance", magicType);
+				a_entryObject.DeleteMember("magicType");
+			}
+
+			ExtendMagicItemData(a_movie, a_entryObject);
+		} break;
+
+		case RE::FormType::Book:
+		{
+			FixNote(a_entryObject);
+		} break;
+		}
+
+	}
+
+	void IconSetter::ExtendMagicItemData(RE::GFxMovie* a_movie, RE::GFxValue& a_entryObject)
+	{
+		RE::GFxValue formId;
+		a_entryObject.GetMember("formId", &formId);
+
+		const RE::MagicItem* magicItem = nullptr;
+		if (formId.IsNumber()) {
+			auto form = RE::TESForm::LookupByID(static_cast<RE::FormID>(formId.GetNumber()));
+			magicItem = skyrim_cast<RE::MagicItem*>(form);
+		}
+
+		if (!magicItem) {
+			return;
+		}
+
+		RE::GFxValue keywordRoot;
+		a_movie->CreateObject(&keywordRoot);
+
+		for (const auto effect : magicItem->effects) {
+			const auto baseEffect = effect ? effect->baseEffect : nullptr;
+			if (!baseEffect) {
+				continue;
+			}
+
+			for (const auto keyword : std::span(baseEffect->keywords, baseEffect->numKeywords)) {
+				if (keyword) {
+					keywordRoot.SetMember(keyword->formEditorID.c_str(), true);
+				}
+			}
+		}
+
+		a_entryObject.SetMember("effectKeywords", keywordRoot);
 	}
 
 	void IconSetter::FixNote(RE::GFxValue& a_entryObject)
