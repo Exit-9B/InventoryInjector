@@ -30,5 +30,7 @@ namespace Hooks
 		static void ExtendMagicItemData(RE::GFxMovie* a_movie, RE::GFxValue& a_entryObject);
 
 		static void FixNote(RE::GFxValue& a_entryObject);
+
+		static bool GetNoIconColors();
 	};
 }

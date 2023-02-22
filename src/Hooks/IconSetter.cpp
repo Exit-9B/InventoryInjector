@@ -37,6 +37,10 @@ namespace Hooks
 			return;
 		}
 
+		if (!a_params.thisPtr->HasMember("_noIconColors")) {
+			a_params.thisPtr->SetMember("_noIconColors", GetNoIconColors());
+		}
+
 		auto& a_list = a_params.args[0];
 		RE::GFxValue entryList;
 		if (a_list.IsObject()) {
@@ -178,7 +182,6 @@ namespace Hooks
 			FixNote(a_entryObject);
 		} break;
 		}
-
 	}
 
 	void IconSetter::ExtendMagicItemData(RE::GFxMovie* a_movie, RE::GFxValue& a_entryObject)
@@ -253,5 +256,91 @@ namespace Hooks
 				a_entryObject.SetMember("subTypeDisplay", L"$Note");
 			}
 		}
+	}
+
+	bool IconSetter::GetNoIconColors()
+	{
+		bool noIconColors = false;
+		bool hasOverride = false;
+
+		RE::BSTSmartPointer<RE::BSScript::Object> scriptObject;
+
+		const auto dataHandler = RE::TESDataHandler::GetSingleton();
+		const auto settingsManager = dataHandler
+			? dataHandler->LookupForm(0x80A, "SkyUI_SE.esp"sv)
+			: nullptr;
+
+		if (settingsManager) {
+			const auto skyrimVM = RE::SkyrimVM::GetSingleton();
+			const auto vm = skyrimVM ? skyrimVM->impl : nullptr;
+			const auto typeID = static_cast<RE::VMTypeID>(settingsManager->GetFormType());
+			const auto policy = vm ? vm->GetObjectHandlePolicy() : nullptr;
+			const auto handle = policy ? policy->GetHandleForObject(typeID, settingsManager) : 0;
+
+			if (handle) {
+				vm->FindBoundObject(handle, "SKI_SettingsManager", scriptObject);
+			}
+		}
+
+		if (scriptObject) {
+			const auto overrideKeys = scriptObject->GetVariable("_overrideKeys"sv);
+			const auto overrideValues = scriptObject->GetVariable("_overrideValues"sv);
+			const auto keys = overrideKeys->IsArray() ? overrideKeys->GetArray() : nullptr;
+			const auto values = overrideValues->IsArray() ? overrideValues->GetArray() : nullptr;
+
+			constexpr auto INVALID = static_cast<std::uint32_t>(-1);
+			auto idx = INVALID;
+			if (keys && values) {
+				for (std::uint32_t i = 0, size = keys->size(); i < size; i++) {
+					auto& key = (*keys)[i];
+					if (key.IsString() && key.GetString() == "Appearance$icons$item$noColor"sv) {
+						idx = i;
+						break;
+					}
+				}
+
+				if (idx != INVALID) {
+					auto& value = (*values)[idx];
+					if (value.IsString()) {
+						noIconColors =
+							(::_stricmp(std::string(value.GetString()).c_str(), "TRUE") == 0);
+						hasOverride = true;
+					}
+				}
+			}
+		}
+
+		if (hasOverride) {
+			return noIconColors;
+		}
+
+		RE::BSResourceNiBinaryStream fileStream{ R"(Data\Interface\skyui\config.txt)" };
+		if (fileStream.good()) {
+			auto size = fileStream.stream->totalSize;
+			std::string text(size, '\0');
+			fileStream.read(text.data(), size);
+
+			auto section = text.find("[Appearance]");
+			auto pos = section != std::string::npos
+				? text.find("icons.item.noColor", section)
+				: std::string::npos;
+
+			auto eq = pos != std::string::npos ? text.find('=', pos) : std::string::npos;
+
+			if (eq != std::string::npos) {
+				auto end = text.find('\n', eq);
+				if (end == std::string::npos) {
+					end = text.size();
+				}
+
+				auto value = std::string_view(&text[eq], end - eq);
+				value.remove_prefix(value.find_first_not_of(" ="));
+				value.remove_suffix(value.size() - value.find_last_not_of(" \r\n") - 1);
+
+				noIconColors = (::_stricmp(std::string(value).c_str(), "true") == 0);
+			}
+		}
+
+		return noIconColors;
 	}
 }
