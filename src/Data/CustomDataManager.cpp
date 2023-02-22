@@ -94,7 +94,7 @@ namespace Data
 			rule.SetInfo(a_entryObject, needsIconUpdate);
 		}
 
-		if (needsIconUpdate) {
+		if (needsIconUpdate && a_processIconCallback) {
 			a_processIconCallback(a_entryObject);
 		}
 

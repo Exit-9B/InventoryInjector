@@ -66,32 +66,7 @@ namespace Hooks
 			return;
 		}
 
-		// Favorites menu icons are offset by (64, 64) compared to icon swf
-		// Icon sprite also has a transform, which might vary depending on mods
-		if (!a_params.thisPtr->HasMember("_iconPosFixed")) {
-			RE::GFxValue transform;
-			itemIcon.GetMember("transform", &transform);
-
-			if (transform.IsObject()) {
-				RE::GFxValue matrix;
-				transform.GetMember("matrix", &matrix);
-
-				if (matrix.IsObject()) {
-					RE::GFxValue sx, sy;
-					matrix.GetMember("a", &sx);
-					matrix.GetMember("d", &sy);
-
-					if (sx.IsNumber() && sy.IsNumber()) {
-						std::array<RE::GFxValue, 2>
-							args{ -64.0 * sx.GetNumber(), -64.0 * sy.GetNumber() };
-						matrix.Invoke("translate", args);
-
-						transform.SetMember("matrix", matrix);
-						a_params.thisPtr->SetMember("_iconPosFixed", true);
-					}
-				}
-			}
-		}
+		FixIconPos(a_params.thisPtr, itemIcon);
 
 		// We are overriding the embedded icons in the movie
 		const char* source = "skyui/icons_item_psychosteve.swf";
@@ -169,6 +144,44 @@ namespace Hooks
 		RE::GFxValue iconColor;
 		a_params.thisPtr->GetMember("_iconColor", &iconColor);
 		ChangeIconColor(a_icon, iconColor);
+	}
+
+	void FavoritesListEntry::FixIconPos(RE::GFxValue* a_thisPtr, RE::GFxValue& a_icon)
+	{
+		assert(a_thisPtr);
+		assert(a_icon.IsDisplayObject());
+
+		// Favorites menu icons are offset by (64, 64) compared to icon swf
+		// Icon sprite also has a transform, which might vary depending on mods
+		if (a_thisPtr->HasMember("_iconPosFixed")) {
+			return;
+		}
+
+		RE::GFxValue transform;
+		a_icon.GetMember("transform", &transform);
+
+		if (!transform.IsObject()) {
+			return;
+		}
+
+		RE::GFxValue matrix;
+		transform.GetMember("matrix", &matrix);
+
+		if (!matrix.IsObject()) {
+			return;
+		}
+
+		RE::GFxValue sx, sy;
+		matrix.GetMember("a", &sx);
+		matrix.GetMember("d", &sy);
+
+		if (sx.IsNumber() && sy.IsNumber()) {
+			std::array<RE::GFxValue, 2> args{ -64.0 * sx.GetNumber(), -64.0 * sy.GetNumber() };
+			matrix.Invoke("translate", args);
+
+			transform.SetMember("matrix", matrix);
+			a_thisPtr->SetMember("_iconPosFixed", true);
+		}
 	}
 
 	void FavoritesListEntry::ChangeIconColor(const RE::GFxValue& a_icon, const RE::GFxValue& a_rgb)

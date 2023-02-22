@@ -27,6 +27,8 @@ namespace Hooks
 			void Call(Params& a_params) override;
 		};
 
+		static void FixIconPos(RE::GFxValue* a_thisPtr, RE::GFxValue& a_icon);
+
 		static void ChangeIconColor(const RE::GFxValue& a_icon, const RE::GFxValue& a_rgb);
 
 		static RE::GRenderer::Cxform GetColorTransform(std::uint32_t a_rgb);

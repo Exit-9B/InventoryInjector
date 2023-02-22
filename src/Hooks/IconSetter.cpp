@@ -43,12 +43,14 @@ namespace Hooks
 			a_list.GetMember("_entryList", &entryList);
 		}
 
-		if (entryList.IsArray()) {
-			for (std::uint32_t i = 0, size = entryList.GetArraySize(); i < size; i++) {
-				RE::GFxValue entryObject;
-				entryList.GetElement(i, &entryObject);
-				ModifyObject(a_params.movie, entryObject);
-			}
+		if (!entryList.IsArray()) {
+			return;
+		}
+
+		for (std::uint32_t i = 0, size = entryList.GetArraySize(); i < size; i++) {
+			RE::GFxValue entryObject;
+			entryList.GetElement(i, &entryObject);
+			ModifyObject(a_params.movie, entryObject);
 		}
 
 		if (_oldFunc.IsObject()) {
@@ -59,12 +61,36 @@ namespace Hooks
 				static_cast<std::size_t>(a_params.argCount) + 1);
 		}
 
-		if (entryList.IsArray()) {
-			for (std::uint32_t i = 0, size = entryList.GetArraySize(); i < size; i++) {
-				RE::GFxValue entryObject;
-				entryList.GetElement(i, &entryObject);
-				if (entryObject.IsObject()) {
-					ProcessEntry(a_params.thisPtr, &entryObject);
+		RE::GFxValue _noIconColors;
+		a_params.thisPtr->GetMember("_noIconColors", &_noIconColors);
+		bool noIconColors = _noIconColors.IsBool() && _noIconColors.GetBool();
+		RE::GFxValue defaultColor;
+
+		if (noIconColors) {
+			RE::GFxValue dummy;
+			a_params.movie->CreateObject(&dummy);
+
+			auto dataManager = Data::CustomDataManager::GetSingleton();
+			dataManager->ProcessEntry(&dummy, {});
+
+			dummy.GetMember("iconColor", &defaultColor);
+		}
+
+		for (std::uint32_t i = 0, size = entryList.GetArraySize(); i < size; i++) {
+			RE::GFxValue entryObject;
+			entryList.GetElement(i, &entryObject);
+			if (!entryObject.IsObject()) {
+				continue;
+			}
+
+			ProcessEntry(a_params.thisPtr, &entryObject);
+
+			if (noIconColors && entryObject.HasMember("iconColor")) {
+				if (defaultColor.IsUndefined()) {
+					entryObject.DeleteMember("iconColor");
+				}
+				else {
+					entryObject.SetMember("iconColor", defaultColor);
 				}
 			}
 		}
@@ -72,10 +98,10 @@ namespace Hooks
 
 	void IconSetter::ProcessEntry(RE::GFxValue* a_thisPtr, RE::GFxValue* a_entryObject)
 	{
-		const auto inventoryManager = Data::CustomDataManager::GetSingleton();
+		const auto dataManager = Data::CustomDataManager::GetSingleton();
 
 		auto processIconCallback = std::bind_front(&ProcessIconInternal, a_thisPtr);
-		inventoryManager->ProcessEntry(a_entryObject, processIconCallback);
+		dataManager->ProcessEntry(a_entryObject, processIconCallback);
 	}
 
 	void IconSetter::ProcessIconInternal(RE::GFxValue* a_thisPtr, RE::GFxValue* a_entryObject)
