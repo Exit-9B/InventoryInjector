@@ -66,7 +66,10 @@ namespace Hooks
 			return;
 		}
 
-		FixIconPos(a_params.thisPtr, itemIcon);
+		if (!a_params.thisPtr->HasMember("_iconPosFixed")) {
+			FixIconPos(itemIcon);
+			a_params.thisPtr->SetMember("_iconPosFixed", true);
+		}
 
 		// We are overriding the embedded icons in the movie
 		const char* source = "skyui/icons_item_psychosteve.swf";
@@ -146,16 +149,9 @@ namespace Hooks
 		ChangeIconColor(a_icon, iconColor);
 	}
 
-	void FavoritesListEntry::FixIconPos(RE::GFxValue* a_thisPtr, RE::GFxValue& a_icon)
+	void FavoritesListEntry::FixIconPos(RE::GFxValue& a_icon)
 	{
-		assert(a_thisPtr);
 		assert(a_icon.IsDisplayObject());
-
-		// Favorites menu icons are offset by (64, 64) compared to icon swf
-		// Icon sprite also has a transform, which might vary depending on mods
-		if (a_thisPtr->HasMember("_iconPosFixed")) {
-			return;
-		}
 
 		RE::GFxValue transform;
 		a_icon.GetMember("transform", &transform);
@@ -171,6 +167,8 @@ namespace Hooks
 			return;
 		}
 
+		// Favorites menu icons are offset by (64, 64) compared to icon swf
+		// Icon sprite also has a transform, which might vary depending on mods
 		RE::GFxValue sx, sy;
 		matrix.GetMember("a", &sx);
 		matrix.GetMember("d", &sy);
@@ -180,7 +178,6 @@ namespace Hooks
 			matrix.Invoke("translate", args);
 
 			transform.SetMember("matrix", matrix);
-			a_thisPtr->SetMember("_iconPosFixed", true);
 		}
 	}
 

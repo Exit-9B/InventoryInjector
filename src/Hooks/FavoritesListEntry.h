@@ -9,6 +9,10 @@ namespace Hooks
 
 		static void Install(RE::GFxMovieView* a_view, const char* a_pathToObj);
 
+		static void FixIconPos(RE::GFxValue& a_icon);
+
+		static void ChangeIconColor(const RE::GFxValue& a_icon, const RE::GFxValue& a_rgb);
+
 	private:
 		class SetEntryFunc : public RE::GFxFunctionHandler
 		{
@@ -26,10 +30,6 @@ namespace Hooks
 		public:
 			void Call(Params& a_params) override;
 		};
-
-		static void FixIconPos(RE::GFxValue* a_thisPtr, RE::GFxValue& a_icon);
-
-		static void ChangeIconColor(const RE::GFxValue& a_icon, const RE::GFxValue& a_rgb);
 
 		static RE::GRenderer::Cxform GetColorTransform(std::uint32_t a_rgb);
 	};

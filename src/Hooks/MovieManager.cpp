@@ -1,6 +1,7 @@
 #include "MovieManager.h"
 
 #include "Hooks/FavoritesListEntry.h"
+#include "Hooks/GroupDataExtender.h"
 #include "Hooks/IconSetter.h"
 #include "Hooks/InventoryListEntry.h"
 
@@ -46,5 +47,7 @@ namespace Hooks
 		InventoryListEntry::Install(a_view, "_global.InventoryListEntry.prototype");
 		InventoryListEntry::Install(a_view, "_global.CraftingListEntry.prototype");
 		FavoritesListEntry::Install(a_view, "_global.FavoritesListEntry.prototype");
+
+		GroupDataExtender::Install(a_view, "_global.GroupDataExtender.prototype");
 	}
 }
