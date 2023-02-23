@@ -78,7 +78,7 @@ namespace Data
 			for (auto& rule : rules) {
 				auto parsed = RuleParser::ParseRule(rule);
 
-				if (parsed.IsValid()) {
+				if (parsed.Validate()) {
 					_rules.push_back(std::move(parsed));
 				}
 			}

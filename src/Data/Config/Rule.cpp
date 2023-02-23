@@ -12,9 +12,37 @@ namespace Data
 		_customData[a_name] = a_data;
 	}
 
-	bool Rule::IsValid() const
+	bool Rule::Validate()
 	{
+		if (auto i = _customData.find("iconSource"s); i != _customData.end()) {
+			auto& data = i->second;
+
+			bool isSourceValid =
+				std::holds_alternative<std::string>(data) &&
+				ValidateIconSource(std::get<std::string>(data));
+
+			if (!isSourceValid) {
+				_customData.erase(i);
+				_customData.erase("iconLabel"s);
+			}
+		}
+
 		return !_properties.empty() && !_customData.empty();
+	}
+
+	bool Rule::ValidateIconSource(std::string a_iconSource)
+	{
+		if (auto i = _validatedSources.find(a_iconSource); i != _validatedSources.end()) {
+			return i->second;
+		}
+
+		RE::BSResourceNiBinaryStream stream{
+			fmt::format("Interface/{}", a_iconSource)
+		};
+
+		bool valid = stream.good();
+		_validatedSources.insert({ a_iconSource, valid });
+		return valid;
 	}
 
 	void Rule::SetInfo(RE::GFxValue* a_entryObject, bool& a_needsIconUpdate) const

@@ -12,7 +12,7 @@ namespace Data
 
 		void AddCustomData(const std::string& a_name, const CustomData& a_data) override;
 
-		[[nodiscard]] bool IsValid() const;
+		bool Validate();
 
 		void SetInfo(RE::GFxValue* a_entryObject, bool& a_needsIconUpdate) const;
 
@@ -22,6 +22,10 @@ namespace Data
 		bool Match(const RE::GFxValue* a_entryObject) const;
 
 		bool HasInfo() const;
+
+		static bool ValidateIconSource(std::string a_iconSource);
+
+		inline static util::istring_map<bool> _validatedSources;
 
 		std::map<std::string, std::shared_ptr<Property>> _properties;
 		std::map<std::string, CustomData> _customData;
