@@ -3,11 +3,42 @@
   "rules": [
     {
       "match": {
-        "type": "MiscItem",
+        "formType": "MiscItem",
         "formId": "Wyrmstooth.esp|27978A"
       },
       "assign": {
-        "subType": "dragonclaw"
+        "subType": "DragonClaw"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Wyrmstooth.esp|2F60BA",
+            "Wyrmstooth.esp|2F60BB",
+            "Wyrmstooth.esp|2F60BC",
+            "Wyrmstooth.esp|2F60BD",
+            "Wyrmstooth.esp|2F60BE",
+            "Wyrmstooth.esp|2F60BF",
+            "Wyrmstooth.esp|2F60C0",
+            "Wyrmstooth.esp|2F60C1",
+            "Wyrmstooth.esp|2F60C2",
+            "Wyrmstooth.esp|2F60C3"
+          ]
+        }
+      },
+      "assign": {
+        "subType": "Remains"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": "Wyrmstooth.esp|C6946D"
+      },
+      "assign": {
+        "iconLabel": "clothing_body"
       }
     }
   ]
