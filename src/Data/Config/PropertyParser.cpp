@@ -67,28 +67,19 @@ namespace Data
 	void FormTypeParser::ParseString(const Json::String& a_value, IPropertyContainer* a_properties)
 		const
 	{
-		if (auto it = FormTypeMap.find(a_value); it != FormTypeMap.end()) {
-			const auto value = util::to_underlying(it->second);
-			const auto prop = std::make_shared<MatchProperty>(value);
-			a_properties->AddProperty(_name, prop);
-			return;
-		}
-
-		PropertyParser::ParseString(a_value, a_properties);
+		std::int32_t value = -1;
+		util::try_get(FormTypeMap, a_value, value);
+		const auto prop = std::make_shared<MatchProperty>(value);
+		a_properties->AddProperty(_name, prop);
 	}
 
 	void FormIDParser::ParseString(const Json::String& a_value, IPropertyContainer* a_properties)
 		const
 	{
 		const auto formID = ParseUtil::ParseFormID(a_value);
-		if (formID) {
-			const auto value = static_cast<std::uint32_t>(formID);
-			const auto prop = std::make_shared<MatchProperty>(value);
-			a_properties->AddProperty(_name, prop);
-			return;
-		}
-
-		PropertyParser::ParseString(a_value, a_properties);
+		const auto value = static_cast<std::uint32_t>(formID);
+		const auto prop = std::make_shared<MatchProperty>(value);
+		a_properties->AddProperty(_name, prop);
 	}
 
 	void ColorParser::ParseString(const Json::String& a_value, IPropertyContainer* a_properties)
@@ -115,7 +106,6 @@ namespace Data
 		const auto part = static_cast<std::uint32_t>(a_value);
 		if (part < 30 || part > 61) {
 			logger::warn("Part number {} is out of range", part);
-			return;
 		}
 
 		const auto value = 1 << (part - 30);

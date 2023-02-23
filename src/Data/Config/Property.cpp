@@ -82,6 +82,10 @@ namespace Data
 
 		auto value = static_cast<std::uint32_t>(a_value.GetNumber());
 
+		if ((value & _slot) == 0) {
+			return false;
+		}
+
 		std::uint32_t mainPart = 0;
 		for (std::uint32_t i = 0; i < PartMaskPrecedence.size(); i++) {
 			auto slot = static_cast<std::uint32_t>(PartMaskPrecedence[i]);
