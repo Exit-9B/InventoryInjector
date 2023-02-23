@@ -3,7 +3,7 @@
 namespace Data
 {
 	template <typename Enum>
-	extern const util::enum_dict<Enum> EnumLookup;
+	extern const util::istring_map<Enum> EnumLookup;
 
 	enum class EquipType
 	{
@@ -24,7 +24,7 @@ namespace Data
 	};
 
 	template <>
-	inline const util::enum_dict<EquipType> EnumLookup<EquipType> = {
+	inline const util::istring_map<EquipType> EnumLookup<EquipType> = {
 		{ "Head", EquipType::Head },
 		{ "Hair", EquipType::Hair },
 		{ "LongHair", EquipType::LongHair },
@@ -41,7 +41,7 @@ namespace Data
 		{ "Tail", EquipType::Tail },
 	};
 
-	inline static const util::enum_dict<std::wstring> ArmorSubTypeDisplayMap = {
+	inline static const util::istring_map<std::wstring> ArmorSubTypeDisplayMap = {
 		{ "Head", L"$Head" },
 		{ "Hair", L"$Head" },
 		{ "LongHair", L"$Head" },
@@ -103,7 +103,7 @@ namespace Data
 	};
 
 	template <>
-	inline const util::enum_dict<WeightClass> EnumLookup<WeightClass> = {
+	inline const util::istring_map<WeightClass> EnumLookup<WeightClass> = {
 		{ "Light", WeightClass::Light },
 		{ "Heavy", WeightClass::Heavy },
 		{ "Other", WeightClass::None },
@@ -111,7 +111,7 @@ namespace Data
 		{ "Jewelry", WeightClass::Jewelry },
 	};
 
-	inline static const util::enum_dict<std::wstring> ArmorWeightClassDisplayMap = {
+	inline static const util::istring_map<std::wstring> ArmorWeightClassDisplayMap = {
 		{ "Light", L"$Light" },
 		{ "Heavy", L"$Heavy" },
 		{ "Other", L"$Other" },

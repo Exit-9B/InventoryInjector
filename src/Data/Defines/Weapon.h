@@ -3,7 +3,7 @@
 namespace Data
 {
 	template <typename Enum>
-	extern const util::enum_dict<Enum> EnumLookup;
+	extern const util::istring_map<Enum> EnumLookup;
 
 	enum class WeaponType
 	{
@@ -34,7 +34,7 @@ namespace Data
 	};
 
 	template <>
-	inline const util::enum_dict<WeaponType> EnumLookup<WeaponType> = {
+	inline const util::istring_map<WeaponType> EnumLookup<WeaponType> = {
 		{ "Melee", WeaponType::Melee },
 		{ "Sword", WeaponType::Sword },
 		{ "Dagger", WeaponType::Dagger },
@@ -51,7 +51,7 @@ namespace Data
 	};
 
 	template <>
-	inline const util::enum_dict<RE::WEAPON_TYPE> EnumLookup<RE::WEAPON_TYPE> = {
+	inline const util::istring_map<RE::WEAPON_TYPE> EnumLookup<RE::WEAPON_TYPE> = {
 		{ "HandToHandMelee", RE::WEAPON_TYPE::kHandToHandMelee },
 		{ "OneHandSword", RE::WEAPON_TYPE::kOneHandSword },
 		{ "OneHandDagger", RE::WEAPON_TYPE::kOneHandDagger },
@@ -64,7 +64,7 @@ namespace Data
 		{ "Crossbow", RE::WEAPON_TYPE::kCrossbow },
 	};
 
-	inline static const util::enum_dict<std::wstring> WeaponSubTypeDisplayMap = {
+	inline static const util::istring_map<std::wstring> WeaponSubTypeDisplayMap = {
 		{ "Melee", L"$Melee" },
 		{ "Sword", L"$Sword" },
 		{ "Dagger", L"$Dagger" },

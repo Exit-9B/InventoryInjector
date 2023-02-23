@@ -3,7 +3,7 @@
 namespace Data
 {
 	template <typename Enum>
-	extern const util::enum_dict<Enum> EnumLookup;
+	extern const util::istring_map<Enum> EnumLookup;
 
 	enum class AmmoType
 	{
@@ -12,12 +12,12 @@ namespace Data
 	};
 
 	template <>
-	inline const util::enum_dict<AmmoType> EnumLookup<AmmoType> = {
+	inline const util::istring_map<AmmoType> EnumLookup<AmmoType> = {
 		{ "Arrow", AmmoType::Arrow },
 		{ "Bolt", AmmoType::Bolt },
 	};
 
-	inline static const util::enum_dict<std::wstring> AmmoSubTypeDisplayMap = {
+	inline static const util::istring_map<std::wstring> AmmoSubTypeDisplayMap = {
 		{ "Arrow", L"$Arrow" },
 		{ "Bolt", L"$Bolt" },
 	};
@@ -25,7 +25,7 @@ namespace Data
 	using AmmoFlag = RE::AMMO_DATA::Flag;
 
 	template <>
-	inline const util::enum_dict<AmmoFlag> EnumLookup<AmmoFlag> = {
+	inline const util::istring_map<AmmoFlag> EnumLookup<AmmoFlag> = {
 		{ "IgnoresNormalWeaponResistance", AmmoFlag::kIgnoresNormalWeaponResistance },
 		{ "NonPlayable", AmmoFlag::kNonPlayable },
 		{ "NonBolt", AmmoFlag::kNonBolt },

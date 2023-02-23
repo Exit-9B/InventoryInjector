@@ -8,7 +8,7 @@
 namespace Data
 {
 	template <typename Enum>
-	extern const util::enum_dict<Enum> EnumLookup;
+	extern const util::istring_map<Enum> EnumLookup;
 
 	class PropertyParser
 	{

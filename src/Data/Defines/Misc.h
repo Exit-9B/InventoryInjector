@@ -3,7 +3,7 @@
 namespace Data
 {
 	template <typename Enum>
-	extern const util::enum_dict<Enum> EnumLookup;
+	extern const util::istring_map<Enum> EnumLookup;
 
 	enum class MiscType
 	{
@@ -34,7 +34,7 @@ namespace Data
 	};
 
 	template <>
-	inline const util::enum_dict<MiscType> EnumLookup<MiscType> = {
+	inline const util::istring_map<MiscType> EnumLookup<MiscType> = {
 		{ "Gem", MiscType::Gem },
 		{ "DragonClaw", MiscType::DragonClaw },
 		{ "Artifact", MiscType::Artifact },
@@ -59,7 +59,7 @@ namespace Data
 		{ "Gold", MiscType::Gold },
 	};
 
-	inline static const util::enum_dict<std::wstring> MiscSubTypeDisplayMap = {
+	inline static const util::istring_map<std::wstring> MiscSubTypeDisplayMap = {
 		{ "Gem", L"$Gem" },
 		{ "DragonClaw", L"$Claw" },
 		{ "Artifact", L"$Artifact" },

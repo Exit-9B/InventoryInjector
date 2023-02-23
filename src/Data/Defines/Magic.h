@@ -3,12 +3,12 @@
 namespace Data
 {
 	template <typename Enum>
-	extern const util::enum_dict<Enum> EnumLookup;
+	extern const util::istring_map<Enum> EnumLookup;
 
 	using RE::MagicSystem::SpellType;
 
 	template <>
-	inline const util::enum_dict<SpellType> EnumLookup<SpellType> = {
+	inline const util::istring_map<SpellType> EnumLookup<SpellType> = {
 		{ "Spell", SpellType::kSpell },
 		{ "Disease", SpellType::kDisease },
 		{ "Power", SpellType::kPower },
@@ -28,7 +28,7 @@ namespace Data
 	using RE::MagicSystem::Delivery;
 
 	template <>
-	inline const util::enum_dict<Delivery> EnumLookup<Delivery> = {
+	inline const util::istring_map<Delivery> EnumLookup<Delivery> = {
 		{ "Self", Delivery::kSelf },
 		{ "Touch", Delivery::kTouch },
 		{ "Aimed", Delivery::kAimed },
@@ -39,7 +39,7 @@ namespace Data
 	using RE::MagicSystem::CastingType;
 
 	template <>
-	inline const util::enum_dict<CastingType> EnumLookup<CastingType> = {
+	inline const util::istring_map<CastingType> EnumLookup<CastingType> = {
 		{ "ConstantEffect", CastingType::kConstantEffect },
 		{ "FireAndForget", CastingType::kFireAndForget },
 		{ "Concentration", CastingType::kConcentration },
@@ -49,7 +49,7 @@ namespace Data
 	using EffectArchetype = RE::EffectArchetypes::ArchetypeID;
 
 	template <>
-	inline const util::enum_dict<EffectArchetype> EnumLookup<EffectArchetype> = {
+	inline const util::istring_map<EffectArchetype> EnumLookup<EffectArchetype> = {
 		{ "ValueModifier", EffectArchetype::kValueModifier },
 		{ "Script", EffectArchetype::kScript },
 		{ "Dispel", EffectArchetype::kDispel },
@@ -102,7 +102,7 @@ namespace Data
 	using EffectFlag = RE::EffectSetting::EffectSettingData::Flag;
 
 	template <>
-	inline const util::enum_dict<EffectFlag> EnumLookup<EffectFlag> = {
+	inline const util::istring_map<EffectFlag> EnumLookup<EffectFlag> = {
 		{ "Hostile", EffectFlag::kHostile },
 		{ "Recover", EffectFlag::kRecover },
 		{ "Detrimental", EffectFlag::kDetrimental },

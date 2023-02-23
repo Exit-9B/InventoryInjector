@@ -3,7 +3,7 @@
 namespace Data
 {
 	template <>
-	inline const util::enum_dict<RE::ActorValue> EnumLookup<RE::ActorValue> = {
+	inline const util::istring_map<RE::ActorValue> EnumLookup<RE::ActorValue> = {
 		{ "Aggression", RE::ActorValue::kAggression },
 		{ "Confidence", RE::ActorValue::kConfidence },
 		{ "Energy", RE::ActorValue::kEnergy },

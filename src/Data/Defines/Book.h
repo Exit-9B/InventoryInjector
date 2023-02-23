@@ -3,7 +3,7 @@
 namespace Data
 {
 	template <typename Enum>
-	extern const util::enum_dict<Enum> EnumLookup;
+	extern const util::istring_map<Enum> EnumLookup;
 
 	enum class BookType
 	{
@@ -13,20 +13,20 @@ namespace Data
 	};
 
 	template <>
-	inline const util::enum_dict<BookType> EnumLookup<BookType> = {
+	inline const util::istring_map<BookType> EnumLookup<BookType> = {
 		{ "SpellTome", BookType::SpellTome },
 		{ "Note", BookType::Note },
 		{ "Recipe", BookType::Recipe },
 	};
 
-	inline static const util::enum_dict<std::wstring> BookSubTypeDisplayMap = {
+	inline static const util::istring_map<std::wstring> BookSubTypeDisplayMap = {
 		{ "SpellTome", L"$Spell Tome" },
 		{ "Note", L"$Note" },
 		{ "Recipe", L"$Recipe" },
 	};
 
 	template <>
-	inline const util::enum_dict<RE::OBJ_BOOK::Type> EnumLookup<RE::OBJ_BOOK::Type> = {
+	inline const util::istring_map<RE::OBJ_BOOK::Type> EnumLookup<RE::OBJ_BOOK::Type> = {
 		{ "Book", RE::OBJ_BOOK::Type::kBookTome },
 		{ "Note", RE::OBJ_BOOK::Type::kNoteScroll },
 	};
@@ -34,7 +34,7 @@ namespace Data
 	using BookFlag = RE::OBJ_BOOK::Flag;
 
 	template <>
-	inline const util::enum_dict<BookFlag> EnumLookup<BookFlag> = {
+	inline const util::istring_map<BookFlag> EnumLookup<BookFlag> = {
 		{ "TeachesSpell", BookFlag::kTeachesSpell },
 		{ "TeachesSkill", BookFlag::kAdvancesActorValue },
 		{ "Read", BookFlag::kHasBeenRead },

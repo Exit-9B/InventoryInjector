@@ -3,7 +3,7 @@
 namespace Data
 {
 	template <typename Enum>
-	extern const util::enum_dict<Enum> EnumLookup;
+	extern const util::istring_map<Enum> EnumLookup;
 
 	enum class PotionType
 	{
@@ -26,7 +26,7 @@ namespace Data
 	};
 
 	template <>
-	inline const util::enum_dict<PotionType> EnumLookup<PotionType> = {
+	inline const util::istring_map<PotionType> EnumLookup<PotionType> = {
 		{ "Health", PotionType::Health },
 		{ "HealRate", PotionType::HealRate },
 		{ "HealRateMult", PotionType::HealRateMult },
@@ -45,7 +45,7 @@ namespace Data
 		{ "Poison", PotionType::Poison },
 	};
 
-	inline static const util::enum_dict<std::wstring> PotionSubTypeDisplayMap = {
+	inline static const util::istring_map<std::wstring> PotionSubTypeDisplayMap = {
 		{ "Health", L"$Health" },
 		{ "HealRate", L"$Health" },
 		{ "HealRateMult", L"$Health" },
@@ -67,7 +67,7 @@ namespace Data
 	using PotionFlag = RE::AlchemyItem::AlchemyFlag;
 
 	template <>
-	inline const util::enum_dict<PotionFlag> EnumLookup<PotionFlag> = {
+	inline const util::istring_map<PotionFlag> EnumLookup<PotionFlag> = {
 		{ "ManualCalc", PotionFlag::kCostOverride },
 		{ "Food", PotionFlag::kFoodItem },
 		{ "Medicine", PotionFlag::kMedicine },

@@ -28,7 +28,7 @@ namespace util
 	};
 
 	template <typename T>
-	using enum_dict = std::map<std::string, T, comp_str_cis>;
+	using istring_map = std::map<std::string, T, comp_str_cis>;
 
 	template <typename Map, typename Result>
 	inline bool try_get(
