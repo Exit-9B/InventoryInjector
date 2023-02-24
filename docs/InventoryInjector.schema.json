@@ -197,9 +197,6 @@
               "magnitude": { "$ref": "#/$defs/assign-data" },
               "duration": { "$ref": "#/$defs/assign-data" },
               "spellCostDisplay": { "$ref": "#/$defs/assign-data" },
-              "word0": { "$ref": "#/$defs/assign-data" },
-              "word1": { "$ref": "#/$defs/assign-data" },
-              "word2": { "$ref": "#/$defs/assign-data" },
               "timeRemainingDisplay": { "$ref": "#/$defs/assign-data" },
               "cardName": { "$ref": "#/$defs/assign-data" },
               "effectName": { "$ref": "#/$defs/assign-data" }
