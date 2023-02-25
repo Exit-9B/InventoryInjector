@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.24)
 
 project(
 	InventoryInjector
-	VERSION 0.3.3
+	VERSION 1.0.0
 	LANGUAGES CXX
 )
 
@@ -59,6 +59,32 @@ install(
 		${CONFIGS}
 	DESTINATION
 		"SKSE/Plugins/${PROJECT_NAME}"
+)
+
+if(NOT BUILD_SKYRIMVR)
+	install(
+		FILES
+			"${PROJECT_SOURCE_DIR}/data/SkyrimSE/I4IconAddon.esp"
+		DESTINATION "."
+	)
+else()
+	install(
+		FILES
+			"${PROJECT_SOURCE_DIR}/data/SkyrimVR/I4IconAddon.esp"
+		DESTINATION "."
+	)
+endif()
+
+install(
+	FILES
+		"${PROJECT_SOURCE_DIR}/data/Interface/I4IconAddon/icons.swf"
+	DESTINATION "Interface/I4IconAddon"
+)
+
+install(
+	FILES
+		"${PROJECT_SOURCE_DIR}/data/Interface/Translations/I4IconAddon_ENGLISH.txt"
+	DESTINATION "Interface/Translations"
 )
 
 set(CPACK_GENERATOR "7Z")

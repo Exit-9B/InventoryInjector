@@ -1,0 +1,17 @@
+$Backpack	Back
+$ClothingCloak	Cloak
+$ScrollSpider	Spider
+$CampingSupplies	Camping Supplies
+$BuildingMaterial	Building Material
+$NetchLeather	Netch Leather
+$FishingRod	Fishing Rod
+$AyleidCrystal	Ayleid Crystal
+$HorseTack	Horse Tack
+$PetGear	Pet Equipment
+$SoulTomato	Soul Tomato
+$BrokenWeapon	Broken Weapon
+$DwarvenScrap	Dwarven Scrap
+$ElderScroll	Elder Scroll
+$Instrument	Instrument
+$BugJar	Bug Jar
+$BearTrap	Bear Trap

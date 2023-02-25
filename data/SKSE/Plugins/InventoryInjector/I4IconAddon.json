@@ -1,0 +1,1306 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Exit-9B/InventoryInjector/main/docs/InventoryInjector.schema.json",
+  "rules": [
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Skyrim.esm|5ACDB",
+            "Skyrim.esm|5ACDC",
+            "Skyrim.esm|5ACDE",
+            "Skyrim.esm|71CF3",
+            "Skyrim.esm|5ACE1",
+            "Skyrim.esm|5ACE0",
+            "Skyrim.esm|5ACDD",
+            "Skyrim.esm|5ACE2",
+            "Skyrim.esm|5B2DF",
+            "Skyrim.esm|5ACDF",
+            "Dragonborn.esm|2B06B",
+            "Dragonborn.esm|17749",
+            "Dragonborn.esm|195A9",
+            "ccBGSSSE025-AdvDSGS.esm|BC6",
+            "ccBGSSSE025-AdvDSGS.esm|BC9",
+            "BSAssets.esm|601C87",
+            "BSAssets.esm|601C50",
+            "BSAssets.esm|601C92",
+            "BSAssets.esm|601C4F",
+            "BSAssets.esm|601C88",
+            "Wyrmstooth.esp|3344F8",
+            "Wyrmstooth.esp|3344F9"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$Ore",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "misc_ore",
+        "iconColor": "#828282"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "keywords": [ "IconOre" ]
+      },
+      "assign": {
+        "subTypeDisplay": "$Ore",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "misc_ore",
+        "iconColor": "#828282"
+      }
+    },
+    {
+      "match": {
+        "formType": "Book",
+        "formId": {
+          "anyOf": [
+            "Skyrim.esm|DDEFB",
+            "Skyrim.esm|EF07A",
+            "Skyrim.esm|F33CD",
+            "Skyrim.esm|F33CE",
+            "Skyrim.esm|F33CF",
+            "Skyrim.esm|F33D0",
+            "Skyrim.esm|F33D1",
+            "Skyrim.esm|F33D2",
+            "Skyrim.esm|F33D3",
+            "Skyrim.esm|F33D4",
+            "Skyrim.esm|F33D5",
+            "Skyrim.esm|F33E0",
+            "Dragonborn.esm|1CAF2",
+            "ccBGSSSE001-Fish.esm|70CCA",
+            "ccBGSSSE001-Fish.esm|70CCB",
+            "ccBGSSSE001-Fish.esm|70CCC",
+            "ccBGSSSE001-Fish.esm|70CCD",
+            "ccBGSSSE001-Fish.esm|70CCE",
+            "ccBGSSSE001-Fish.esm|70CCF",
+            "ccBGSSSE001-Fish.esm|70CD0",
+            "ccBGSSSE001-Fish.esm|70CD1",
+            "ccBGSSSE001-Fish.esm|70CD2",
+            "ccBGSSSE001-Fish.esm|70CD3",
+            "ccBGSSSE001-Fish.esm|70CD4",
+            "ccBGSSSE001-Fish.esm|70CD5"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$Map",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "book_map"
+      }
+    },
+    {
+      "match": {
+        "formType": "Book",
+        "keywords": [ "IconMap" ]
+      },
+      "assign": {
+        "subTypeDisplay": "$Map",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "book_map"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Skyrim.esm|60CC2",
+            "Skyrim.esm|BBCD5",
+            "Dragonborn.esm|2BAAE",
+            "ccBGSSSE031-AdvCyrus.esm|80D",
+            "ccBGSSSE034-MntUni.esl|D67",
+            "ccFFBSSE001-ImperialDragon.esl|867",
+            "BeyondSkyrimMerchant.esp|E29A"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$Map",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "book_map"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "keywords": [ "IconMap" ]
+      },
+      "assign": {
+        "subTypeDisplay": "$Map",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "book_map"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": "ccKRTSSE001_Altar.esl|81A"
+      },
+      "assign": {
+        "subType": "Gold"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "keywords": [ "IconCurrency" ]
+      },
+      "assign": {
+        "subType": "Gold"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "keywords": [ "IconClaw" ]
+      },
+      "assign": {
+        "subTypeDisplay": "$Claw",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "misc_dragonclaw"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "formId": "BSAssets.esm|60258A"
+      },
+      "assign": {
+        "subType": "Pickaxe"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [ "IconPickaxe" ]
+      },
+      "assign": {
+        "subTypeDisplay": "$Pickaxe",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "weapon_pickaxe"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "formId": "BSAssets.esm|6025BF"
+      },
+      "assign": {
+        "subType": "WoodAxe"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [ "IconWoodAxe" ]
+      },
+      "assign": {
+        "subTypeDisplay": "$Wood Axe",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "weapon_woodaxe"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "keywords": [ "VendorItemFireword" ]
+      },
+      "assign": {
+        "iconColor": "#705842"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Dragonborn.esm|1CD7C",
+            "ccBGSSSE041-NetchLeather.esl|892",
+            "ccBGSSSE041-NetchLeather.esl|893",
+            "ccBGSSSE041-NetchLeather.esl|8A3",
+            "ccBGSSSE041-NetchLeather.esl|909"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$Leather",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "misc_strips",
+        "iconColor": "#78558E"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Skyrim.esm|3AD57",
+            "Dawnguard.esm|195AA",
+            "Dragonborn.esm|2B04E"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$Chitin",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_chitin",
+        "iconColor": "#8B7C5A"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "keywords": [ "IconChitin" ]
+      },
+      "assign": {
+        "subTypeDisplay": "$Chitin",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_chitin",
+        "iconColor": "#8B7C5A"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "parts": [ 47 ]
+      },
+      "assign": {
+        "subTypeDisplay": "$Backpack",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "clothing_backpack"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "parts": [ 46 ]
+      },
+      "assign": {
+        "subTypeDisplay": "$ClothingCloak",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "clothing_cloak"
+      }
+    },
+    {
+      "match": {
+        "formType": "Scroll",
+        "keywords": [ "IconSpider" ]
+      },
+      "assign": {
+        "subTypeDisplay": "$ScrollSpider",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "scroll_spider"
+      }
+    },
+    {
+      "match": {
+        "formType": "Scroll",
+        "formId": {
+          "anyOf": [
+            "Dragonborn.esm|1445E",
+            "Dragonborn.esm|14480",
+            "Dragonborn.esm|16E1C",
+            "Dragonborn.esm|1707B",
+            "Dragonborn.esm|1952C",
+            "Dragonborn.esm|19534",
+            "Dragonborn.esm|1CAB0",
+            "Dragonborn.esm|1DA03",
+            "Dragonborn.esm|206D3",
+            "Dragonborn.esm|206D9",
+            "Dragonborn.esm|206DB",
+            "Dragonborn.esm|2095F",
+            "Dragonborn.esm|20960",
+            "Dragonborn.esm|20961",
+            "Dragonborn.esm|27490",
+            "Dragonborn.esm|2749D",
+            "Dragonborn.esm|274A5",
+            "Dragonborn.esm|3319E",
+            "Dragonborn.esm|3319F",
+            "Dragonborn.esm|331A0",
+            "Dragonborn.esm|331A1"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$ScrollSpider",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "scroll_spider"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Dragonborn.esm|17719",
+            "Dragonborn.esm|1771F"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$ScrollSpider",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "scroll_spider"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "formId": {
+          "anyOf": [
+            "ccVSVSSE004-BeAFarmer.esl|86F",
+            "ccVSVSSE004-BeAFarmer.esl|870",
+            "ccVSVSSE004-BeAFarmer.esl|871",
+            "ccVSVSSE004-BeAFarmer.esl|872",
+            "ccVSVSSE004-BeAFarmer.esl|873",
+            "ccVSVSSE004-BeAFarmer.esl|874",
+            "ccVSVSSE004-BeAFarmer.esl|875"
+          ]
+        }
+      },
+      "assign": {
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_housepart"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [ "IconHousePart" ]
+      },
+      "assign": {
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_housepart"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "HearthFires.esm|3043",
+            "HearthFires.esm|3035",
+            "HearthFires.esm|5A69",
+            "HearthFires.esm|3011",
+            "HearthFires.esm|303F",
+            "HearthFires.esm|3012",
+            "HearthFires.esm|300E",
+            "HearthFires.esm|300F",
+            "HearthFires.esm|306C",
+            "HearthFires.esm|5A68"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$BuildingMaterial",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_housepart",
+        "iconColor": "#FFFFFF"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "subType": 18
+      },
+      "assign": {
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_housepart"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "keywords": [ "IconHousePart" ]
+      },
+      "assign": {
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_housepart"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "subType": "Tool"
+      },
+      "assign": {
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_tool"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "subType": "Toy"
+      },
+      "assign": {
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_toy"
+      }
+    },
+    {
+      "match": {
+        "formType": "Scroll",
+        "keywords": [ "IconToy" ]
+      },
+      "assign": {
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_toy"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Skyrim.esm|E72AA",
+            "Skyrim.esm|E72AC",
+            "Skyrim.esm|E72B0",
+            "Skyrim.esm|E72AE",
+            "Skyrim.esm|E72A6",
+            "Skyrim.esm|E72A8",
+            "Skyrim.esm|E72A0",
+            "Skyrim.esm|E729E",
+            "Skyrim.esm|E729A",
+            "Skyrim.esm|E729C",
+            "Skyrim.esm|E7296",
+            "Skyrim.esm|E7298",
+            "Skyrim.esm|E72A4",
+            "Skyrim.esm|E72A2",
+            "Skyrim.esm|64283",
+            "Skyrim.esm|64285",
+            "Skyrim.esm|64287",
+            "Skyrim.esm|64289",
+            "Skyrim.esm|6428B",
+            "Skyrim.esm|6428E",
+            "Skyrim.esm|64290",
+            "Skyrim.esm|64292",
+            "Skyrim.esm|64294",
+            "Skyrim.esm|64296",
+            "Skyrim.esm|64298",
+            "Skyrim.esm|6E806",
+            "Skyrim.esm|DB351",
+            "Skyrim.esm|240D3",
+            "Skyrim.esm|240D4",
+            "Skyrim.esm|240D5",
+            "Skyrim.esm|240D6"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$BrokenWeapon",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "default_weapon",
+        "iconColor": "#FFFFFF"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "keywords": [ "IconBrokenWeapon" ]
+      },
+      "assign": {
+        "subTypeDisplay": "$BrokenWeapon",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "default_weapon",
+        "iconColor": "#FFFFFF"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "keywords": [ "IconCampsite" ]
+      },
+      "assign": {
+        "subTypeDisplay": "$CampingSupplies",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_camping",
+        "iconColor": "#BF8E60"
+      }
+    },
+    {
+      "match": {
+        "formType": "Potion",
+        "formId": "ccQDRSSE002-Firewood.esl|801"
+      },
+      "assign": {
+        "subTypeDisplay": "$CampingSupplies",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_camping",
+        "iconColor": "#BF8E60"
+      }
+    },
+    {
+      "match": {
+        "formType": "Potion",
+        "keywords": [ "IconCampsite" ]
+      },
+      "assign": {
+        "subTypeDisplay": "$CampingSupplies",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_camping",
+        "iconColor": "#BF8E60"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": {
+            "anyOf": [
+              "ccBGSSSE001_FishingPoleKW",
+              "IconFishingRod"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$FishingRod",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "weapon_fishingrod"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "ccBGSSSE067-DaedInv.esm|809",
+            "ccBGSSSE067-DaedInv.esm|762B7",
+            "ccBGSSSE067-DaedInv.esm|762B8",
+            "ccBGSSSE067-DaedInv.esm|762B9",
+            "ccBGSSSE067-DaedInv.esm|762BA",
+            "ccBGSSSE067-DaedInv.esm|BDB37"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$AyleidCrystal",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "soulgem_ayleidcrystalfull",
+        "iconColor": "#5BC4C9"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "keywords": [ "IconAyleidCrystal" ]
+      },
+      "assign": {
+        "subTypeDisplay": "$AyleidCrystal",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "soulgem_ayleidcrystalfull",
+        "iconColor": "#5BC4C9"
+      }
+    },
+    {
+      "match": {
+        "formType": "SoulGem",
+        "formId": "ccBGSSSE037-Curios.esl|801",
+        "status": "Empty"
+      },
+      "assign": {
+        "subTypeDisplay": "$AyleidCrystal",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "soulgem_ayleidcrystalempty",
+        "iconColor": "#5BC4C9"
+      }
+    },
+    {
+      "match": {
+        "formType": "SoulGem",
+        "keywords": [ "IconAyleidCrystal" ],
+        "status": "Empty"
+      },
+      "assign": {
+        "subTypeDisplay": "$AyleidCrystal",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "soulgem_ayleidcrystalempty",
+        "iconColor": "#5BC4C9"
+      }
+    },
+    {
+      "match": {
+        "formType": "SoulGem",
+        "formId": "ccBGSSSE037-Curios.esl|801",
+        "status": "Partial"
+      },
+      "assign": {
+        "subTypeDisplay": "$AyleidCrystal",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "soulgem_ayleidcrystalpartial",
+        "iconColor": "#5BC4C9"
+      }
+    },
+    {
+      "match": {
+        "formType": "SoulGem",
+        "keywords": [ "IconAyleidCrystal" ],
+        "status": "Partial"
+      },
+      "assign": {
+        "subTypeDisplay": "$AyleidCrystal",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "soulgem_ayleidcrystalpartial",
+        "iconColor": "#5BC4C9"
+      }
+    },
+    {
+      "match": {
+        "formType": "SoulGem",
+        "formId": "ccBGSSSE037-Curios.esl|801",
+        "status": "Full"
+      },
+      "assign": {
+        "subTypeDisplay": "$AyleidCrystal",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "soulgem_ayleidcrystalfull",
+        "iconColor": "#5BC4C9"
+      }
+    },
+    {
+      "match": {
+        "formType": "SoulGem",
+        "keywords": [ "IconAyleidCrystal" ],
+        "status": "Full"
+      },
+      "assign": {
+        "subTypeDisplay": "$AyleidCrystal",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "soulgem_ayleidcrystalfull",
+        "iconColor": "#5BC4C9"
+      }
+    },
+    {
+      "match": {
+        "formType": "Potion",
+        "formId": {
+          "anyOf": [
+            "ccBGSSSE037-Curios.esl|800",
+            "ccBGSSSE067-DaedInv.esm|20E802",
+            "BSAssets.esm|6028E9",
+            "BSAssets.esm|6028EA",
+            "BSHeartland.esm|AF476",
+            "BSHeartland.esm|AF477"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$AyleidCrystal",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "soulgem_ayleidcrystalfull",
+        "iconColor": "#5BC4C9"
+      }
+    },
+    {
+      "match": {
+        "formType": "Potion",
+        "keywords": [ "IconAyleidCrystal" ]
+      },
+      "assign": {
+        "subTypeDisplay": "$AyleidCrystal",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "soulgem_ayleidcrystalfull",
+        "iconColor": "#5BC4C9"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Update.esm|30C9",
+            "Update.esm|30CA",
+            "BSAssets.esm|723B8"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$HorseTack",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_horsetack"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "keywords": [ "IconHorseTack" ]
+      },
+      "assign": {
+        "subTypeDisplay": "$HorseTack",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_horsetack"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": "ccVSVSSE002-Pets.esl|851"
+      },
+      "assign": {
+        "subTypeDisplay": "$PetGear",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "clothing_backpack"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": "ccVSVSSE002-Pets.esl|871"
+      },
+      "assign": {
+        "subTypeDisplay": "$PetGear",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "armor_amulet"
+      }
+    },
+    {
+      "match": {
+        "formType": "SoulGem",
+        "formId": {
+          "anyOf": [
+            "ccBGSSSE025-AdvDSGS.esm|804",
+            "ccBGSSSE025-AdvDSGS.esm|137F40"
+          ]
+        },
+        "status": "Empty"
+      },
+      "assign": {
+        "subTypeDisplay": "$SoulTomato",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "soulgem_tomatoempty",
+        "iconColor": "#D14A38"
+      }
+    },
+    {
+      "match": {
+        "formType": "SoulGem",
+        "formId": {
+          "anyOf": [
+            "ccBGSSSE025-AdvDSGS.esm|804",
+            "ccBGSSSE025-AdvDSGS.esm|137F40"
+          ]
+        },
+        "status": "Partial"
+      },
+      "assign": {
+        "subTypeDisplay": "$SoulTomato",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "soulgem_tomatopartial",
+        "iconColor": "#D14A38"
+      }
+    },
+    {
+      "match": {
+        "formType": "SoulGem",
+        "formId": {
+          "anyOf": [
+            "ccBGSSSE025-AdvDSGS.esm|804",
+            "ccBGSSSE025-AdvDSGS.esm|137F40"
+          ]
+        },
+        "status": "Full"
+      },
+      "assign": {
+        "subTypeDisplay": "$SoulTomato",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "soulgem_tomatofull",
+        "iconColor": "#D14A38"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Skyrim.esm|C886C",
+            "Skyrim.esm|C8878",
+            "Skyrim.esm|C8864",
+            "Skyrim.esm|C8872",
+            "Skyrim.esm|C8866",
+            "Skyrim.esm|C8864",
+            "Skyrim.esm|C8874",
+            "Skyrim.esm|C886A",
+            "Skyrim.esm|AEBF1",
+            "Skyrim.esm|C8861",
+            "Skyrim.esm|C8868",
+            "Skyrim.esm|C886E",
+            "Skyrim.esm|C8870",
+            "ccAFDSSE001-DweSanctuary.esm|804"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$DwarvenScrap",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_dwarvenscrap",
+        "iconColor": "#705F32"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "keywords": [ "IconDwarvenScrap" ]
+      },
+      "assign": {
+        "subTypeDisplay": "$DwarvenScrap",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_dwarvenscrap",
+        "iconColor": "#705F32"
+      }
+    },
+    {
+      "match": {
+        "formType": "Book",
+        "formId": {
+          "anyOf": [
+            "Skyrim.esm|2D513",
+            "Skyrim.esm|48782",
+            "Dawnguard.esm|126DC",
+            "Dawnguard.esm|11A13",
+            "Dawnguard.esm|118F9"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$ElderScroll",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_elderscroll",
+        "iconColor": "#75664d"
+      }
+    },
+    {
+      "match": {
+        "formType": "Spell",
+        "formId": {
+          "anyOf": [
+            "Dawnguard.esm|38B5",
+            "Dawnguard.esm|3F52",
+            "Dawnguard.esm|38B6"
+          ]
+        }
+      },
+      "assign": {
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "magic_sun",
+        "iconColor": "#FF8700"
+      }
+    },
+    {
+      "match": {
+        "formType": "Spell",
+        "effectKeywords": {
+          "anyOf": [
+            "IconMagicSun",
+            "MAG_MagicDamageSun"
+          ]
+        }
+      },
+      "assign": {
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "magic_sun",
+        "iconColor": "#FF8700"
+      }
+    },
+    {
+      "match": {
+        "formType": "Spell",
+        "formId": "Dragonborn.esm|1D74B"
+      },
+      "assign": {
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "misc_remains",
+        "iconColor": "#62A636"
+      }
+    },
+    {
+      "match": {
+        "formType": "Spell",
+        "effectKeywords": {
+          "anyOf": [
+            "IconMagicPoison",
+            "MAG_MagicDamagePoison"
+          ]
+        }
+      },
+      "assign": {
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "misc_remains",
+        "iconColor": "#62A636"
+      }
+    },
+    {
+      "match": {
+        "formType": "Spell",
+        "formId": "Dragonborn.esm|1772D"
+      },
+      "assign": {
+        "subTypeDisplay": "$MagicWind",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "magic_wind",
+        "iconColor": "#CDCBC4"
+      }
+    },
+    {
+      "match": {
+        "formType": "Spell",
+        "effectKeywords": [ "IconMagicWind" ]
+      },
+      "assign": {
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "magic_wind",
+        "iconColor": "#CDCBC4"
+      }
+    },
+    {
+      "match": {
+        "formType": "Spell",
+        "effectKeywords": [ "IconMagicBlood" ]
+      },
+      "assign": {
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "magic_vampire",
+        "iconColor": "#8E2129"
+      }
+    },
+    {
+      "match": {
+        "formType": "Spell",
+        "effectKeywords": [ "IconMagicWater" ]
+      },
+      "assign": {
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "magic_water",
+        "iconColor": "#3861C5"
+      }
+    },
+    {
+      "match": {
+        "formType": "Spell",
+        "effectKeywords": [ "IconMagicEarth" ]
+      },
+      "assign": {
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "magic_earth",
+        "iconColor": "#855A41"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": "Skyrim.esm|28AD7"
+      },
+      "assign": {
+        "subTypeDisplay": "$Artifact",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "soulgem_azura"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Skyrim.esm|2C259",
+            "Skyrim.esm|2C25A"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$Artifact",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "default_potion"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Skyrim.esm|C4F2E",
+            "ccASVSSE001-ALMSIVI.esm|82F",
+            "ccBGSSSE041-NetchLeather.esl|8A4",
+            "ccKRTSSE001_Altar.esl|806"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$Potion",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "default_potion"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Skyrim.esm|2BAAB",
+            "ccKRTSSE001_Altar.esl|F04"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$Poison",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "potion_poison"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Skyrim.esm|457AB",
+            "Skyrim.esm|DC530",
+            "Skyrim.esm|DC52E",
+            "BeyondSkyrimMerchant.esp|13201",
+            "BeyondSkyrimMerchant.esp|13202"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$Scroll",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "default_scroll"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Skyrim.esm|F1491",
+            "Skyrim.esm|CE70B",
+            "Skyrim.esm|E4897",
+            "Skyrim.esm|E3CB7"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$Book",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "default_book"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Skyrim.esm|1CB34",
+            "Skyrim.esm|DA732",
+            "Skyrim.esm|DA733",
+            "Skyrim.esm|DA734",
+            "Skyrim.esm|DA735"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$Ring",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "armor_ring"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": "ccPEWSSE002-ArmsOfChaos.esl|827"
+      },
+      "assign": {
+        "subTypeDisplay": "$Amulet",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "armor_amulet"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "ccBGSSSE019-StaffofSheogorath.esl|80F",
+            "ccPEWSSE002-ArmsOfChaos.esl|81C",
+            "ccPEWSSE002-ArmsOfChaos.esl|823"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$Amulet",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "weapon_staff"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Dragonborn.esm|1AAD6",
+            "ccTWBSSE001-PuzzleDungeon.esm|8B2",
+            "ccTWBSSE001-PuzzleDungeon.esm|8B8",
+            "ccTWBSSE001-PuzzleDungeon.esm|8B9",
+            "ccTWBSSE001-PuzzleDungeon.esm|8BA",
+            "ccTWBSSE001-PuzzleDungeon.esm|8BB",
+            "ccTWBSSE001-PuzzleDungeon.esm|8BC",
+            "ccTWBSSE001-PuzzleDungeon.esm|8BD",
+            "ccTWBSSE001-PuzzleDungeon.esm|8BE",
+            "ccTWBSSE001-PuzzleDungeon.esm|8BF",
+            "ccTWBSSE001-PuzzleDungeon.esm|8C3",
+            "ccTWBSSE001-PuzzleDungeon.esm|8C4",
+            "ccTWBSSE001-PuzzleDungeon.esm|8C5"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$Ingredient",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "default_ingredient"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Skyrim.esm|DABA9",
+            "Skyrim.esm|DABA7",
+            "Skyrim.esm|105177",
+            "Skyrim.esm|3292F",
+            "Skyrim.esm|200BA",
+            "Skyrim.esm|DABAB",
+            "Skyrim.esm|200B6",
+            "Skyrim.esm|105109",
+            "Skyrim.esm|E77BB",
+            "BSHeartland.esm|CE153",
+            "BSHeartland.esm|8AD49",
+            "BSHeartland.esm|67855"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$Instrument",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_instrument",
+        "iconColor": "#FFFFFF"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "keywords": [ "IconInstrument" ]
+      },
+      "assign": {
+        "subTypeDisplay": "$Instrument",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_instrument",
+        "iconColor": "#FFFFFF"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Skyrim.esm|B08C7",
+            "Skyrim.esm|FBC3A",
+            "Skyrim.esm|FBC3B",
+            "Skyrim.esm|FBC3C",
+            "Skyrim.esm|FBC3D",
+            "Skyrim.esm|DABAB",
+            "ccBGSSSE025-AdvDSGS.esm|12DD3A",
+            "ccBGSSSE025-AdvDSGS.esm|12DD3B",
+            "ccBGSSSE025-AdvDSGS.esm|12DD3C"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$BugJar",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_jar",
+        "iconColor": "#FFFFFF"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "keywords": [ "IconJar" ]
+      },
+      "assign": {
+        "subTypeDisplay": "$BugJar",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_jar",
+        "iconColor": "#FFFFFF"
+      }
+    },
+    {
+      "match": {
+        "formType": "Potion",
+        "formId": "ccKRTSSE001_Altar.esl|810"
+      },
+      "assign": {
+        "subTypeDisplay": "$Artifact",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "misc_artifact",
+        "iconColor": "#FFFFFF"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": "ccKRTSSE001_Altar.esl|A6B"
+      },
+      "assign": {
+        "subType": "Artifact"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "keywords": [ "IconArtifact" ]
+      },
+      "assign": {
+        "subType": "Artifact"
+      }
+    },
+    {
+      "match": {
+        "formType": "Spell",
+        "formId": {
+          "anyOf": [
+            "BSHeartland.esm|72320",
+            "BSHeartland.esm|72311",
+            "BSHeartland.esm|7233B"
+          ]
+        }
+      },
+      "assign": {
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "magic_fire",
+        "iconColor": "#1FFBFF"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": "Wyrmstooth.esp|14F879"
+      },
+      "assign": {
+        "subTypeDisplay": "$BearTrap",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_beartrap",
+        "iconColor": "#FFFFFF"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "keywords": [ "IconBearTrap" ]
+      },
+      "assign": {
+        "subTypeDisplay": "$BearTrap",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_beartrap",
+        "iconColor": "#FFFFFF"
+      }
+    }
+  ]
+}
