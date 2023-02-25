@@ -95,6 +95,8 @@ namespace Data
 		}
 
 		if (needsIconUpdate && a_processIconCallback) {
+			a_entryObject->DeleteMember("iconLabel");
+			a_entryObject->DeleteMember("iconColor");
 			a_processIconCallback(a_entryObject);
 		}
 
