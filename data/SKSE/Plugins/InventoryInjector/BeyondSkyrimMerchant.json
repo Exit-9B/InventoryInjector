@@ -1,0 +1,31 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Exit-9B/InventoryInjector/main/docs/InventoryInjector.schema.json",
+  "rules": [
+    {
+      "match": {
+        "formType": "Weapon",
+        "formId": "BeyondSkyrimMerchant.esp|13209"
+      },
+      "assign": {
+        "subType": "Pickaxe"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "subType": "Clutter",
+        "formId": {
+          "anyOf": [
+            "BeyondSkyrimMerchant.esp|6073",
+            "BeyondSkyrimMerchant.esp|6074",
+            "BeyondSkyrimMerchant.esp|6075",
+            "BeyondSkyrimMerchant.esp|6076"
+          ]
+        }
+      },
+      "assign": {
+        "iconLabel": "misc_gold"
+      }
+    }
+  ]
+}

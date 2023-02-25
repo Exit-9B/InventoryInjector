@@ -1,0 +1,15 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Exit-9B/InventoryInjector/main/docs/InventoryInjector.schema.json",
+  "rules": [
+    {
+      "match": {
+        "formType": "MiscItem",
+        "subType": "Clutter",
+        "formId": "BSAssets.esm|6028DC"
+      },
+      "assign": {
+        "iconLabel": "misc_gold"
+      }
+    }
+  ]
+}
