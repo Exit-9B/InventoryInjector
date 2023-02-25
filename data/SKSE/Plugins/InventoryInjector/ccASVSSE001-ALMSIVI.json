@@ -1,0 +1,21 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Exit-9B/InventoryInjector/main/docs/InventoryInjector.schema.json",
+  "rules": [
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "ccASVSSE001-ALMSIVI.esm|990ED",
+            "ccASVSSE001-ALMSIVI.esm|990F0",
+            "ccASVSSE001-ALMSIVI.esm|990F1",
+            "ccASVSSE001-ALMSIVI.esm|990F2"
+          ]
+        }
+      },
+      "assign": {
+        "subType": "Gem"
+      }
+    }
+  ]
+}

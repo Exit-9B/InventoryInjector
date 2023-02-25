@@ -1,0 +1,14 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Exit-9B/InventoryInjector/main/docs/InventoryInjector.schema.json",
+  "rules": [
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": "ccBGSSSE036-PetBWolf.esl|80A"
+      },
+      "assign": {
+        "subType": "Remains"
+      }
+    }
+  ]
+}

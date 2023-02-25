@@ -1,0 +1,14 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Exit-9B/InventoryInjector/main/docs/InventoryInjector.schema.json",
+  "rules": [
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": "ccKRTSSE001_Altar.esl|81A"
+      },
+      "assign": {
+        "iconLabel": "misc_gold"
+      }
+    }
+  ]
+}
