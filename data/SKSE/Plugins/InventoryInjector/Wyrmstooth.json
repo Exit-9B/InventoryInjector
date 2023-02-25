@@ -31,15 +31,6 @@
       "assign": {
         "subType": "Remains"
       }
-    },
-    {
-      "match": {
-        "formType": "MiscItem",
-        "formId": "Wyrmstooth.esp|C6946D"
-      },
-      "assign": {
-        "iconLabel": "clothing_body"
-      }
     }
   ]
 }
