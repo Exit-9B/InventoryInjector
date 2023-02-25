@@ -12,6 +12,42 @@
     },
     {
       "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Skyrim.esm|1994F",
+            "Skyrim.esm|59654",
+            "Skyrim.esm|9DFBB",
+            "Skyrim.esm|9F7A6"
+          ]
+        }
+      },
+      "assign": {
+        "subType": "Gem"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Skyrim.esm|75868",
+            "Skyrim.esm|F6767",
+            "Skyrim.esm|AADB6",
+            "Skyrim.esm|AADB7",
+            "Skyrim.esm|4286C",
+            "Dawnguard.esm|2993",
+            "Dawnguard.esm|2994",
+            "Dawnguard.esm|11CF7"
+          ]
+        }
+      },
+      "assign": {
+        "subType": "Remains"
+      }
+    },
+    {
+      "match": {
         "formType": "Spell",
         "resistance": "FireResist"
       },

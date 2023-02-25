@@ -1,0 +1,38 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Exit-9B/InventoryInjector/main/docs/InventoryInjector.schema.json",
+  "rules": [
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Dawnguard.esm|12F97",
+            "Dawnguard.esm|12FC3",
+            "Dawnguard.esm|19ABB",
+            "Dawnguard.esm|19ABC",
+            "Dawnguard.esm|19ABD"
+          ]
+        }
+      },
+      "assign": {
+        "subType": "Gem"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Dawnguard.esm|5704",
+            "Dawnguard.esm|5705",
+            "Dawnguard.esm|5706",
+            "Dawnguard.esm|5707"
+          ]
+        }
+      },
+      "assign": {
+        "subType": "Remains"
+      }
+    }
+  ]
+}

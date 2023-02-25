@@ -18,6 +18,23 @@
     {
       "match": {
         "formType": "MiscItem",
+        "formId": {
+          "anyOf": [
+            "Dragonborn.esm|2145A",
+            "Dragonborn.esm|3166F",
+            "Dragonborn.esm|31670",
+            "Dragonborn.esm|31671",
+            "Dragonborn.esm|31672"
+          ]
+        }
+      },
+      "assign": {
+        "subType": "Gem"
+      }
+    },
+    {
+      "match": {
+        "formType": "MiscItem",
         "formId": "Dragonborn.esm|247F9"
       },
       "assign": {
