@@ -26,6 +26,9 @@ namespace Data
 				_customData.erase("iconLabel"s);
 			}
 		}
+		else if (_customData.contains("iconLabel"s)) {
+			_customData.insert({ "iconSource"s, nullptr });
+		}
 
 		return !_properties.empty() && !_customData.empty();
 	}

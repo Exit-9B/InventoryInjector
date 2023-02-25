@@ -2,10 +2,10 @@
 
 namespace Data
 {
-	struct CustomData : std::variant<bool, double, std::string, std::wstring>
+	struct CustomData : std::variant<std::nullptr_t, bool, double, std::string, std::wstring>
 	{
 	public:
-		using Base = std::variant<bool, double, std::string, std::wstring>;
+		using Base = std::variant<std::nullptr_t, bool, double, std::string, std::wstring>;
 		using Base::Base;
 
 		template <typename Num> requires std::is_arithmetic_v<Num>
