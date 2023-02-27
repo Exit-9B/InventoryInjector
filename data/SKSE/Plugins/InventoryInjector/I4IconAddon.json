@@ -1286,7 +1286,7 @@
         "subTypeDisplay": "$BearTrap",
         "iconSource": "I4IconAddon/icons.swf",
         "iconLabel": "misc_beartrap",
-        "iconColor": "#FFFFFF"
+        "iconColor": "#A89E8C"
       }
     },
     {
@@ -1298,7 +1298,7 @@
         "subTypeDisplay": "$BearTrap",
         "iconSource": "I4IconAddon/icons.swf",
         "iconLabel": "misc_beartrap",
-        "iconColor": "#FFFFFF"
+        "iconColor": "#A89E8C"
       }
     }
   ]
