@@ -85,16 +85,7 @@ namespace Data
 		using PropertyParser::PropertyParser;
 
 		void ParseString(const Json::String& a_value, IPropertyContainer* a_properties)
-			const override
-		{
-			std::underlying_type_t<T> underlying{};
-			if (util::try_get(EnumLookup<T>, a_value, underlying)) {
-				a_properties->AddProperty(_name, std::make_shared<MatchProperty>(underlying));
-				return;
-			}
-
-			PropertyParser::ParseString(a_value, a_properties);
-		}
+			const override;
 	};
 
 	template <typename T>
@@ -104,15 +95,39 @@ namespace Data
 		using PropertyParser::PropertyParser;
 
 		void ParseString(const Json::String& a_value, IPropertyContainer* a_properties)
-			const override
-		{
-			std::uint32_t flag = 0;
-			if (util::try_get(EnumLookup<T>, a_value, flag)) {
-				a_properties->AddProperty(_name, std::make_shared<BitfieldProperty>(flag));
-				return;
-			}
-
-			PropertyParser::ParseString(a_value, a_properties);
-		}
+			const override;
 	};
+
+	template <typename T>
+	void EnumParser<T>::ParseString(const Json::String& a_value, IPropertyContainer* a_properties)
+		const
+	{
+		std::underlying_type_t<T> underlying{};
+		if (util::try_get(EnumLookup<T>, a_value, underlying)) {
+			a_properties->AddProperty(_name, std::make_shared<MatchProperty>(underlying));
+			return;
+		}
+		// Special case used by weightClass
+		else if (::_stricmp(a_value.c_str(), "Other") == 0)
+		{
+			a_properties->AddProperty(_name, std::make_shared<MatchProperty>(std::nullopt));
+			return;
+		}
+
+		PropertyParser::ParseString(a_value, a_properties);
+	}
+
+	template <typename T>
+	void BitfieldParser<T>::ParseString(
+		const Json::String& a_value,
+		IPropertyContainer* a_properties) const
+	{
+		std::uint32_t flag = 0;
+		if (util::try_get(EnumLookup<T>, a_value, flag)) {
+			a_properties->AddProperty(_name, std::make_shared<BitfieldProperty>(flag));
+			return;
+		}
+
+		PropertyParser::ParseString(a_value, a_properties);
+	}
 }

@@ -106,7 +106,7 @@ namespace Data
 	inline const util::istring_map<WeightClass> EnumLookup<WeightClass> = {
 		{ "Light", WeightClass::Light },
 		{ "Heavy", WeightClass::Heavy },
-		{ "Other", WeightClass::None },
+		//{ "Other", WeightClass::None },
 		{ "Clothing", WeightClass::Clothing },
 		{ "Jewelry", WeightClass::Jewelry },
 	};

@@ -27,10 +27,13 @@ namespace Data
 			for (std::uint32_t i = 0, size = a_value.GetArraySize(); i < size; i++) {
 				RE::GFxValue elem;
 				a_value.GetElement(i, &elem);
-				if (a_value == _value) {
+				if (Match(elem)) {
 					return true;
 				}
 			}
+		}
+		else if (a_value.IsNull()) {
+			return _value.IsUndefined() || _value.IsNull();
 		}
 
 		return a_value == _value;

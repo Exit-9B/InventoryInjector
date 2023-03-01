@@ -106,7 +106,7 @@
     {
       "match": {
         "formType": "Armor",
-        "weightClass": "Other"
+        "weightClass": { "anyOf": [ "Jewelry", "Clothing", "Other" ] }
       },
       "assign": {
         "iconColor": "#EDDA87"
