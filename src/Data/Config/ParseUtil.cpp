@@ -15,6 +15,7 @@ namespace Data
 		const auto dataHandler = RE::TESDataHandler::GetSingleton();
 		const auto file = dataHandler->LookupModByName(plugin);
 		if (!file || file->compileIndex == 0xFF) {
+			logger::warn("Plugin file not found: {}", plugin);
 			return 0x00000000;
 		}
 
