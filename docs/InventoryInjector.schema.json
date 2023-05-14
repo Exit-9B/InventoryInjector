@@ -852,13 +852,13 @@
     "match-archetype": {
       "description": "Spell Archetype",
       "anyOf": [
-        { "$ref": "#/$defs/weaponType" },
+        { "$ref": "#/$defs/archetype" },
         {
           "type": "object",
           "properties": {
             "anyOf": {
               "type": "array",
-              "items": { "$ref": "#/$defs/weaponType" }
+              "items": { "$ref": "#/$defs/archetype" }
             }
           }
         }
