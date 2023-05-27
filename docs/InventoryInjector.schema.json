@@ -199,7 +199,22 @@
               "spellCostDisplay": { "$ref": "#/$defs/assign-data" },
               "timeRemainingDisplay": { "$ref": "#/$defs/assign-data" },
               "cardName": { "$ref": "#/$defs/assign-data" },
-              "effectName": { "$ref": "#/$defs/assign-data" }
+              "effectName": { "$ref": "#/$defs/assign-data" },
+              "itemType": { "$ref": "#/$defs/assign-data" },
+              "itemClass": { "$ref": "#/$defs/assign-data" },
+              "itemSort": { "$ref": "#/$defs/assign-data" },
+              "magicSchool": { "$ref": "#/$defs/assign-data" },
+              "armorClass": { "$ref": "#/$defs/assign-data" },
+              "weightClass": { "$ref": "#/$defs/assign-data" },
+              "magicClassDisplay": { "$ref": "#/$defs/assign-data" },
+              "equipType": { "$ref": "#/$defs/assign-data" },
+              "equipTypeDisplay": { "$ref": "#/$defs/assign-data" },
+              "SHHunger": { "$ref": "#/$defs/assign-data" },
+              "SHThirst": { "$ref": "#/$defs/assign-data" },
+              "SHFW": { "$ref": "#/$defs/assign-data" },
+              "infoHunger": { "$ref": "#/$defs/assign-data" },
+              "restoreCold": { "$ref": "#/$defs/assign-data" },
+              "fWarmth": { "$ref": "#/$defs/assign-data" }
             },
             "minProperties": 1
           }
