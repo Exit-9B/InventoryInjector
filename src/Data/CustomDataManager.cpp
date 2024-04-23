@@ -67,22 +67,26 @@ namespace Data
 			fileStream >> root;
 		}
 		catch (...) {
-			logger::error("Parse errors in file: {}"sv, a_path.filename().string());
+			logger::error("Parse errors in file: {}", a_path.filename().string());
 		}
 
 		if (!root.isObject())
 			return;
 
 		Json::Value rules = root["rules"];
+		std::uint32_t numRules = 0;
 		if (rules.isArray()) {
 			for (auto& rule : rules) {
 				auto parsed = RuleParser::ParseRule(rule);
 
 				if (parsed.Validate()) {
 					_rules.push_back(std::move(parsed));
+					numRules++;
 				}
 			}
 		}
+
+		logger::info("Read {} rules from {}", numRules, a_path.filename().string());
 	}
 
 	void CustomDataManager::ProcessEntry(
