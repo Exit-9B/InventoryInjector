@@ -302,8 +302,7 @@ namespace Hooks
 				if (idx != INVALID) {
 					auto& value = (*values)[idx];
 					if (value.IsString()) {
-						noIconColors =
-							(::_stricmp(std::string(value.GetString()).c_str(), "TRUE") == 0);
+						noIconColors = util::iequals(value.GetString(), "true"sv);
 						hasOverride = true;
 					}
 				}
@@ -337,7 +336,7 @@ namespace Hooks
 				value.remove_prefix(value.find_first_not_of(" ="));
 				value.remove_suffix(value.size() - value.find_last_not_of(" \r\n") - 1);
 
-				noIconColors = (::_stricmp(std::string(value).c_str(), "true") == 0);
+				noIconColors = util::iequals(value, "true"sv);
 			}
 		}
 

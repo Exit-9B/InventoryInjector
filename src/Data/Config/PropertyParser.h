@@ -108,7 +108,7 @@ namespace Data
 			return;
 		}
 		// Special case used by weightClass
-		else if (::_stricmp(a_value.c_str(), "Other") == 0)
+		else if (util::iequals(a_value, "Other"sv))
 		{
 			a_properties->AddProperty(_name, std::make_shared<MatchProperty>(std::nullopt));
 			return;

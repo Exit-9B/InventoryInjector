@@ -26,6 +26,39 @@ namespace util
 		return ch;
 	}
 
+	struct iequal_to
+	{
+		template <std::ranges::contiguous_range S1, std::ranges::contiguous_range S2>
+			requires(
+				std::is_same_v<std::ranges::range_value_t<S1>, char> &&
+				std::is_same_v<std::ranges::range_value_t<S2>, char>)
+		constexpr bool operator()(S1&& a_str1, S2&& a_str2) const
+		{
+			std::size_t count = std::ranges::size(a_str1);
+			if (count != std::ranges::size(a_str2))
+				return false;
+
+			if (count) {
+				const char* p1 = std::ranges::data(a_str1);
+				const char* p2 = std::ranges::data(a_str2);
+
+				do {
+					const int ch1 = ascii_tolower(*p1++);
+					const int ch2 = ascii_tolower(*p2++);
+					if (ch1 != ch2)
+						return false;
+				} while (--count);
+			}
+
+			return true;
+		}
+	};
+
+	[[nodiscard]] bool iequals(auto&& a_str1, auto&& a_str2)
+	{
+		return iequal_to{}(a_str1, a_str2);
+	}
+
 	struct iless
 	{
 		using is_transparent = int;
