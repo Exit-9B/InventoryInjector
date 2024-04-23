@@ -19,22 +19,50 @@ namespace util
 	using SKSE::stl::to_underlying;
 	using SKSE::stl::utf8_to_utf16;
 
-	struct comp_str_cis
+	[[nodiscard]] constexpr int ascii_tolower(int ch) noexcept
 	{
-		bool operator()(const std::string& a_lhs, const std::string& a_rhs) const
+		if (ch >= 'A' && ch <= 'Z')
+			ch += 'a' - 'A';
+		return ch;
+	}
+
+	struct iless
+	{
+		using is_transparent = int;
+
+		template <std::ranges::contiguous_range S1, std::ranges::contiguous_range S2>
+			requires(
+				std::is_same_v<std::ranges::range_value_t<S1>, char> &&
+				std::is_same_v<std::ranges::range_value_t<S2>, char>)
+		constexpr bool operator()(S1&& a_str1, S2&& a_str2) const
 		{
-			return ::_stricmp(a_lhs.c_str(), a_rhs.c_str()) < 0;
+			std::size_t count = std::ranges::size(a_str2);
+			const std::size_t len1 = std::ranges::size(a_str1);
+			const bool shorter = len1 < count;
+			if (shorter)
+				count = len1;
+
+			if (count) {
+				const char* p1 = std::ranges::data(a_str1);
+				const char* p2 = std::ranges::data(a_str2);
+
+				do {
+					const int ch1 = ascii_tolower(*p1++);
+					const int ch2 = ascii_tolower(*p2++);
+					if (ch1 != ch2)
+						return ch1 < ch2;
+				} while (--count);
+			}
+
+			return shorter;
 		}
 	};
 
-	template <typename T>
-	using istring_map = std::map<std::string, T, comp_str_cis>;
+	template <class T>
+	using istring_map = std::map<std::string, T, iless>;
 
-	template <typename Map, typename Result>
-	inline bool try_get(
-		Map const& a_map,
-		typename Map::key_type const& a_key,
-		typename Result& a_result)
+	template <typename Map, typename Key, typename Result>
+	inline bool try_get(Map const& a_map, Key&& a_key, Result& a_result)
 	{
 		if (const auto it = a_map.find(a_key); it != a_map.end()) {
 			a_result = static_cast<Result>(it->second);
