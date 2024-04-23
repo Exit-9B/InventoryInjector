@@ -1,0 +1,17 @@
+$Backpack	Plecy
+$ClothingCloak	Płaszcz
+$ScrollSpider	Pająk
+$CampingSupplies	Materiały do budowania obozu
+$BuildingMaterial	Mat. budowlany
+$NetchLeather	Skóra parzydłaka
+$FishingRod	Wędka
+$AyleidCrystal	Kryształ Ayleidów
+$HorseTack	Rząd koński
+$PetGear	Sprzęt dla zwierząt
+$SoulTomato	Pomidor duszy
+$BrokenWeapon	Zepsuta broń
+$DwarvenScrap	Krasnoludzki złom
+$ElderScroll	Prastary Zwój
+$Instrument	Instrument
+$BugJar	Słoik na robaki
+$BearTrap	Sidła na niedźwiedzia
