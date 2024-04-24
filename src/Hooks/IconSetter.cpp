@@ -123,11 +123,21 @@ namespace Hooks
 		case RE::FormType::Spell:
 			a_thisPtr->Invoke("processSpellIcon", nullptr, a_entryObject, 1);
 			break;
+		case RE::FormType::Scroll:
+			a_entryObject->SetMember("iconLabel", "default_scroll");
+			a_thisPtr->Invoke("processResist", nullptr, a_entryObject, 1);
+			break;
 		case RE::FormType::Armor:
 			a_thisPtr->Invoke("processArmorIcon", nullptr, a_entryObject, 1);
 			break;
 		case RE::FormType::Book:
 			a_thisPtr->Invoke("processBookIcon", nullptr, a_entryObject, 1);
+			break;
+		case RE::FormType::Ingredient:
+			a_entryObject->SetMember("iconLabel", "default_ingredient");
+			break;
+		case RE::FormType::Light:
+			a_entryObject->SetMember("iconLabel", "misc_torch");
 			break;
 		case RE::FormType::Misc:
 			a_thisPtr->Invoke("processMiscIcon", nullptr, a_entryObject, 1);
@@ -137,6 +147,9 @@ namespace Hooks
 			break;
 		case RE::FormType::Ammo:
 			a_thisPtr->Invoke("processAmmoIcon", nullptr, a_entryObject, 1);
+			break;
+		case RE::FormType::KeyMaster:
+			a_entryObject->SetMember("iconLabel", "default_key");
 			break;
 		case RE::FormType::AlchemyItem:
 			a_thisPtr->Invoke("processPotionIcon", nullptr, a_entryObject, 1);

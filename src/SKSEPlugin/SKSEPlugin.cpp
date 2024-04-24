@@ -1,3 +1,4 @@
+#include "AS/Functions.h"
 #include "Data/CustomDataManager.h"
 #include "Hooks/MovieManager.h"
 
@@ -51,7 +52,8 @@ extern "C" DLLEXPORT constinit auto SKSEPlugin_Version = []()
 
 #else
 
-extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Query(const SKSE::QueryInterface* a_skse, SKSE::PluginInfo* a_info)
+extern "C" DLLEXPORT bool SKSEAPI
+SKSEPlugin_Query(const SKSE::QueryInterface* a_skse, SKSE::PluginInfo* a_info)
 {
 	a_info->infoVersion = SKSE::PluginInfo::kVersion;
 	a_info->name = Plugin::NAME.data();
@@ -78,6 +80,8 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* a_s
 
 	SKSE::Init(a_skse);
 	SKSE::AllocTrampoline(8);
+
+	SKSE::GetScaleformInterface()->Register(&AS::RegisterFuncs, "InventoryInjector");
 
 	SKSE::GetMessagingInterface()->RegisterListener(
 		[](auto a_msg)
